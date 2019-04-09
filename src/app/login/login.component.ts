@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MasterService } from '../services/master.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'deg-login',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  hasApprovedImg = false;
+  username = '';
+
+  constructor(private masterService: MasterService, private router: Router) { }
 
   ngOnInit() {
+  }
+
+  startPuzzle() {
+    this.masterService.createUser(this.username);
   }
 
 }

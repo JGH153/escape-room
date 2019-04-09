@@ -12,14 +12,14 @@ import { LoginComponent } from './login/login.component';
 
 // todo routes to const?
 const routes: Routes = [
-  { path: 'login/', component: LoginComponent },
-  { path: 'accesscard/', component: AccessCardComponent },
-  { path: 'snake/', component: SnakeComponent },
-  { path: 'autocode/', component: AutoCodeComponent },
-  { path: 'findqrcode/', component: FindQrCodeComponent },
-  { path: 'highscore/', component: HighscoreComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'accesscard', component: AccessCardComponent },
+  { path: 'snake', component: SnakeComponent },
+  { path: 'autocode', component: AutoCodeComponent },
+  { path: 'findqrcode', component: FindQrCodeComponent },
+  { path: 'highscore', component: HighscoreComponent },
   // { path: 'memory/', component:  }, Memory game?
-  { path: '**', redirectTo: 'login/'}
+  // { path: '**', redirectTo: 'login/'}
 ];
 
 @NgModule({

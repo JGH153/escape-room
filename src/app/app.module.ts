@@ -6,16 +6,18 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {
-  MatToolbarModule,
-  MatSidenavModule,
-  MatButtonModule,
-  MatIconModule,
-  MatCardModule,
-  MatSlideToggleModule,
-  MatSliderModule,
-  MatDividerModule,
-  MatDialogModule,
-  MatInputModule,
+   MatToolbarModule,
+   MatSidenavModule,
+   MatButtonModule,
+   MatIconModule,
+   MatCardModule,
+   MatSlideToggleModule,
+   MatSliderModule,
+   MatDividerModule,
+   MatDialogModule,
+   MatInputModule,
+   MatCheckboxModule,
+   MatProgressSpinnerModule,
 } from '@angular/material';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
@@ -31,16 +33,18 @@ import { HighscoreComponent } from './highscore/highscore.component';
 import { LoginComponent } from './login/login.component';
 
 const matImports = [
-  MatCardModule,
-  MatButtonModule,
-  MatToolbarModule,
-  MatSidenavModule,
-  MatIconModule,
-  MatSlideToggleModule,
-  MatSliderModule,
-  MatDividerModule,
-  MatDialogModule,
-  MatInputModule,
+   MatCardModule,
+   MatButtonModule,
+   MatToolbarModule,
+   MatSidenavModule,
+   MatIconModule,
+   MatSlideToggleModule,
+   MatSliderModule,
+   MatDividerModule,
+   MatDialogModule,
+   MatInputModule,
+   MatCheckboxModule,
+   MatProgressSpinnerModule,
 ];
 
 @NgModule({
@@ -51,7 +55,7 @@ const matImports = [
       AutoCodeComponent,
       FindQrCodeComponent,
       HighscoreComponent,
-      LoginComponent
+      LoginComponent,
    ],
    imports: [
       BrowserModule,
