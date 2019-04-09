@@ -1,0 +1,56 @@
+$card-width: 400px;
+$card-color: #007A8E;
+
+.card-container {
+    width: $card-width;
+    height: $card-width * 1.5;
+    // border: 1px solid red;
+
+    padding-top: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    box-shadow: 2px 3px 14px 0px rgba(0,0,0,0.75);
+    border-radius: 10px;
+    overflow: hidden;
+
+    margin: auto;
+}
+
+.person-img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.person-img-circle {
+    width: $card-width * 0.7;
+    height: $card-width * 0.7;
+    background-color: $card-color;
+    border-radius: 100%;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.person-img{
+    border-radius: 100%;
+    width: 100%;
+    height: 100%;
+}
+
+.person-name{
+    text-transform: uppercase;
+    font-size: 45px;
+    width: 100%;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+.bottom {
+    background-color: $card-color;
+    height: $card-width / 5;
+    width: 100%;
+
+}

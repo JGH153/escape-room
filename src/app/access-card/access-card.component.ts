@@ -12,4 +12,6 @@ export class AccessCardComponent implements OnInit {
   ngOnInit() {
   }
 
+  // TODO use WebRTC to get image live and send to google and crop to face!
+
 }
