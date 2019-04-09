@@ -28,6 +28,7 @@ import { SnakeComponent } from './snake/snake.component';
 import { AutoCodeComponent } from './auto-code/auto-code.component';
 import { FindQrCodeComponent } from './find-qr-code/find-qr-code.component';
 import { HighscoreComponent } from './highscore/highscore.component';
+import { LoginComponent } from './login/login.component';
 
 const matImports = [
   MatCardModule,
@@ -49,7 +50,8 @@ const matImports = [
       SnakeComponent,
       AutoCodeComponent,
       FindQrCodeComponent,
-      HighscoreComponent
+      HighscoreComponent,
+      LoginComponent
    ],
    imports: [
       BrowserModule,
