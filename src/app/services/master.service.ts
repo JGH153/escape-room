@@ -17,6 +17,11 @@ export class MasterService {
   private readonly userIdKey = 'userId';
 
   constructor(private router: Router, private firestore: AngularFirestore) {
+
+    // temp
+    this.setIsLoading(false);
+    return;
+
     const localStorageUserId = localStorage.getItem(this.userIdKey);
     if (localStorageUserId) {
       this.userId = localStorageUserId;
