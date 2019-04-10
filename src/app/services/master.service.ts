@@ -48,6 +48,8 @@ export class MasterService {
       this.router.navigate(['login']);
     } else if (stage === Stages.AccessCard) {
       this.router.navigate(['accesscard']);
+    } else if (stage === Stages.Snake) {
+      this.router.navigate(['snake']);
     } else { // TODO REST!
       this.router.navigate(['login']);
     }

@@ -1,4 +1,5 @@
 import { Component, OnInit, AfterContentInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'deg-access-card',
@@ -7,9 +8,9 @@ import { Component, OnInit, AfterContentInit } from '@angular/core';
 })
 export class AccessCardComponent implements OnInit, AfterContentInit {
 
-  ownStream = null;
+  ownStream: MediaStream = null;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
@@ -22,6 +23,11 @@ export class AccessCardComponent implements OnInit, AfterContentInit {
         console.warn('can\'t get media!');
         console.warn(error);
       });
+  }
+
+  nextPuzzle() {
+    this.ownStream.getTracks()[0].stop();
+    this.router.navigate(['snake']);
   }
 
   // TODO use WebRTC to get image live and send to google and crop to face!
