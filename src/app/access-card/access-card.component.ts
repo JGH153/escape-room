@@ -1,5 +1,7 @@
 import { Component, OnInit, AfterContentInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MasterService } from '../services/master.service';
+import { Stages } from '../models/stages';
 
 @Component({
   selector: 'deg-access-card',
@@ -9,10 +11,12 @@ import { Router } from '@angular/router';
 export class AccessCardComponent implements OnInit, AfterContentInit {
 
   ownStream: MediaStream = null;
+  username;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private masterService: MasterService) { }
 
   ngOnInit() {
+    this.username = this.masterService.username;
   }
 
   ngAfterContentInit() {
@@ -27,7 +31,7 @@ export class AccessCardComponent implements OnInit, AfterContentInit {
 
   nextPuzzle() {
     this.ownStream.getTracks()[0].stop();
-    this.router.navigate(['snake']);
+    this.masterService.gotoStage(Stages.Snake);
   }
 
   // TODO use WebRTC to get image live and send to google and crop to face!

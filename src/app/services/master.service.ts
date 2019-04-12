@@ -13,21 +13,18 @@ export class MasterService {
 
   public isLoading = new BehaviorSubject<boolean>(true);
   public userId = ''; // userId is document id in scoreboard
+  public username = new BehaviorSubject<string>('');
 
   private readonly userIdKey = 'userId';
 
   constructor(private router: Router, private firestore: AngularFirestore) {
-
-    // temp
-    this.setIsLoading(false);
-    return;
 
     const localStorageUserId = localStorage.getItem(this.userIdKey);
     if (localStorageUserId) {
       this.userId = localStorageUserId;
       this.loadUser();
     } else {
-      this.router.navigate(['login']);
+      // this.router.navigate(['login']);
       this.setIsLoading(false);
     }
   }
@@ -37,8 +34,8 @@ export class MasterService {
       'scoreboard'
     ).doc(this.userId).get().subscribe(doc => {
       // TODO what if not found
-      const lastStageCompleted = doc.data().stageCompleted;
-      this.gotoCorrectStage(lastStageCompleted + 1 as Stages);
+      // this.gotoCorrectStage(doc.data().stageCompleted + 1 as Stages);
+      this.username.next(doc.data().name);
       this.setIsLoading(false);
     });
   }
@@ -49,7 +46,9 @@ export class MasterService {
     } else if (stage === Stages.AccessCard) {
       this.router.navigate(['accesscard']);
     } else if (stage === Stages.Snake) {
-      this.router.navigate(['snake']);
+      this.router.navigate(['autocode']);
+    } else if (stage === Stages.Autocode) {
+      this.router.navigate(['autocode']);
     } else { // TODO REST!
       this.router.navigate(['login']);
     }
@@ -68,6 +67,7 @@ export class MasterService {
       stageCompleted: Stages.Login
     }).then(() => {
       this.setIsLoading(false);
+      this.username.next(username);
       this.router.navigate(['accesscard']);
     });
 
@@ -75,8 +75,18 @@ export class MasterService {
     this.userId = docId;
   }
 
-  public updateStageInBackend(newStage: Stages) {
-
+  // updates backend as well
+  public gotoStage(newStage: Stages) {
+    this.setIsLoading(true);
+    const docId = this.getRandDocId();
+    this.firestore.collection<ScoreboardElement>(
+      'scoreboard'
+    ).doc(docId).set({
+      stageCompleted: newStage
+    }, {merge: true}).then(() => {
+      this.setIsLoading(false);
+      this.gotoCorrectStage(newStage);
+    });
   }
 
   public setIsLoading(newValue) {
