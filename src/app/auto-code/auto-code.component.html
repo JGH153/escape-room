@@ -1,3 +1,10 @@
-<p>
-  auto-code works!
-</p>
+
+<div class="container">
+  <div class="code-container">
+    {{currentText}}
+  </div>
+  <div class="button-row">
+      <button class="auto-button" (click)="clickedButtonZero()" mat-raised-button>0</button>
+      <button class="auto-button" (click)="clickedButtonOne()" mat-raised-button>1</button>
+  </div>
+</div>

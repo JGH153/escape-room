@@ -10,6 +10,7 @@ export class FindQrCodeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log('oppe');
   }
 
 }

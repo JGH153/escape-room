@@ -49,6 +49,8 @@ export class MasterService {
       this.router.navigate(['autocode']);
     } else if (stage === Stages.Autocode) {
       this.router.navigate(['autocode']);
+    } else if (stage === Stages.FindQrCode) {
+      this.router.navigate(['findqrcode']);
     } else { // TODO REST!
       this.router.navigate(['login']);
     }
@@ -75,15 +77,19 @@ export class MasterService {
     this.userId = docId;
   }
 
-  // updates backend as well
+  // TODO prevent spamming
   public gotoStage(newStage: Stages) {
+    if (this.isLoading.value) {
+      return;
+    }
+
     this.setIsLoading(true);
     const docId = this.getRandDocId();
     this.firestore.collection<ScoreboardElement>(
       'scoreboard'
     ).doc(docId).set({
       stageCompleted: newStage
-    }, {merge: true}).then(() => {
+    }, { merge: true }).then(() => {
       this.setIsLoading(false);
       this.gotoCorrectStage(newStage);
     });

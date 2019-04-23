@@ -1,0 +1,3 @@
+/* tslint:disable */
+export const AutoText = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis placerat quis nibh in commodo. Nunc facilisis varius tempor. Donec ornare finibus dapibus. In at sapien quis arcu auctor vestibulum tempus id erat. Sed eget augue quis purus aliquam sollicitudin at facilisis ligula. Maecenas volutpat sapien lorem, ut ornare massa lacinia sed. Proin iaculis gravida orci, eget lacinia diam laoreet a. Ut imperdiet ante vitae aliquet aliquam. Suspendisse eget venenatis velit, eleifend ullamcorper ex.
+`;
