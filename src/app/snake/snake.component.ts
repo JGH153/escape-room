@@ -303,12 +303,8 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
   }
 
   drawRect(x, y, w, h, color: string) {
-
-    // this.canvasRC.beginPath();
     this.canvasRC.fillStyle = color;
     this.canvasRC.fillRect(x, y, w, h);
-    // this.canvasRC.closePath();
-    // this.canvasRC.fill();
   }
 
   getRandomColor(): string {

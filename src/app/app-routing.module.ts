@@ -6,6 +6,7 @@ import { AutoCodeComponent } from './auto-code/auto-code.component';
 import { FindQrCodeComponent } from './find-qr-code/find-qr-code.component';
 import { HighscoreComponent } from './highscore/highscore.component';
 import { LoginComponent } from './login/login.component';
+import { GameEndComponent } from './game-end/game-end.component';
 
 // use inbetween components for when between tasks?
 // TODO router guard to prevent skipping tasks
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'snake', component: SnakeComponent },
   { path: 'autocode', component: AutoCodeComponent },
   { path: 'findqrcode', component: FindQrCodeComponent },
+  { path: 'end', component: GameEndComponent },
   { path: 'highscore', component: HighscoreComponent },
   // { path: 'memory/', component:  }, Memory game?
   // { path: '**', redirectTo: 'login/'}

@@ -4,4 +4,5 @@ export enum Stages {
     Snake = 3,
     Autocode = 4,
     FindQrCode = 5,
+    End = 6
 }
