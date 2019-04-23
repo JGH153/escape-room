@@ -78,11 +78,36 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
 
     this.timerSub = this.myTimer.subscribe({ next: this.logicTick.bind(this) });
 
+    window.addEventListener('deviceorientation', this.handleOrientation.bind(this), true);
+
+  }
+
+  handleOrientation(event) {
+    const absolute = event.absolute;
+    const alpha = event.alpha;
+    const beta = event.beta; // forward and back ( positive down, neg up)
+    const gamma = event.gamma; // left n right (positive right, neg left)
+
+    if (Math.abs(beta) > Math.abs(gamma)) {
+      if (beta > 0) { // positive down, neg up
+        this.moveDirection = MoveDirection.Down;
+      } else {
+        this.moveDirection = MoveDirection.Up;
+      }
+    } else {
+      if (gamma > 0) { // positive right, neg left
+        this.moveDirection = MoveDirection.Right;
+      } else {
+        this.moveDirection = MoveDirection.Left;
+      }
+    }
+
   }
 
   ngOnDestroy() {
     document.body.style.overflow = 'visible';
     document.removeEventListener('keydown', this.onKeyPress.bind(this));
+    window.removeEventListener('deviceorientation', this.handleOrientation.bind(this), true);
     this.timerSub.unsubscribe();
   }
 
@@ -100,9 +125,23 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
 
   }
 
-  logicTick() {
-    // console.log('tick', this.snakeHeadPos.x, this.numBlocsWidth);
+  // neeeded?
+  isMobile() {
+    if (navigator.userAgent.match(/Android/i)
+      || navigator.userAgent.match(/webOS/i)
+      || navigator.userAgent.match(/iPhone/i)
+      || navigator.userAgent.match(/iPad/i)
+      || navigator.userAgent.match(/iPod/i)
+      || navigator.userAgent.match(/BlackBerry/i)
+      || navigator.userAgent.match(/Windows Phone/i)
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
+  logicTick() {
     this.updateSnakePos();
     this.handleEating();
     this.handleIfWon();
