@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AutoText } from './autocode.text';
 import { MasterService } from '../services/master.service';
 import { Stages } from '../models/stages';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'deg-auto-code',
@@ -10,17 +11,21 @@ import { Stages } from '../models/stages';
 })
 export class AutoCodeComponent implements OnInit {
 
-  totalText = AutoText.substr(0, 40);
+  totalText; //.substr(0, 40);
   currentText = '';
+  displayText;
 
-  addMax = 30;
+  addMax = 80;
   addZero = this.addMax;
   addOne = this.addMax;
-  removeEachPress = 5;
+  removeEachPress = 0;
 
-  constructor(private masterService: MasterService) { }
+  @ViewChild('codeElement') codeElement;
+
+  constructor(private masterService: MasterService, private sanitized: DomSanitizer) { }
 
   ngOnInit() {
+    this.totalText = AutoText.replace(/(?:\r\n|\r|\n)/g, '<br>');
   }
 
   clickedButtonZero() {
@@ -45,6 +50,11 @@ export class AutoCodeComponent implements OnInit {
     if (this.totalText.length > this.currentText.length) {
       this.currentText = this.totalText.substr(0, this.currentText.length + chatsPrPress);
     }
+
+    this.displayText = this.sanitized.bypassSecurityTrustHtml(this.currentText);
+    requestAnimationFrame(() => {
+      this.codeElement.nativeElement.scrollTop = 1000000;
+    });
 
   }
 

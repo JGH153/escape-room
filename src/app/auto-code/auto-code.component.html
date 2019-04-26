@@ -1,7 +1,6 @@
 
 <div class="container">
-  <div class="code-container">
-    {{currentText}}
+  <div class="code-container" #codeElement [innerHtml]="currentText">
   </div>
   <div class="button-row">
       <button class="auto-button" (click)="clickedButtonZero()" mat-raised-button>0</button>
