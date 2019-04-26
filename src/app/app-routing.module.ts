@@ -7,12 +7,14 @@ import { FindQrCodeComponent } from './find-qr-code/find-qr-code.component';
 import { HighscoreComponent } from './highscore/highscore.component';
 import { LoginComponent } from './login/login.component';
 import { GameEndComponent } from './game-end/game-end.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 // use inbetween components for when between tasks?
 // TODO router guard to prevent skipping tasks
 
 // todo routes to const?
 const routes: Routes = [
+  { path: '', component: WelcomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'accesscard', component: AccessCardComponent },
   { path: 'snake', component: SnakeComponent },

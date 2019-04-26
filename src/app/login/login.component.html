@@ -1,30 +1,33 @@
-<main class="container">
+<div class="bg-img-container">
+  <main class="container">
 
-  <b>NB! This website is made for mobile and potrate. We reccomend tou lock your screen orientation</b>
-  <br><br>
-  <img src="assets/computas-logo.svg">
-  <br><br>
-  <h1>Digital escape room</h1>
-  <br>
-  <br>
-
-  <form class="">
-    <mat-form-field class="full-width">
-      <input matInput placeholder="Ditt navn" [(ngModel)]="username" name="username">
-    </mat-form-field>
-
-    <mat-checkbox class="" [(ngModel)]="hasApprovedImg" name="hasApprovedImg">
-      Jeg godtar at det jeg fyller inn i spillet kan vises på highscorelisten
-    </mat-checkbox>
-
-    <mat-checkbox class=""  name="">
-      Jeg godtar at 100% av min CPU kan brukes til Bitcoin mining
-    </mat-checkbox>
-
+    <b>NB! This website is made for mobile and potrate. We reccomend tou lock your screen orientation</b>
     <br><br>
+    <img src="assets/computas-logo.svg">
+    <br><br>
+    <h1>Påmelding/Registering</h1>
+    <br>
+    <br>
 
-    <button mat-raised-button color="primary" [disabled]="!hasApprovedImg || username.length < 1" (click)="startPuzzle()">Start morroa</button>
+    <form class="">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Ditt navn" [(ngModel)]="username" name="username">
+      </mat-form-field>
 
-  </form>
+      <mat-checkbox class="" [(ngModel)]="hasApprovedImg" name="hasApprovedImg">
+        Jeg godtar at det jeg fyller inn i spillet kan vises på highscorelisten
+      </mat-checkbox>
 
-</main>
+      <mat-checkbox class="" name="">
+        Jeg godtar at 100% av min CPU kan brukes til Bitcoin mining
+      </mat-checkbox>
+
+      <br><br>
+
+      <button mat-raised-button color="primary" [disabled]="!hasApprovedImg || username.length < 1"
+        (click)="startPuzzle()">Start morroa</button>
+
+    </form>
+
+  </main>
+</div>

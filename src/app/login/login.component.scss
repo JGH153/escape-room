@@ -1,4 +1,11 @@
 
+.bg-img-container {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('./../../assets/login.jpg');
+    background-size: cover;
+}
+
 .container {
     margin: auto;
     padding: 20px;

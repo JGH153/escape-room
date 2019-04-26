@@ -32,6 +32,7 @@ import { FindQrCodeComponent } from './find-qr-code/find-qr-code.component';
 import { HighscoreComponent } from './highscore/highscore.component';
 import { LoginComponent } from './login/login.component';
 import { GameEndComponent } from './game-end/game-end.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 const matImports = [
    MatCardModule,
@@ -57,7 +58,8 @@ const matImports = [
       FindQrCodeComponent,
       HighscoreComponent,
       LoginComponent,
-      GameEndComponent
+      GameEndComponent,
+      WelcomeComponent
    ],
    imports: [
       BrowserModule,

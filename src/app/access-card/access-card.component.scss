@@ -1,9 +1,21 @@
-$card-width: 400px;
-$card-color: #007A8E;
+:host{
+    --card-width: calc(100vw - 20px);
+    --card-height: calc(100vh - 20px);
+    --card-max-width: 600px;
+    --card-color: #007A8E;
+}
+
+// .bg-img {
+//     background-image: url('./../../assets/cardBG.jpg');
+//     background-size: cover;
+// }
+
 
 .card-container {
-    width: $card-width;
-    height: $card-width * 1.5;
+    width: var(--card-width);
+    max-width: var(--card-max-width);
+    min-height: var(--card-height);
+    max-height: calc(var(--card-width) * 1.618);
     // border: 1px solid red;
 
     padding-top: 20px;
@@ -16,7 +28,7 @@ $card-color: #007A8E;
     border-radius: 10px;
     overflow: hidden;
 
-    margin: auto;
+    margin: 10px auto;
 }
 
 .person-img-container {
@@ -26,9 +38,11 @@ $card-color: #007A8E;
 }
 
 .person-img-circle {
-    width: $card-width * 0.7;
-    height: $card-width * 0.7;
-    background-color: $card-color;
+    width: calc(var(--card-width) * 0.7);
+    max-width: calc(var(--card-max-width) * 0.7);
+    height: calc(var(--card-width) * 0.7);
+    max-height: calc(var(--card-max-width) * 0.7);
+    background-color: var(--card-color);
     border-radius: 100%;
     padding: 10px;
     cursor: pointer;
@@ -50,8 +64,8 @@ $card-color: #007A8E;
 }
 
 .bottom {
-    background-color: $card-color;
-    height: $card-width / 5;
+    background-color: var(--card-color);
+    height: calc(var(--card-width) / 5);
     width: 100%;
 
 }

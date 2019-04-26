@@ -46,7 +46,7 @@ export class MasterService {
     } else if (stage === Stages.AccessCard) {
       this.router.navigate(['accesscard']);
     } else if (stage === Stages.Snake) {
-      this.router.navigate(['autocode']);
+      this.router.navigate(['snake']);
     } else if (stage === Stages.Autocode) {
       this.router.navigate(['autocode']);
     } else if (stage === Stages.FindQrCode) {

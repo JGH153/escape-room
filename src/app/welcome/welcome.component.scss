@@ -1,0 +1,41 @@
+.container {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('./../../assets/start.jpg');
+    background-size: cover;
+}
+
+.content-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: auto;
+    width: 75vw;
+    height: 80vh;
+    flex-direction: column;
+}
+
+.logo {
+    min-width: 400px;
+    text-align: center;
+}
+
+.title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.info {
+
+}
+
+.start {
+
+}
+.start-button {
+    --buttonHeight: 100px;
+    width: calc(var(--buttonHeight) * 1.618);
+    height: var(--buttonHeight);
+    font-size: 30px;
+}
