@@ -20,6 +20,8 @@ export class AutoCodeComponent implements OnInit {
   addOne = this.addMax;
   removeEachPress = 0;
 
+  showIntro = true;
+
   @ViewChild('codeElement') codeElement;
 
   constructor(private masterService: MasterService, private sanitized: DomSanitizer) { }
@@ -60,6 +62,10 @@ export class AutoCodeComponent implements OnInit {
 
   gotoNextTask() {
     this.masterService.gotoStage(Stages.FindQrCode);
+  }
+
+  closeIntro() {
+    this.showIntro = false;
   }
 
 }

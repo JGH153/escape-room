@@ -41,6 +41,9 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
   numBlocsWidth = 10;
   numBlocsHeight = 20;
 
+
+  showIntro = true;
+
   // on grid from numBlocs
   snakeHeadPos: GridPos = { x: this.numBlocsWidth / 2, y: this.numBlocsHeight / 2 };
   snakeLength = 1;
@@ -80,6 +83,10 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
 
     window.addEventListener('deviceorientation', this.handleOrientation.bind(this), true);
 
+  }
+
+  closeIntro() {
+    this.showIntro = false;
   }
 
   handleOrientation(event) {

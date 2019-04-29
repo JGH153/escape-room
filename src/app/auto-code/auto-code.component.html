@@ -7,3 +7,15 @@
       <button class="auto-button" (click)="clickedButtonOne()" mat-raised-button>1</button>
   </div>
 </div>
+
+<div class="intro-container" *ngIf="showIntro">
+    <deg-info-overlay 
+        [title]="'Dette må løses med AI'" 
+        [subTitle]="'Nå skal det kodes!'"
+        [imageUrl]="'assets/profiles/ai.jpg'" 
+        [startButtonLabel]="'La oss kode på tavle!'"
+        (startEE)="closeIntro()"
+    >
+        Noe noe må lage AI for å løse noe strøm og saker! Husk å skriv rett!
+    </deg-info-overlay>
+</div>

@@ -1,1 +1,13 @@
 <canvas #myCanvas></canvas>
+
+<div class="intro-container" *ngIf="showIntro">
+    <deg-info-overlay 
+        [title]="'Første dag på jobben!'" 
+        [subTitle]="'Nå skal det jobbes med strøm'"
+        [imageUrl]="'assets/profiles/3.jpg'" 
+        [startButtonLabel]="'Jeg er klar og sånt!'"
+        (startEE)="closeIntro()"
+    >
+        Noe noe hafslund og strøm. Dette må du løse!
+    </deg-info-overlay>
+</div>

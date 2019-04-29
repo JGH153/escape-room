@@ -33,6 +33,7 @@ import { HighscoreComponent } from './highscore/highscore.component';
 import { LoginComponent } from './login/login.component';
 import { GameEndComponent } from './game-end/game-end.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { InfoOverlayComponent } from './shared/info-overlay/info-overlay.component';
 
 const matImports = [
    MatCardModule,
@@ -47,6 +48,7 @@ const matImports = [
    MatInputModule,
    MatCheckboxModule,
    MatProgressSpinnerModule,
+   MatCardModule
 ];
 
 @NgModule({
@@ -59,7 +61,8 @@ const matImports = [
       HighscoreComponent,
       LoginComponent,
       GameEndComponent,
-      WelcomeComponent
+      WelcomeComponent,
+      InfoOverlayComponent,
    ],
    imports: [
       BrowserModule,

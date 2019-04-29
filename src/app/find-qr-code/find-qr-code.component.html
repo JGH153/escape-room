@@ -1,4 +1,21 @@
 <div class="container">
-  <div class="video-container"> <canvas #myCanvas></canvas></div>
-  <div class="qr-container"> <img class="qr-img" src="assets/qrCode.png"> Tip! Det kan hende du finner kode der du startet </div>
+  <div class="video-container"><video id="localVideo" [srcObject]="ownStream" class="person-video" autoplay
+      muted></video></div>
+  <div class="qr-container">
+    <h2>Finn denne koden å scann den</h2>
+    <img class="qr-img" src="assets/qrCode.png">
+    <br> Tip! Det kan hende du finner kode der du
+    startet </div>
+</div>
+
+<div class="intro-container" *ngIf="showIntro">
+    <deg-info-overlay 
+        [title]="'På tide å løse dette!'" 
+        [subTitle]="'Vise deg frem for sjæfen sjør'"
+        [imageUrl]="'assets/profiles/trond.jpg'" 
+        [startButtonLabel]="'La os finne den koden!'"
+        (startEE)="closeIntro()"
+    >
+        Noe noe QR kode og løse alt for å vinne. Trond følger med på deg Live!
+    </deg-info-overlay>
 </div>

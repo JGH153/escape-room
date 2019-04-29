@@ -11,9 +11,6 @@ import { Stages } from '../models/stages';
 })
 export class FindQrCodeComponent implements OnInit, AfterContentInit, OnDestroy {
 
-  @ViewChild('myCanvas') myCanvas;
-  canvasRC: CanvasRenderingContext2D;
-
   video = document.createElement('video');
   ownStream: MediaStream = null;
 
@@ -21,6 +18,8 @@ export class FindQrCodeComponent implements OnInit, AfterContentInit, OnDestroy 
   height;
 
   solution = 'Computas';
+
+  showIntro = true;
 
   constructor(private masterService: MasterService) { }
 
@@ -30,13 +29,11 @@ export class FindQrCodeComponent implements OnInit, AfterContentInit, OnDestroy 
 
   ngAfterContentInit() {
 
-    this.canvasRC = this.myCanvas.nativeElement.getContext('2d');
-
     navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: false }).then(stream => {
       this.ownStream = stream;
       this.video.srcObject = stream;
       this.video.play();
-      this.draw();
+      this.lookForCode();
     },
       error => {
         console.warn('can\'t get media!');
@@ -50,24 +47,30 @@ export class FindQrCodeComponent implements OnInit, AfterContentInit, OnDestroy 
     }
   }
 
-  draw() {
+  grabImage() {
+    const videoW = this.ownStream.getTracks()[0].getSettings().width;
+    const videoH = this.ownStream.getTracks()[0].getSettings().height;
+
+    const myCanvas = document.createElement('canvas');
+    myCanvas.id = 'myCanvas';
+    const context = myCanvas.getContext('2d');
+    myCanvas.width = videoW;
+    myCanvas.height = videoH;
+    context.drawImage(this.video, 0, 0, videoW, videoH);
+
+    return context.getImageData(0, 0, videoW, videoH);
+  }
+
+  lookForCode() {
 
     let solved = false;
 
     if (this.video.readyState === this.video.HAVE_ENOUGH_DATA) {
 
-      this.width = window.innerWidth;
-      this.height = window.innerHeight / 1.5;
+      const videoW = this.ownStream.getTracks()[0].getSettings().width;
+      const videoH = this.ownStream.getTracks()[0].getSettings().height;
 
-
-      this.myCanvas.nativeElement.width = this.width;
-      this.myCanvas.nativeElement.height = this.height;
-
-      this.drawReset();
-      this.canvasRC.drawImage(this.video, 0, 0, this.width, this.height);
-
-      const imageData = this.canvasRC.getImageData(0, 0, this.width, this.height);
-      const code = jsQR(imageData.data, imageData.width, imageData.height, {
+      const code = jsQR(this.grabImage().data, videoW, videoH, {
         inversionAttempts: 'dontInvert',
       });
 
@@ -79,7 +82,9 @@ export class FindQrCodeComponent implements OnInit, AfterContentInit, OnDestroy 
       }
     }
 
-    requestAnimationFrame(this.draw.bind(this));
+    if (!solved) {
+      requestAnimationFrame(this.lookForCode.bind(this));
+    }
   }
 
   drawReset() {
@@ -87,8 +92,12 @@ export class FindQrCodeComponent implements OnInit, AfterContentInit, OnDestroy 
   }
 
   drawRect(x, y, w, h, color: string) {
-    this.canvasRC.fillStyle = color;
-    this.canvasRC.fillRect(x, y, w, h);
+    // this.canvasRC.fillStyle = color;
+    // this.canvasRC.fillRect(x, y, w, h);
+  }
+
+  closeIntro() {
+    this.showIntro = false;
   }
 
 }

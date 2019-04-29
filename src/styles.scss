@@ -6,3 +6,13 @@
 * {
     box-sizing: border-box;
 }
+
+.intro-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.849);
+    padding: 20px;
+}

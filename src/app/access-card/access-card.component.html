@@ -12,3 +12,20 @@
     </div>
   </main>
 </div>
+
+<img #thyImg style="display: none;">
+
+<div class="intro-container" *ngIf="showIntro">
+  <deg-info-overlay 
+    [title]="'Velkommen til Computas'" 
+    [subTitle]="'På tide å lage ID kortet'"
+    [imageUrl]="'assets/profiles/christine.jpg'" 
+    [startButtonLabel]="'La oss starte!'"
+    (startEE)="closeIntro()"
+  >
+    The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+    A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+    bred for hunting.
+    Husk å smile!
+  </deg-info-overlay>
+</div>

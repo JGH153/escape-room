@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GameEndComponent implements OnInit {
 
+  showIntro = true;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  closeIntro() {
+    this.showIntro = false;
   }
 
 }
