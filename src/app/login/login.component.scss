@@ -4,15 +4,41 @@
     height: 100vh;
     background-image: url('./../../assets/login.jpg');
     background-size: cover;
+    background-color: #FED547;
+    background-position: center center;
 }
 
 .container {
-    margin: auto;
-    padding: 20px;
+    width: 100%;
     text-align: center;
-    max-width: 800px;
+    
 }
 
 .full-width {
     width: 100%;
+}
+
+.top-container {
+    margin: auto;
+    padding: 20px;
+    max-width: 800px;
+    // -webkit-text-stroke: 1px white;
+
+    .c-logo {
+        max-width: 100%;
+        min-width: 20%;;
+    }
+}
+
+.form-container {
+    width: 100%;
+    background: white;
+    padding: 10px 0px;
+
+    .username-input {
+        max-width: 500px;
+        width: 100%;
+    }
+
+    .mat-checkbox-layout { white-space: normal !important; }
 }

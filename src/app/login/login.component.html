@@ -1,33 +1,38 @@
 <div class="bg-img-container">
   <main class="container">
 
-    <b>NB! This website is made for mobile and potrate. We reccomend tou lock your screen orientation</b>
-    <br><br>
-    <img src="assets/computas-logo.svg">
-    <br><br>
-    <h1>Påmelding/Registering</h1>
-    <br>
-    <br>
-
-    <form class="">
-      <mat-form-field class="full-width">
-        <input matInput placeholder="Ditt navn" [(ngModel)]="username" name="username">
-      </mat-form-field>
-
-      <mat-checkbox class="" [(ngModel)]="hasApprovedImg" name="hasApprovedImg">
-        Jeg godtar at det jeg fyller inn i spillet kan vises på highscorelisten
-      </mat-checkbox>
-
-      <mat-checkbox class="" name="">
-        Jeg godtar at 100% av min CPU kan brukes til Bitcoin mining
-      </mat-checkbox>
-
+    <div class="top-container">
+      <b>NB! This website is made for mobile and potrate. We reccomend tou lock your screen orientation</b>
       <br><br>
+      <img class="c-logo" src="assets/computas-logo.svg">
+      <br><br>
+      <h1>Påmelding / Registering</h1>
+      <br>
+      <br>
+    </div>
 
-      <button mat-raised-button color="primary" [disabled]="!hasApprovedImg || username.length < 1"
-        (click)="startPuzzle()">Start morroa</button>
+    <div class="form-container">
+      <form class="">
+        <mat-form-field class="username-input">
+          <input matInput placeholder="Ditt navn" [(ngModel)]="username" name="username" class="">
+        </mat-form-field>
+        <br>
 
-    </form>
+        <mat-checkbox class="" [(ngModel)]="hasApprovedImg" name="hasApprovedImg">
+          Jeg godtar at det jeg fyller inn i spillet kan vises på highscorelisten
+        </mat-checkbox>
+        <br>
+        <mat-checkbox class="" name="">
+          Jeg godtar at 100% av min CPU kan brukes til Bitcoin mining
+        </mat-checkbox>
+
+        <br><br>
+
+        <button mat-raised-button color="primary" [disabled]="!hasApprovedImg || username.length < 1"
+          (click)="startPuzzle()">Start morroa</button>
+
+      </form>
+    </div>
 
   </main>
 </div>

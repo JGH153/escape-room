@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterContentInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterContentInit, ViewChild, OnDestroy } from '@angular/core';
 
 import jsQR from 'jsqr';
 import { MasterService } from '../services/master.service';
@@ -9,12 +9,13 @@ import { Stages } from '../models/stages';
   templateUrl: './find-qr-code.component.html',
   styleUrls: ['./find-qr-code.component.scss']
 })
-export class FindQrCodeComponent implements OnInit, AfterContentInit {
+export class FindQrCodeComponent implements OnInit, AfterContentInit, OnDestroy {
 
   @ViewChild('myCanvas') myCanvas;
   canvasRC: CanvasRenderingContext2D;
 
   video = document.createElement('video');
+  ownStream: MediaStream = null;
 
   width;
   height;
@@ -32,6 +33,7 @@ export class FindQrCodeComponent implements OnInit, AfterContentInit {
     this.canvasRC = this.myCanvas.nativeElement.getContext('2d');
 
     navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: false }).then(stream => {
+      this.ownStream = stream;
       this.video.srcObject = stream;
       this.video.play();
       this.draw();
@@ -40,6 +42,12 @@ export class FindQrCodeComponent implements OnInit, AfterContentInit {
         console.warn('can\'t get media!');
         console.warn(error);
       });
+  }
+
+  ngOnDestroy() {
+    if (this.ownStream) {
+      this.ownStream.getTracks()[0].stop();
+    }
   }
 
   draw() {

@@ -66,6 +66,7 @@
 .bottom {
     background-color: var(--card-color);
     height: calc(var(--card-width) / 5);
+    max-height: 120px;
     width: 100%;
 
 }
