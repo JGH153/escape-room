@@ -85,8 +85,13 @@ export class MasterService {
       return;
     }
 
+    if (!this.userId) {
+      this.gotoCorrectStage(Stages.Login);
+      return;
+    }
+
     this.setIsLoading(true);
-    const docId = this.getRandDocId();
+    const docId = this.userId;
     this.firestore.collection<ScoreboardElement>(
       'scoreboard'
     ).doc(docId).set({

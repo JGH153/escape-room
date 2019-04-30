@@ -18,6 +18,7 @@ import {
    MatInputModule,
    MatCheckboxModule,
    MatProgressSpinnerModule,
+   MatTableModule,
 } from '@angular/material';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
@@ -48,7 +49,8 @@ const matImports = [
    MatInputModule,
    MatCheckboxModule,
    MatProgressSpinnerModule,
-   MatCardModule
+   MatCardModule,
+   MatTableModule
 ];
 
 @NgModule({

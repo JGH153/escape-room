@@ -17,9 +17,9 @@ export class WelcomeComponent implements OnInit {
   preLoadImages() {
     const paths = new Array(
       'assets/computas-logo.svg',
-      'assets/profiles/cardBG.jpg',
-      'assets/profiles/login.jpg',
-      'assets/profiles/qrCode.png',
+      'assets/cardBG.jpg',
+      'assets/login.jpg',
+      'assets/qrCode.png',
       'assets/profiles/christine.jpg',
       'assets/profiles/1.jpg',
       'assets/profiles/2.jpg',
