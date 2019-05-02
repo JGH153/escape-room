@@ -42,4 +42,51 @@ export class WelcomeComponent implements OnInit {
     this.router.navigate(['login']);
   }
 
+  payToWin() {
+    if ((window as any).PaymentRequest) {
+      const request = this.initPaymentRequest();
+      request.show().then((instrumentResponse: PaymentResponse) => {
+        const name = instrumentResponse.details.cardholderName;
+        setTimeout(() => {
+          instrumentResponse.complete('fail').then(() => {
+            // console.log('done!', this.a);
+          }).catch((err) => {
+            console.log(err);
+          });
+          alert('Ikke smart å bare gi fra seg kortet ditt som det ' + name + '!');
+        }, 2000);
+      })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      alert('Not supported, switch to Chrome');
+    }
+  }
+
+  initPaymentRequest() {
+    const networks = ['mastercard', 'visa'];
+    const types = ['debit', 'credit', 'prepaid'];
+    const supportedInstruments = [{
+      supportedMethods: 'basic-card',
+      data: { supportedNetworks: networks, supportedTypes: types },
+    }];
+
+    const details = {
+      total: { label: 'Pay 2 Win', amount: { currency: 'USD', value: '1.00' } },
+      displayItems: [
+        {
+          label: 'Russian mob fee',
+          amount: { currency: 'USD', value: '2.00' },
+        },
+        {
+          label: 'GDPR fee',
+          amount: { currency: 'USD', value: '10.00' },
+        },
+      ],
+    };
+
+    return new PaymentRequest(supportedInstruments, details);
+  }
+
 }

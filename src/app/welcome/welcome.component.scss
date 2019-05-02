@@ -37,7 +37,7 @@
 }
 .start-button {
     --buttonHeight: 100px;
-    width: calc(var(--buttonHeight) * 1.618);
+    min-width: calc(var(--buttonHeight) * 1.618);
     height: var(--buttonHeight);
     font-size: 30px;
 }
