@@ -64,8 +64,8 @@ export class MasterService {
     this.firestore.collection<ScoreboardElement>(
       'scoreboard'
     ).doc(docId).set({
-      endTime: -1,
-      startTime: + new Date(),
+      endTime: '', // save as unix timestamp too for sorting
+      startTime: + new Date().toISOString(), // change to int! and save as unix timestamp too for sorting
       name: username,
       score: 0,
       stageCompleted: Stages.Login

@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild, AfterContentInit, OnDestroy, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterContentInit, OnDestroy, HostListener, ChangeDetectorRef, ViewRef } from '@angular/core';
 import { timer, Subscription } from 'rxjs';
 import { MasterService } from '../services/master.service';
 import { Router } from '@angular/router';
 import { Stages } from '../models/stages';
+import { MatSnackBar } from '@angular/material';
 
 enum MoveDirection {
   Up,
@@ -30,7 +31,7 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
 
   image: HTMLImageElement;
 
-  moveDirection = MoveDirection.Up;
+  moveDirection = MoveDirection.Down;
 
   width;
   height;
@@ -43,6 +44,7 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
 
 
   showIntro = true;
+  hasChangedMoveDir = false;
 
   // on grid from numBlocs
   snakeHeadPos: GridPos = { x: this.numBlocsWidth / 2, y: this.numBlocsHeight / 2 };
@@ -60,7 +62,12 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
   myTimer = timer(0, 250);
   timerSub: Subscription;
 
-  constructor(private router: Router, private masterService: MasterService) { }
+  constructor(
+    private router: Router,
+    private masterService: MasterService,
+    private snackBar: MatSnackBar,
+    private changeDetector: ChangeDetectorRef
+  ) { }
 
   ngOnInit() {
   }
@@ -87,6 +94,25 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
 
   closeIntro() {
     this.showIntro = false;
+
+    setTimeout(() => {
+      if (!this.hasChangedMoveDir && !(this.changeDetector as ViewRef).destroyed) {
+        this.openHelpSnackBar();
+      }
+    }, 5000);
+  }
+
+  openHelpSnackBar() {
+    const durationInSeconds = 5;
+    this.snackBar.open(
+      'Prøv å roter telefonen!',
+      'Jeg tar ikke ordre!',
+      {
+        duration: durationInSeconds * 1000,
+      }
+    );
+
+
   }
 
   handleOrientation(event) {
@@ -100,8 +126,10 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
         this.moveDirection = MoveDirection.Down;
       } else {
         this.moveDirection = MoveDirection.Up;
+        this.hasChangedMoveDir = true;
       }
     } else {
+      this.hasChangedMoveDir = true;
       if (gamma > 0) { // positive right, neg left
         this.moveDirection = MoveDirection.Right;
       } else {
@@ -129,6 +157,8 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
     } else if (event.code === 'ArrowLeft') {
       this.moveDirection = MoveDirection.Left;
     }
+
+    this.hasChangedMoveDir = true;
 
   }
 

@@ -1,6 +1,6 @@
 export interface ScoreboardElement {
-    endTime: number;
-    startTime: number;
+    endTime: string;
+    startTime: string;
     name: string;
     score: number;
     stageCompleted: number;
