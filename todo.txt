@@ -1,3 +1,18 @@
 improve bg and text on first wo tasks
 
 use https://a-jie.github.io/Proton/ for firwork on stage complete. Tehn popup or move to next?
+
+get camera ID to mark subbmissions so that only the firs run coundt (even if they can do it more time) mark silently and use for selecting winner
+
+draw winner 
+
+on accesscard:
+vis at bilde ikke lagres på accesscard
+stop camera if no success after for ex 1 min
+vis detected emojo in bottom bar
+
+vurder memory spill
+
+highscore i to, en for pågående og en for ferdige
+
+se om kan på stand 19 juni?
