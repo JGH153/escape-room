@@ -8,6 +8,7 @@ import { HighscoreComponent } from './highscore/highscore.component';
 import { LoginComponent } from './login/login.component';
 import { GameEndComponent } from './game-end/game-end.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { MemoryComponent } from './memory/memory.component';
 
 // use inbetween components for when between tasks?
 // TODO router guard to prevent skipping tasks
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'accesscard', component: AccessCardComponent },
   { path: 'snake', component: SnakeComponent },
   { path: 'autocode', component: AutoCodeComponent },
+  { path: 'memory', component: MemoryComponent },
   { path: 'findqrcode', component: FindQrCodeComponent },
   { path: 'end', component: GameEndComponent },
   { path: 'highscore', component: HighscoreComponent },

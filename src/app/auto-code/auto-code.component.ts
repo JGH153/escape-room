@@ -11,7 +11,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class AutoCodeComponent implements OnInit {
 
-  totalText; //.substr(0, 40);
+  totalText; // .substr(0, 40);
   currentText = '';
   displayText;
 
@@ -61,7 +61,7 @@ export class AutoCodeComponent implements OnInit {
   }
 
   gotoNextTask() {
-    this.masterService.gotoStage(Stages.FindQrCode);
+    this.masterService.gotoStage(Stages.Memory);
   }
 
   closeIntro() {

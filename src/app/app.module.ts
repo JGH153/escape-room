@@ -36,6 +36,7 @@ import { LoginComponent } from './login/login.component';
 import { GameEndComponent } from './game-end/game-end.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { InfoOverlayComponent } from './shared/info-overlay/info-overlay.component';
+import { MemoryComponent } from './memory/memory.component';
 
 const matImports = [
    MatCardModule,
@@ -67,9 +68,9 @@ const matImports = [
       GameEndComponent,
       WelcomeComponent,
       InfoOverlayComponent,
+      MemoryComponent
    ],
-   entryComponents: [
-   ],
+   entryComponents: [],
    imports: [
       BrowserModule,
       AppRoutingModule,

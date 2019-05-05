@@ -51,9 +51,11 @@ export class MasterService {
       this.router.navigate(['autocode']);
     } else if (stage === Stages.FindQrCode) {
       this.router.navigate(['findqrcode']);
+    } else if (stage === Stages.Memory) {
+      this.router.navigate(['memory']);
     } else if (stage === Stages.End) {
       this.router.navigate(['end']);
-    } else { // TODO REST!
+    } else {
       this.router.navigate(['login']);
     }
   }

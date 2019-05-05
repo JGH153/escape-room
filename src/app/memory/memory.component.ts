@@ -1,0 +1,102 @@
+import { Component, OnInit } from '@angular/core';
+import { MasterService } from '../services/master.service';
+import { Stages } from '../models/stages';
+
+interface Card {
+  name: string;
+  url: string;
+  id?: number;
+}
+
+@Component({
+  selector: 'deg-memory',
+  templateUrl: './memory.component.html',
+  styleUrls: ['./memory.component.scss']
+})
+export class MemoryComponent implements OnInit {
+
+  allCardsUnique: Card[] = [
+    { name: 'GCP', url: 'gcp.png' },
+    { name: 'Angular', url: 'angular1.png' },
+    { name: 'Azure', url: 'azure.png' },
+    { name: 'Firebase', url: 'firebase.svg' },
+    { name: 'React', url: 'react.png' },
+    { name: 'Vue', url: 'vue1.png' },
+    { name: 'Docker', url: 'docker.png' },
+    { name: 'Kubernetes', url: 'kubernetes.png' },
+  ];
+
+  // with duplicates
+  allCardsTotal: Card[] = [];
+
+
+  cards: Card[] = [];
+
+  selectedCards: Card[] = [];
+
+  constructor(private masterService: MasterService) { }
+
+  ngOnInit() {
+
+    const cards1 = [...this.allCardsUnique];
+    const cards2 = [...this.allCardsUnique];
+    this.allCardsTotal = this.shuffleCards(cards1.concat(cards2));
+
+    // use array index as id
+    this.allCardsTotal = this.allCardsTotal.map((current, index) => {
+      return {
+        ...current,
+        id: index
+      };
+    });
+
+    this.cards = [...this.allCardsTotal];
+  }
+
+  // todo pipe
+  cardVisible(id: Card['id']) {
+    return this.selectedCards.some(current => current.id === id);
+  }
+
+  clickedCard(card: Card) {
+    if (this.selectedCards.length >= 2) {
+      this.selectedCards = [];
+    }
+
+    if (this.selectedCards.length === 0) {
+      this.selectedCards.push({ ...card });
+    } else if (this.selectedCards.length === 1) {
+      this.selectedCards.push({ ...card });
+      if (this.selectedCardsSame()) {
+        this.removeCardByName(card.name);
+      }
+    } else {
+      console.warn('Error of some kind!');
+    }
+  }
+
+  private removeCardByName(name: Card['name']) {
+    this.cards = this.cards.filter(current => current.name !== name);
+
+    if (this.cards.length === 0) {
+      this.masterService.gotoStage(Stages.FindQrCode);
+    }
+  }
+
+  private selectedCardsSame(): boolean {
+    if (this.selectedCards.length !== 2) {
+      return false;
+    }
+    return this.selectedCards[0].name === this.selectedCards[1].name;
+  }
+
+  // from stackoverflow
+  private shuffleCards(cards: Card[]) {
+    for (let i = cards.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [cards[i], cards[j]] = [cards[j], cards[i]];
+    }
+    return cards;
+  }
+
+}
