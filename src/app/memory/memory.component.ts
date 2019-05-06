@@ -51,6 +51,8 @@ export class MemoryComponent implements OnInit {
     });
 
     this.cards = [...this.allCardsTotal];
+
+    this.preLoadImages();
   }
 
   // todo pipe
@@ -68,7 +70,9 @@ export class MemoryComponent implements OnInit {
     } else if (this.selectedCards.length === 1) {
       this.selectedCards.push({ ...card });
       if (this.selectedCardsSame()) {
-        this.removeCardByName(card.name);
+        setTimeout(() => {
+          this.removeCardByName(card.name);
+        }, 200);
       }
     } else {
       console.warn('Error of some kind!');
@@ -88,6 +92,18 @@ export class MemoryComponent implements OnInit {
       return false;
     }
     return this.selectedCards[0].name === this.selectedCards[1].name;
+  }
+
+  private preLoadImages() {
+    const paths = this.allCardsUnique.map(current => 'assets/memory/' + current.url);
+
+    const images = new Array();
+
+    paths.forEach(currentImgPath => {
+      const image = new Image();
+      image.src = currentImgPath;
+      images.push(image);
+    });
   }
 
   // from stackoverflow
