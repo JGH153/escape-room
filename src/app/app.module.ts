@@ -31,12 +31,14 @@ import { AccessCardComponent } from './access-card/access-card.component';
 import { SnakeComponent } from './snake/snake.component';
 import { AutoCodeComponent } from './auto-code/auto-code.component';
 import { FindQrCodeComponent } from './find-qr-code/find-qr-code.component';
-import { HighscoreComponent } from './highscore/highscore.component';
+
 import { LoginComponent } from './login/login.component';
 import { GameEndComponent } from './game-end/game-end.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { InfoOverlayComponent } from './shared/info-overlay/info-overlay.component';
 import { MemoryComponent } from './memory/memory.component';
+import { HighscoreComponent } from './shared/highscore/highscore.component';
+import { HighscorePageComponent } from './highscore-page/highscore-page.component';
 
 const matImports = [
    MatCardModule,
@@ -64,6 +66,7 @@ const matImports = [
       AutoCodeComponent,
       FindQrCodeComponent,
       HighscoreComponent,
+      HighscorePageComponent,
       LoginComponent,
       GameEndComponent,
       WelcomeComponent,

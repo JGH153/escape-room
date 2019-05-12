@@ -3,7 +3,7 @@
     <ng-container *ngFor="let card of cards">
       <div class="memory-card" (click)="clickedCard(card)">
         <ng-container *ngIf="cardVisible(card.id); else notVisible">
-          <img src="assets/memory/{{card.url}}" class="memory-card-img">
+          <img src="assets/memory/{{card.url}}" draggable="false" class="memory-card-img">
         </ng-container>
         <ng-template #notVisible>
           <div class="not-visible-body">
@@ -13,4 +13,16 @@
       </div>
     </ng-container>
   </div>
+</div>
+
+<div class="intro-container" *ngIf="showIntro">
+  <deg-info-overlay 
+      [title]="'Vi må finne tilbake til stacken!'" 
+      [subTitle]="'Nå skal det matches!'"
+      [imageUrl]="'assets/profiles/2.jpg'" 
+      [startButtonLabel]="'La oss lete!'"
+      (startEE)="closeIntro()"
+  >
+      Noe noe matche kort, lykke til og sånt!
+  </deg-info-overlay>
 </div>

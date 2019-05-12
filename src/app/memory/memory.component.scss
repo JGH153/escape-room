@@ -16,10 +16,10 @@
     width: 100%;
     height: auto;
     .memory-card {
-        --cardWidth: 120px;
+        --cardWidth: 80px;
         width: var(--cardWidth);
         height: calc(var(--cardWidth) * 1.618);
-        margin: 10px;
+        margin: 5px;
         padding: 5px;
         border-radius: 5px;
         box-shadow: 4px 4px 15px 3px rgba(0,0,0,0.5);

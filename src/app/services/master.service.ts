@@ -5,6 +5,10 @@ import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Stages } from '../models/stages';
 
+import {
+  subMinutes
+} from 'date-fns';
+
 // for the complete state
 @Injectable({
   providedIn: 'root'
@@ -27,6 +31,8 @@ export class MasterService {
       // this.router.navigate(['login']);
       this.setIsLoading(false);
     }
+
+    console.log(this.getUnixTime(new Date()));
   }
 
   public loadUser() {
@@ -66,8 +72,11 @@ export class MasterService {
     this.firestore.collection<ScoreboardElement>(
       'scoreboard'
     ).doc(docId).set({
-      endTime: '', // save as unix timestamp too for sorting
-      startTime: + new Date().toISOString(), // change to int! and save as unix timestamp too for sorting
+      endTime: '',
+      endTimeUnix: '',
+      startTime: new Date().toISOString(),
+      startTimeUnix: this.getUnixTime(new Date()),
+      completed: false,
       name: username,
       score: 0,
       stageCompleted: Stages.Login
@@ -92,13 +101,23 @@ export class MasterService {
       return;
     }
 
+    let dataToSave: Partial<ScoreboardElement> = {
+      stageCompleted: newStage
+    };
+    if (newStage === Stages.End) {
+      dataToSave = {
+        stageCompleted: newStage,
+        endTime: new Date().toISOString(),
+        endTimeUnix: this.getUnixTime(new Date()),
+        completed: true,
+      };
+    }
+
     this.setIsLoading(true);
     const docId = this.userId;
     this.firestore.collection<ScoreboardElement>(
       'scoreboard'
-    ).doc(docId).set({
-      stageCompleted: newStage
-    }, { merge: true }).then(() => {
+    ).doc(docId).set(dataToSave, { merge: true }).then(() => {
       this.setIsLoading(false);
       this.gotoCorrectStage(newStage);
     });
@@ -108,8 +127,16 @@ export class MasterService {
     this.isLoading.next(newValue);
   }
 
+  public getUnix30MinAgo() {
+    return this.getUnixTime(subMinutes(new Date(), 30));
+  }
+
   private getRandDocId(): string {
     return this.firestore.createId();
+  }
+
+  private getUnixTime(date: Date) {
+    return Math.floor(date.getTime() / 1000);
   }
 
 }

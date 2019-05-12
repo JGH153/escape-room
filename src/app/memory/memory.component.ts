@@ -18,21 +18,23 @@ export class MemoryComponent implements OnInit {
   allCardsUnique: Card[] = [
     { name: 'GCP', url: 'gcp.png' },
     { name: 'Angular', url: 'angular1.png' },
-    { name: 'Azure', url: 'azure.png' },
+    // { name: 'Azure', url: 'azure.png' },
     { name: 'Firebase', url: 'firebase.svg' },
     { name: 'React', url: 'react.png' },
     { name: 'Vue', url: 'vue1.png' },
     { name: 'Docker', url: 'docker.png' },
     { name: 'Kubernetes', url: 'kubernetes.png' },
+    // { name: 'TypeScript', url: 'ts.png' },
+    // { name: 'Git', url: 'git.png' },
+    { name: 'Computas', url: 'computas.png' },
   ];
 
   // with duplicates
   allCardsTotal: Card[] = [];
-
-
   cards: Card[] = [];
-
   selectedCards: Card[] = [];
+
+  showIntro = true;
 
   constructor(private masterService: MasterService) { }
 
@@ -53,6 +55,10 @@ export class MemoryComponent implements OnInit {
     this.cards = [...this.allCardsTotal];
 
     this.preLoadImages();
+  }
+
+  closeIntro() {
+    this.showIntro = false;
   }
 
   // todo pipe

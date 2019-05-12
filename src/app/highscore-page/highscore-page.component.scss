@@ -1,0 +1,24 @@
+
+.page-container {
+    width: 100vw;
+    height: 100vh;
+
+    background-image: url('./../../assets/memoryBG.png');
+    background-size: cover;
+    background-color: #FED547;
+    background-position: center 25%;
+}
+
+.highscore-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.highscore-column {
+    width: calc(50vw - 20px);
+    height: calc(100vh - 20px);
+    padding: 10px;
+    overflow-y: auto;
+}

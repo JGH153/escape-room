@@ -29,6 +29,15 @@ export class FindQrCodeComponent implements OnInit, AfterContentInit, OnDestroy 
 
   ngAfterContentInit() {
 
+  }
+
+  ngOnDestroy() {
+    if (this.ownStream) {
+      this.ownStream.getTracks()[0].stop();
+    }
+  }
+
+  getUserMedia() {
     navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: false }).then(stream => {
       this.ownStream = stream;
       this.video.srcObject = stream;
@@ -39,12 +48,6 @@ export class FindQrCodeComponent implements OnInit, AfterContentInit, OnDestroy 
         console.warn('can\'t get media!');
         console.warn(error);
       });
-  }
-
-  ngOnDestroy() {
-    if (this.ownStream) {
-      this.ownStream.getTracks()[0].stop();
-    }
   }
 
   grabImage() {
@@ -98,6 +101,7 @@ export class FindQrCodeComponent implements OnInit, AfterContentInit, OnDestroy 
 
   closeIntro() {
     this.showIntro = false;
+    this.getUserMedia();
   }
 
 }

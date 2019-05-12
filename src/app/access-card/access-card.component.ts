@@ -35,9 +35,7 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
   }
 
   getUserMedia() {
-    console.log('123');
     navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then(stream => {
-      console.log('jupp');
       this.ownStream = stream;
       this.video.srcObject = stream;
       this.video.play();
