@@ -21,6 +21,7 @@ export class AutoCodeComponent implements OnInit {
   removeEachPress = 0;
 
   showIntro = true;
+  showOutro = false;
 
   @ViewChild('codeElement') codeElement;
 
@@ -28,6 +29,10 @@ export class AutoCodeComponent implements OnInit {
 
   ngOnInit() {
     this.totalText = AutoText.replace(/(?:\r\n|\r|\n)/g, '<br>');
+  }
+
+  puzzleCompleted() {
+    this.showOutro = true;
   }
 
   clickedButtonZero() {
@@ -45,7 +50,7 @@ export class AutoCodeComponent implements OnInit {
   addText(toAdd) {
 
     if (this.currentText.length >= this.totalText.length) {
-      this.gotoNextTask();
+      this.puzzleCompleted();
     }
 
     const chatsPrPress = toAdd;

@@ -16,6 +16,7 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
 
   showIntro = true;
   noCamera = true; // set to false TODO
+  showOutro = false;
 
   @ViewChild('thyImg') thyImg;
 
@@ -61,6 +62,10 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
     alert('Du har ikke noe kamera :(');
   }
 
+  gotoNextTask() {
+    this.masterService.gotoStage(Stages.Snake);
+  }
+
   // https://developers.google.com/web/updates/2016/12/imagecapture
 
   grabImage() {
@@ -80,9 +85,9 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
     // console.log(image);
   }
 
-  nextPuzzle() {
+  puzzleComplete() {
+    this.showOutro = true;
     this.ownStream.getTracks()[0].stop();
-    this.masterService.gotoStage(Stages.Snake);
   }
 
   closeIntro() {

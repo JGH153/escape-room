@@ -26,3 +26,5 @@
       Noe noe matche kort, lykke til og sånt!
   </deg-info-overlay>
 </div>
+
+<deg-victory (closedEE)="gotoNextTask()" [effectLines]="true" [title]="'Seier!'" *ngIf="showOutro"></deg-victory>

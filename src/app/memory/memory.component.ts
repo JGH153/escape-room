@@ -35,6 +35,7 @@ export class MemoryComponent implements OnInit {
   selectedCards: Card[] = [];
 
   showIntro = true;
+  showOutro = false;
 
   constructor(private masterService: MasterService) { }
 
@@ -55,6 +56,10 @@ export class MemoryComponent implements OnInit {
     this.cards = [...this.allCardsTotal];
 
     this.preLoadImages();
+  }
+
+  gotoNextTask() {
+    this.masterService.gotoStage(Stages.FindQrCode);
   }
 
   closeIntro() {
@@ -89,7 +94,7 @@ export class MemoryComponent implements OnInit {
     this.cards = this.cards.filter(current => current.name !== name);
 
     if (this.cards.length === 0) {
-      this.masterService.gotoStage(Stages.FindQrCode);
+      this.showOutro = true;
     }
   }
 

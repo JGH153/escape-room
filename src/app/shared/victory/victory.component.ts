@@ -33,7 +33,7 @@ export class VictoryComponent implements OnInit, AfterViewInit {
   }
 
   onClickClose() {
-    // this.closedEE.emit(true);
+    this.closedEE.emit(true);
   }
 
 }

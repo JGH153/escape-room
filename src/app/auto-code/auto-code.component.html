@@ -19,3 +19,5 @@
         Noe noe må lage AI for å løse noe strøm og saker! Husk å skriv rett!
     </deg-info-overlay>
 </div>
+
+<deg-victory (closedEE)="gotoNextTask()" [effectLogo]="true" [title]="'Seier!'" *ngIf="showOutro"></deg-victory>
