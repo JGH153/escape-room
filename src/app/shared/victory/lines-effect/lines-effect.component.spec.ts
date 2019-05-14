@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { FireworksComponent } from './fireworks.component';
+import { LinesEffectComponent } from './lines-effect.component';
 
-describe('FireworksComponent', () => {
-  let component: FireworksComponent;
-  let fixture: ComponentFixture<FireworksComponent>;
+describe('LinesEffectComponent', () => {
+  let component: LinesEffectComponent;
+  let fixture: ComponentFixture<LinesEffectComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FireworksComponent ]
+      declarations: [ LinesEffectComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FireworksComponent);
+    fixture = TestBed.createComponent(LinesEffectComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

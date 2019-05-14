@@ -39,7 +39,10 @@ import { InfoOverlayComponent } from './shared/info-overlay/info-overlay.compone
 import { MemoryComponent } from './memory/memory.component';
 import { HighscoreComponent } from './shared/highscore/highscore.component';
 import { HighscorePageComponent } from './highscore-page/highscore-page.component';
-import { FireworksComponent } from './shared/fireworks/fireworks.component';
+import { VictoryComponent } from './shared/victory/victory.component';
+import { FireworkEffectComponent } from './shared/victory/firework-effect/firework-effect.component';
+import { LinesEffectComponent } from './shared/victory/lines-effect/lines-effect.component';
+import { LogoEffectComponent } from './shared/victory/logo-effect/logo-effect.component';
 
 const matImports = [
    MatCardModule,
@@ -73,7 +76,10 @@ const matImports = [
       WelcomeComponent,
       InfoOverlayComponent,
       MemoryComponent,
-      FireworksComponent
+      VictoryComponent,
+      FireworkEffectComponent,
+      LinesEffectComponent,
+      LogoEffectComponent
    ],
    entryComponents: [],
    imports: [

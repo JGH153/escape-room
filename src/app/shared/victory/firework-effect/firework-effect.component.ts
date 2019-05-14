@@ -1,16 +1,13 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
 
 import * as Proton from 'proton-js/build/proton.js';
 
 @Component({
-  selector: 'deg-fireworks',
-  templateUrl: './fireworks.component.html',
-  styleUrls: ['./fireworks.component.scss']
+  selector: 'deg-firework-effect',
+  templateUrl: './firework-effect.component.html',
+  styleUrls: ['./firework-effect.component.scss']
 })
-export class FireworksComponent implements OnInit, AfterViewInit {
-
-  @Input() title = '';
-  @Output() closedEE = new EventEmitter<boolean>();
+export class FireworkEffectComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('myCanvas') myCanvas: ElementRef;
   canvasRC: CanvasRenderingContext2D;
@@ -26,12 +23,14 @@ export class FireworksComponent implements OnInit, AfterViewInit {
   stats;
 
   play = true;
-  showText = false;
 
   constructor() { }
 
   ngOnInit() {
+  }
 
+  ngOnDestroy() {
+    this.play = false;
   }
 
   ngAfterViewInit() {
@@ -48,15 +47,6 @@ export class FireworksComponent implements OnInit, AfterViewInit {
 
     this.main();
 
-    setTimeout(() => {
-      this.showText = true;
-    }, 800);
-
-  }
-
-  onClickClose() {
-    this.play = false;
-    this.closedEE.emit(true);
   }
 
   main() {
