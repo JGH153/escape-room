@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import * as Proton from 'proton-js/build/proton.js';
+
 @Component({
   selector: 'deg-welcome',
   templateUrl: './welcome.component.html',

@@ -39,6 +39,7 @@ import { InfoOverlayComponent } from './shared/info-overlay/info-overlay.compone
 import { MemoryComponent } from './memory/memory.component';
 import { HighscoreComponent } from './shared/highscore/highscore.component';
 import { HighscorePageComponent } from './highscore-page/highscore-page.component';
+import { FireworksComponent } from './shared/fireworks/fireworks.component';
 
 const matImports = [
    MatCardModule,
@@ -71,7 +72,8 @@ const matImports = [
       GameEndComponent,
       WelcomeComponent,
       InfoOverlayComponent,
-      MemoryComponent
+      MemoryComponent,
+      FireworksComponent
    ],
    entryComponents: [],
    imports: [
