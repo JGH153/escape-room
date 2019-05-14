@@ -26,6 +26,7 @@ export class FireworksComponent implements OnInit, AfterViewInit {
   stats;
 
   play = true;
+  showText = false;
 
   constructor() { }
 
@@ -47,6 +48,10 @@ export class FireworksComponent implements OnInit, AfterViewInit {
 
     this.main();
 
+    setTimeout(() => {
+      this.showText = true;
+    }, 800);
+
   }
 
   onClickClose() {
@@ -55,14 +60,16 @@ export class FireworksComponent implements OnInit, AfterViewInit {
   }
 
   main() {
-    // this.canvas.width = window.innerWidth;
-    // this.canvas.height = window.innerHeight;
-    // context = this.canvas.getContext('2d');
-    // context.globalCompositeOperation = "lighter";
     this.createProton();
     this.tick();
   }
 
+  tick() {
+    if (this.play) {
+      this.proton.update();
+      requestAnimationFrame(this.tick.bind(this));
+    }
+  }
 
   createProton() {
     this.proton = new Proton();
@@ -92,8 +99,6 @@ export class FireworksComponent implements OnInit, AfterViewInit {
 
     //// NOTICE :you can only use two emitters do this effect.In this demo I use more emitters want to test the emtter's life
     this.proton.addEventListener(Proton.PARTICLE_DEAD, (particle) => {
-      console.log('here');
-
       setTimeout(() => {
         window.navigator.vibrate(200);
       }, 50);
@@ -101,7 +106,7 @@ export class FireworksComponent implements OnInit, AfterViewInit {
       if (Math.random() < .7) {
         this.createFirstEmitter(particle);
       } else {
-        // this.createSecendEmitter(particle);
+        this.createSecondEmitter(particle);
       }
     });
   }
@@ -126,7 +131,7 @@ export class FireworksComponent implements OnInit, AfterViewInit {
     this.proton.addEmitter(subemitter);
   }
 
-  createSecendEmitter(particle) {
+  createSecondEmitter(particle) {
     const subemitter = new Proton.Emitter();
     subemitter.rate = new Proton.Rate(new Proton.Span(100, 120), 1);
 
@@ -147,11 +152,5 @@ export class FireworksComponent implements OnInit, AfterViewInit {
     this.proton.addEmitter(subemitter);
   }
 
-  tick() {
-    if (this.play) {
-      this.proton.update();
-      requestAnimationFrame(this.tick.bind(this));
-    }
-  }
 
 }

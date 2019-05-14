@@ -45,10 +45,13 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
 
   showIntro = true;
   hasChangedMoveDir = false;
+  showOutro = false;
+  stopDrawing = false;
 
   // on grid from numBlocs
   snakeHeadPos: GridPos = { x: this.numBlocsWidth / 2, y: this.numBlocsHeight / 2 };
   snakeLength = 1;
+  targetSnakeLength = 2;
   snakeBody: Array<GridPos> = [
     // { ...this.snakeHeadPos, x: this.snakeHeadPos.x - 1 },
     // { ...this.snakeHeadPos, x: this.snakeHeadPos.x - 2 },
@@ -73,27 +76,22 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
   }
 
   ngAfterContentInit() {
-
     this.canvasRC = this.myCanvas.nativeElement.getContext('2d');
     document.body.style.overflow = 'hidden';
+
+    document.addEventListener('keydown', this.onKeyPress.bind(this));
+    window.addEventListener('deviceorientation', this.handleOrientation.bind(this), true);
+  }
+
+  closeIntro() {
+    this.showIntro = false;
 
     this.image = new Image();
     this.image.src = 'assets/boss.png';
     this.image.onload = () => {
       this.draw();
     };
-
-
-    document.addEventListener('keydown', this.onKeyPress.bind(this));
-
     this.timerSub = this.myTimer.subscribe({ next: this.logicTick.bind(this) });
-
-    window.addEventListener('deviceorientation', this.handleOrientation.bind(this), true);
-
-  }
-
-  closeIntro() {
-    this.showIntro = false;
 
     setTimeout(() => {
       if (!this.hasChangedMoveDir && !(this.changeDetector as ViewRef).destroyed) {
@@ -102,17 +100,19 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
     }, 5000);
   }
 
+  gotoNextTask() {
+    this.masterService.gotoStage(Stages.Autocode);
+  }
+
   openHelpSnackBar() {
-    const durationInSeconds = 5;
+    const durationInSeconds = 6;
     this.snackBar.open(
       'Prøv å roter telefonen!',
-      'Jeg tar ikke ordre!',
+      '',
       {
         duration: durationInSeconds * 1000,
       }
     );
-
-
   }
 
   handleOrientation(event) {
@@ -186,11 +186,13 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
   }
 
   handleIfWon() {
-    if (this.snakeBody.length > 3) {
+    if (this.snakeBody.length >= this.targetSnakeLength) {
       // WON!
-      this.masterService.gotoStage(Stages.Autocode);
+      this.showOutro = true;
+      this.stopDrawing = true;
     }
   }
+
 
   handleEating() {
     if (this.snakeHeadPos.x === this.snakeFoodPos.x && this.snakeHeadPos.y === this.snakeFoodPos.y) {
@@ -300,6 +302,10 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
     this.drawSnake();
 
     // this.canvasRC.drawImage(this.image, 20, 20);
+
+    if (this.stopDrawing) {
+      return;
+    }
 
     requestAnimationFrame(this.draw.bind(this));
   }

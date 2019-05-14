@@ -15,6 +15,7 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
   username;
 
   showIntro = true;
+  noCamera = true; // set to false TODO
 
   @ViewChild('thyImg') thyImg;
 
@@ -35,19 +36,29 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
   }
 
   getUserMedia() {
-    navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then(stream => {
-      this.ownStream = stream;
-      this.video.srcObject = stream;
-      this.video.play();
+    console.log(navigator.mediaDevices);
+    if (!navigator.mediaDevices) {
+      this.ifNoCamera();
+    } else {
+      navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then(stream => {
+        this.ownStream = stream;
+        this.video.srcObject = stream;
+        this.video.play();
 
-      setTimeout(() => {
-        this.grabImage();
-      }, 1500);
-    },
-      error => {
-        console.warn('can\'t get media!');
-        console.warn(error);
-      });
+        setTimeout(() => {
+          this.grabImage();
+        }, 1500);
+      },
+        error => {
+          console.warn('can\'t get media!');
+          console.warn(error);
+        });
+    }
+  }
+
+  ifNoCamera() {
+    this.noCamera = true;
+    alert('Du har ikke noe kamera :(');
   }
 
   // https://developers.google.com/web/updates/2016/12/imagecapture

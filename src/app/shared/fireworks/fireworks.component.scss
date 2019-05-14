@@ -1,50 +1,62 @@
 canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    // background: red;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  // background: red;
 }
 
 .message-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    // margin-left: -50vw;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    .message {
-        font-weight: bold;
-        user-select: none;
-        text-align: center;
-        font-size: 80px;
-        color: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  // margin-left: -50vw;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  .message {
+    font-weight: bold;
+    user-select: none;
+    text-align: center;
+    font-size: 80px;
+    color: white;
+    letter-spacing: 0px;
+
+    animation-duration: 2.5s;
+    animation-name: slidein;
+    transition-timing-function: cubic-bezier(0.11, 0.26, 0.59, 1.02);
+
+    /* ST 
+    text-transform: uppercase;
+    font-weight: 800;
+    font-family: 'ITC Benguiat W01';
+    color: #1c0502;
+    text-shadow: -0.05rem -0.05rem 1px #ed2b12, 0.05rem -0.05rem 1px #ed2b12, -0.05rem 0.05rem 1px #ed2b12,
+      0.05rem 0.05rem 1px #ed2b12, 0 0 15px #630100, 0 0 20px #450100;
+      */
+
+    /* shadow */
+    text-shadow: 3px 5px 2px #474747;
+
+    @keyframes slidein {
+      0% {
+        opacity: 0;
+        // font-size: 20px;
+        letter-spacing: 70px;
+        // letter-spacing: -17px;
+      }
+
+      100% {
+        opacity: 1;
+        // font-size: 80px;
         letter-spacing: 0px;
-
-        animation-duration: 2s;
-        animation-name: slidein;
-
-        @keyframes slidein {
-            0% {
-                opacity: 0;
-                font-size: 20px;
-                letter-spacing: 150px;
-                // letter-spacing: -17px;
-            }
-
-            100% {
-                opacity: 1;
-                font-size: 80px;
-                letter-spacing: 0px;
-                // letter-spacing: 4px;
-            }
-        }
-
+        // letter-spacing: 4px;
+      }
     }
+  }
 }
