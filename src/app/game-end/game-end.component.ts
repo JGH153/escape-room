@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class GameEndComponent implements OnInit {
 
   showIntro = true;
+  showOutro = false;
 
   constructor() { }
 
@@ -16,6 +17,11 @@ export class GameEndComponent implements OnInit {
 
   closeIntro() {
     this.showIntro = false;
+    this.showOutro = true;
+  }
+
+  closeOutro() {
+
   }
 
 }

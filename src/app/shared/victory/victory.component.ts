@@ -15,6 +15,7 @@ export class VictoryComponent implements OnInit, AfterViewInit {
   @Input() effectFireworks = false;
   @Input() effectLines = false;
   @Input() effectLogo = false;
+  @Input() effectDna = false;
 
   showText = false;
 

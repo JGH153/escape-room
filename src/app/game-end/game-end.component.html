@@ -1,15 +1,17 @@
-<p>
-  Du vant! Kontakt HR for premie!
-</p>
+<div class="container">
+    <br><br><br>
+    <p>
+        Du vant! Kontakt HR for premie!
+    </p>
 
+
+
+</div>
 <div class="intro-container" *ngIf="showIntro">
-    <deg-info-overlay 
-        [title]="'Gratulere, du vant!'" 
-        [subTitle]="'Dette var kult'"
-        [imageUrl]="'assets/profiles/1.jpg'" 
-        [startButtonLabel]="'La meg se hvordan jeg ligger an'"
-        (startEE)="closeIntro()"
-    >
+    <deg-info-overlay [title]="'Gratulere, du vant!'" [subTitle]="'Dette var kult'" [imageUrl]="'assets/profiles/1.jpg'"
+        [startButtonLabel]="'La meg se hvordan jeg ligger an'" (startEE)="closeIntro()">
         Takk for at du spilte å sånn. Likk denne for å se highscore
     </deg-info-overlay>
 </div>
+
+<deg-victory (closedEE)="closeOutro()" [effectDna]="true" [title]="'Slutt!'" *ngIf="showOutro"></deg-victory>

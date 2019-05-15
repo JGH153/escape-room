@@ -43,6 +43,7 @@ import { VictoryComponent } from './shared/victory/victory.component';
 import { FireworkEffectComponent } from './shared/victory/firework-effect/firework-effect.component';
 import { LinesEffectComponent } from './shared/victory/lines-effect/lines-effect.component';
 import { LogoEffectComponent } from './shared/victory/logo-effect/logo-effect.component';
+import { DnaEffectComponent } from './shared/victory/dna-effect/dna-effect.component';
 
 const matImports = [
    MatCardModule,
@@ -79,7 +80,8 @@ const matImports = [
       VictoryComponent,
       FireworkEffectComponent,
       LinesEffectComponent,
-      LogoEffectComponent
+      LogoEffectComponent,
+      DnaEffectComponent,
    ],
    entryComponents: [],
    imports: [

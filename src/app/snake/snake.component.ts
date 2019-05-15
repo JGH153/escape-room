@@ -198,6 +198,7 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
     if (this.snakeHeadPos.x === this.snakeFoodPos.x && this.snakeHeadPos.y === this.snakeFoodPos.y) {
       this.makeSnakeLonger();
       this.newFood();
+      window.navigator.vibrate(200);
     }
   }
 
