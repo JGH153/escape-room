@@ -44,6 +44,7 @@ import { FireworkEffectComponent } from './shared/victory/firework-effect/firewo
 import { LinesEffectComponent } from './shared/victory/lines-effect/lines-effect.component';
 import { LogoEffectComponent } from './shared/victory/logo-effect/logo-effect.component';
 import { DnaEffectComponent } from './shared/victory/dna-effect/dna-effect.component';
+import { HttpClientModule } from '@angular/common/http';
 
 const matImports = [
    MatCardModule,
@@ -93,7 +94,8 @@ const matImports = [
       AngularFirestoreModule,
       AngularFireFunctionsModule,
       AngularFireAuthModule,
-      FormsModule
+      FormsModule,
+      HttpClientModule
    ],
    providers: [],
    bootstrap: [

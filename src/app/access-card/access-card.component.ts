@@ -2,6 +2,9 @@ import { Component, OnInit, AfterContentInit, OnDestroy, ViewChild } from '@angu
 import { Router } from '@angular/router';
 import { MasterService } from '../services/master.service';
 import { Stages } from '../models/stages';
+import { AccessCardService } from './service/access-card.service';
+import { timer, Subscription } from 'rxjs';
+import { EmojiLikelihood } from './service/emoji-likelihood';
 
 @Component({
   selector: 'deg-access-card',
@@ -19,8 +22,20 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
   showOutro = false;
 
   @ViewChild('thyImg') thyImg;
+  @ViewChild('progressElement') progressElement;
 
-  constructor(private router: Router, private masterService: MasterService) { }
+  tempResponse = '';
+
+  progressDeg = 360 / 2;
+
+  myTimer = timer(0, 30);
+  timerSub: Subscription;
+
+  constructor(
+    private router: Router,
+    private masterService: MasterService,
+    private accessCardService: AccessCardService
+  ) { }
 
   ngOnInit() {
     this.username = this.masterService.username;
@@ -34,6 +49,9 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
     if (this.ownStream) {
       this.ownStream.getTracks()[0].stop();
     }
+    if (this.timerSub) {
+      this.timerSub.unsubscribe();
+    }
   }
 
   getUserMedia() {
@@ -46,15 +64,27 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
         this.video.srcObject = stream;
         this.video.play();
 
-        setTimeout(() => {
-          this.grabImage();
-        }, 1500);
+        // setTimeout(() => {
+        //   this.grabImage();
+        // }, 500);
       },
         error => {
           console.warn('can\'t get media!');
           console.warn(error);
         });
     }
+
+    this.timerSub = this.myTimer.subscribe({ next: this.logicTick.bind(this) });
+  }
+
+  logicTick(time) {
+    this.progressDeg += 1;
+    if (this.progressDeg > 360) {
+      this.progressDeg = 0;
+      this.grabImage();
+    }
+    const progressDegText = this.progressDeg + 'deg';
+    this.progressElement.nativeElement.style.cssText = '--progress-deg:' + progressDegText + ';';
   }
 
   ifNoCamera() {
@@ -83,7 +113,29 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
     this.thyImg.nativeElement.src = myCanvas.toDataURL();
     // document.body.appendChild(image);
     // console.log(image);
+
+    // myCanvas.toBlob(this.sendFile.bind(this), 'image/jpeg');
+
+    const base64 = myCanvas.toDataURL().replace('data:image/png;base64,', '');
+    console.log(base64);
+
+    this.accessCardService.detectEmojions(base64).subscribe({
+      next: response => {
+        console.log('response', response);
+        this.tempResponse = response;
+        if (response.joyLikelihood === EmojiLikelihood.LIKELY
+          || response.joyLikelihood === EmojiLikelihood.VERY_LIKELY
+          || response.joyLikelihood === EmojiLikelihood.POSSIBLE) {
+            this.puzzleComplete();
+        }
+        // TODO display emjions that match somewhere
+      }
+    });
   }
+
+  // sendFile(blob) {
+
+  // }
 
   puzzleComplete() {
     this.showOutro = true;

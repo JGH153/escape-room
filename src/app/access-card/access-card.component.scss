@@ -38,11 +38,17 @@
 }
 
 .person-img-circle {
+
+    --progress-deg: 0deg;
+
     width: calc(var(--card-width) * 0.7);
     max-width: calc(var(--card-max-width) * 0.7);
     height: calc(var(--card-width) * 0.7);
     max-height: calc(var(--card-max-width) * 0.7);
     background-color: var(--card-color);
+
+    background: conic-gradient(green var(--progress-deg), red var(--progress-deg));
+
     border-radius: 100%;
     padding: 10px;
     cursor: pointer;
