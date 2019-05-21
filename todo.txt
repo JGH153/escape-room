@@ -16,3 +16,5 @@ vurder memory spill
 highscore i to, en for pågående og en for ferdige
 
 se om kan på stand 19 juni?
+
+https://developers.google.com/web/updates/2016/09/navigator-share
