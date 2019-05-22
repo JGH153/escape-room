@@ -1,8 +1,8 @@
-:host{
-    --card-width: calc(100vw - 20px);
-    --card-height: calc(100vh - 20px);
-    --card-max-width: 600px;
-    --card-color: #007A8E;
+:host {
+  --card-width: calc(100vw - 20px);
+  --card-height: calc(100vh - 20px);
+  --card-max-width: 600px;
+  --card-color: #007a8e;
 }
 
 // .bg-img {
@@ -10,69 +10,95 @@
 //     background-size: cover;
 // }
 
-
 .card-container {
-    width: var(--card-width);
-    max-width: var(--card-max-width);
-    min-height: var(--card-height);
-    max-height: calc(var(--card-width) * 1.618);
-    // border: 1px solid red;
+  width: var(--card-width);
+  max-width: var(--card-max-width);
+  min-height: var(--card-height);
+  max-height: calc(var(--card-width) * 1.618);
+  // border: 1px solid red;
 
-    padding-top: 20px;
+  padding-top: 20px;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    
-    box-shadow: 2px 3px 14px 0px rgba(0,0,0,0.75);
-    border-radius: 10px;
-    overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
-    margin: 10px auto;
+  box-shadow: 2px 3px 14px 0px rgba(0, 0, 0, 0.75);
+  border-radius: 10px;
+  overflow: hidden;
+
+  margin: 10px auto;
 }
 
 .person-img-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .person-img-circle {
+  --progress-deg: 0deg;
 
-    --progress-deg: 0deg;
+  width: calc(var(--card-width) * 0.7);
+  max-width: calc(var(--card-max-width) * 0.7);
+  height: calc(var(--card-width) * 0.7);
+  max-height: calc(var(--card-max-width) * 0.7);
+  background-color: var(--card-color);
 
-    width: calc(var(--card-width) * 0.7);
-    max-width: calc(var(--card-max-width) * 0.7);
-    height: calc(var(--card-width) * 0.7);
-    max-height: calc(var(--card-max-width) * 0.7);
-    background-color: var(--card-color);
+  background: conic-gradient(green var(--progress-deg), red var(--progress-deg));
 
-    background: conic-gradient(green var(--progress-deg), red var(--progress-deg));
+  border-radius: 100%;
+  padding: 10px;
+  cursor: pointer;
 
+  position: relative;
+
+  .own-img {
     border-radius: 100%;
-    padding: 10px;
-    cursor: pointer;
-}
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    margin: 10px;
+  }
 
-.person-img, .person-video {
+  .loading-spinner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 100%;
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .person-img,
+  .person-video {
     border-radius: 100%;
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
 }
 
-.person-name{
-    text-transform: uppercase;
-    font-size: 45px;
-    width: 100%;
-    text-align: center;
-    font-family: sans-serif;
+.person-name {
+  text-transform: uppercase;
+  font-size: 45px;
+  width: 100%;
+  text-align: center;
+  font-family: sans-serif;
 }
 
 .bottom {
-    background-color: var(--card-color);
-    height: calc(var(--card-width) / 5);
-    max-height: 120px;
-    width: 100%;
-
+  background-color: var(--card-color);
+  height: calc(var(--card-width) / 5);
+  max-height: 120px;
+  width: 100%;
+  text-align: center;
+  font-size: 100px;
 }

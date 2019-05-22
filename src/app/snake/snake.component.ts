@@ -143,7 +143,9 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
     document.body.style.overflow = 'visible';
     document.removeEventListener('keydown', this.onKeyPress.bind(this));
     window.removeEventListener('deviceorientation', this.handleOrientation.bind(this), true);
-    this.timerSub.unsubscribe();
+    if (this.timerSub) {
+      this.timerSub.unsubscribe();
+    }
   }
 
   onKeyPress(event: KeyboardEvent) {

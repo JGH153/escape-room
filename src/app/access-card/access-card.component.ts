@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterContentInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterContentInit, OnDestroy, ViewChild, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { MasterService } from '../services/master.service';
 import { Stages } from '../models/stages';
@@ -18,13 +18,15 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
   username;
 
   showIntro = true;
-  noCamera = true; // set to false TODO
+  noCamera = false;
   showOutro = false;
 
   @ViewChild('thyImg') thyImg;
   @ViewChild('progressElement') progressElement;
 
+  loadingResponse = false;
   tempResponse = '';
+  activeEmojions = '';
 
   progressDeg = 360 / 2;
 
@@ -34,7 +36,8 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
   constructor(
     private router: Router,
     private masterService: MasterService,
-    private accessCardService: AccessCardService
+    private accessCardService: AccessCardService,
+    private renderer: Renderer2,
   ) { }
 
   ngOnInit() {
@@ -42,7 +45,7 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
   }
 
   ngAfterContentInit() {
-
+    // this.getUserMedia(); // temp
   }
 
   ngOnDestroy() {
@@ -78,7 +81,7 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
   }
 
   logicTick(time) {
-    this.progressDeg += 1;
+    this.progressDeg += 2;
     if (this.progressDeg > 360) {
       this.progressDeg = 0;
       this.grabImage();
@@ -96,42 +99,69 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
     this.masterService.gotoStage(Stages.Snake);
   }
 
-  // https://developers.google.com/web/updates/2016/12/imagecapture
-
-  grabImage() {
+  setLocalImage() {
     const videoW = this.ownStream.getTracks()[0].getSettings().width;
     const videoH = this.ownStream.getTracks()[0].getSettings().height;
 
     const myCanvas = document.createElement('canvas');
-    myCanvas.id = 'myCanvas';
+    // myCanvas.id = 'myCanvas';
     const context = myCanvas.getContext('2d');
     myCanvas.width = videoW;
     myCanvas.height = videoH;
     context.drawImage(this.video, 0, 0, videoW, videoH);
     // const image = new Image();
-    // image.id = 'pic';
+    // / image.id = 'pic';
+    this.renderer.setStyle(this.thyImg.nativeElement, 'display', 'block');
     this.thyImg.nativeElement.src = myCanvas.toDataURL();
-    // document.body.appendChild(image);
-    // console.log(image);
+  }
 
-    // myCanvas.toBlob(this.sendFile.bind(this), 'image/jpeg');
+  // https://developers.google.com/web/updates/2016/12/imagecapture
+
+  grabImage() {
+
+    this.setLocalImage();
+
+    const videoW = this.ownStream.getTracks()[0].getSettings().width;
+    const videoH = this.ownStream.getTracks()[0].getSettings().height;
+
+    const targetWidth = 300;
+    const diffFactor = videoW / targetWidth;
+
+    const outputWidth = targetWidth;
+    const outputHight = videoH / diffFactor;
+    console.log(videoW, videoW);
+    console.log(outputWidth, outputHight);
+
+    const myCanvas = document.createElement('canvas');
+    // myCanvas.id = 'myCanvas';
+    const context = myCanvas.getContext('2d');
+    myCanvas.width = outputWidth;
+    myCanvas.height = outputHight;
+    context.drawImage(this.video, 0, 0, outputWidth, outputHight);
 
     const base64 = myCanvas.toDataURL().replace('data:image/png;base64,', '');
-    console.log(base64);
 
+    this.loadingResponse = true;
     this.accessCardService.detectEmojions(base64).subscribe({
       next: response => {
+        this.loadingResponse = false;
         console.log('response', response);
         this.tempResponse = response;
-        if (response.joyLikelihood === EmojiLikelihood.LIKELY
-          || response.joyLikelihood === EmojiLikelihood.VERY_LIKELY
-          || response.joyLikelihood === EmojiLikelihood.POSSIBLE) {
-            this.puzzleComplete();
+        if (this.accessCardService.emojiPossibleOrMore(response.joyLikelihood)) {
+          this.puzzleComplete();
+        } else {
+          this.renderer.setStyle(this.thyImg.nativeElement, 'display', 'none');
         }
         // TODO display emjions that match somewhere
+        this.activeEmojions = this.accessCardService.getActiveEmojions(response);
+        if (this.activeEmojions.length === 0) {
+          this.activeEmojions = 'Husk å smil!';
+        }
       }
     });
   }
+
+
 
   // sendFile(blob) {
 
@@ -140,6 +170,7 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
   puzzleComplete() {
     this.showOutro = true;
     this.ownStream.getTracks()[0].stop();
+    this.timerSub.unsubscribe();
   }
 
   closeIntro() {

@@ -4,18 +4,23 @@
     <div class=person-img-container>
       <div class="person-img-circle" #progressElement>
         <video id="localVideo" [srcObject]="ownStream" class="person-video" autoplay muted></video>
+        <!-- <img class="own-img" src="assets/profiles/christine.jpg"> -->
+        <img class="own-img" #thyImg >
+        <div class="loading-spinner" *ngIf="loadingResponse">
+            <mat-spinner></mat-spinner>
+        </div>
         <!-- <img src="assets/testUserImg.jpg" class="person-img"> -->
       </div>
     </div>
     <div class="person-name">{{username | async}}</div>
     <div class="bottom">
       <button mat-raised-button color="primary" *ngIf="noCamera" (click)="puzzleComplete()">Neste oppgave</button>
-      {{tempResponse | json}}
+      {{activeEmojions}}
     </div>
   </main>
 </div>
 
-<img #thyImg style="display: none;">
+
 
 <div class="intro-container" *ngIf="showIntro">
   <deg-info-overlay 
