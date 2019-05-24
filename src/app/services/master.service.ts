@@ -105,10 +105,12 @@ export class MasterService {
       stageCompleted: newStage
     };
     if (newStage === Stages.End) {
+      const durationTimeSec = 1337; // TODO
       dataToSave = {
         stageCompleted: newStage,
         endTime: new Date().toISOString(),
         endTimeUnix: this.getUnixTime(new Date()),
+        durationTimeSec,
         completed: true,
       };
     }

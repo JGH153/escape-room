@@ -22,47 +22,22 @@ https://developers.google.com/web/updates/2016/09/navigator-share
 
 --------------------------
 
-vank kamera for fort med å smile
 
-autocode -> fobedres, klikket bort "win screen". mulig litt for lang?
-
-endring i pos skaper problemer i memory
-
-Husk åsmil forsvinner ut av skjermen
-
-tips om hvor qr forsvinner ut av skjermen
-
-vise snakbar med husk å smil! i accesscard
-gå videre med alle emojions?
-
-snake: vibrer når dør, ikke når mat
+snake:
 mur rundt spillet?
 
-autocode: shorter and prevent win click to fast
-endre til "kjør" knapp når ferdig?
-
-ikke kunne trykke bort win før animasjon med tekst er ferdig
-
 memory:
+endring i pos skaper problemer i memory
 når kort løst blir det stående, og bare blir grønt eller lignene med chackmark
 
-find qr code:
-find qr code hint in snackbar and open when tap qr code
-
-end:
-koble link: koble.events/6324
 
 highscore:
-vis i highscore hvor mange min og sec
 visueliser på graf? ala tdc submit og approve bar
 vis live pågående
 
-fullscreebn on start? on body?
 
-prevent joping over stage
+prevent jumping over stage
 and add sec rules to backend
-
-stop autofill/autocomplete on name field on login
 
 scroll to top on page change (from login to accesscard)
 
@@ -76,3 +51,7 @@ camera only one frame and then stop (accesscard and qr code) add uatoplay?
 device motion fungerer ikke safari ios
 no pay to win på iOS
 bottom bar not icluded in vh on ioS...
+https://github.com/aframevr/aframe/issues/3976
+
+
+consider using css fix for welcome vh for rest

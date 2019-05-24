@@ -79,7 +79,21 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
     document.body.style.overflow = 'hidden';
 
     document.addEventListener('keydown', this.onKeyPress.bind(this));
+    // TODO fix https://github.com/aframevr/aframe/issues/3976
     window.addEventListener('deviceorientation', this.handleOrientation.bind(this), true);
+  }
+
+  ngOnDestroy() {
+    document.body.style.overflow = 'visible';
+    document.removeEventListener('keydown', this.onKeyPress.bind(this));
+    window.removeEventListener('deviceorientation', this.handleOrientation.bind(this), true);
+    if (this.timerSub) {
+      this.timerSub.unsubscribe();
+    }
+    if (window.screen && window.screen.orientation) {
+      document.exitFullscreen();
+      window.screen.orientation.unlock();
+    }
   }
 
   closeIntro() {
@@ -98,8 +112,9 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
       }
     }, 5000);
 
-    if (screen && screen.orientation) {
-      screen.orientation.lock('portrait');
+    if (window.screen && window.screen.orientation) {
+      document.body.requestFullscreen();
+      window.screen.orientation.lock('portrait');
     }
   }
 
@@ -142,18 +157,6 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
 
   }
 
-  ngOnDestroy() {
-    document.body.style.overflow = 'visible';
-    document.removeEventListener('keydown', this.onKeyPress.bind(this));
-    window.removeEventListener('deviceorientation', this.handleOrientation.bind(this), true);
-    if (this.timerSub) {
-      this.timerSub.unsubscribe();
-    }
-    if (screen && screen.orientation) {
-      screen.orientation.unlock();
-    }
-  }
-
   onKeyPress(event: KeyboardEvent) {
 
     if (event.code === 'ArrowUp') {
@@ -168,22 +171,6 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
 
     this.hasChangedMoveDir = true;
 
-  }
-
-  // neeeded?
-  isMobile() {
-    if (navigator.userAgent.match(/Android/i)
-      || navigator.userAgent.match(/webOS/i)
-      || navigator.userAgent.match(/iPhone/i)
-      || navigator.userAgent.match(/iPad/i)
-      || navigator.userAgent.match(/iPod/i)
-      || navigator.userAgent.match(/BlackBerry/i)
-      || navigator.userAgent.match(/Windows Phone/i)
-    ) {
-      return true;
-    } else {
-      return false;
-    }
   }
 
   logicTick() {
@@ -206,7 +193,6 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
     if (this.snakeHeadPos.x === this.snakeFoodPos.x && this.snakeHeadPos.y === this.snakeFoodPos.y) {
       this.makeSnakeLonger();
       this.newFood();
-      window.navigator.vibrate(200);
     }
   }
 
@@ -289,6 +275,7 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
     this.snakeHeadPos.x = this.numBlocsWidth / 2;
     this.snakeHeadPos.y = this.numBlocsHeight / 2;
     this.snakeBody = [];
+    window.navigator.vibrate(150);
   }
 
   // drawing below. Move to own class?

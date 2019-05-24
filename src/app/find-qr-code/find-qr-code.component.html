@@ -1,11 +1,11 @@
 <div class="container">
-  <div class="video-container"><video id="localVideo" [srcObject]="ownStream" class="person-video" autoplay
-      muted></video></div>
-  <div class="qr-container">
-    <h2>Finn denne koden å scann den</h2>
-    <img class="qr-img" src="assets/qrCode.png">
-    <br> Tip! Det kan hende du finner kode der du
-    startet </div>
+    <div class="video-container">
+        <video id="localVideo" [srcObject]="ownStream" class="person-video" autoplay muted playsinline></video>
+    </div>
+    <div class="qr-container">
+        <h2>Finn denne koden å scann den</h2>
+        <img class="qr-img" src="assets/qrCode.png" (click)="qrClicked()">
+    </div>
 </div>
 
 <div class="intro-container" *ngIf="showIntro">

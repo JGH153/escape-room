@@ -12,15 +12,20 @@
     <td mat-cell *matCellDef="let element"> {{element.stageCompleted}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="start">
-    <th mat-header-cell *matHeaderCellDef> Start </th>
-    <td mat-cell *matCellDef="let element"> {{element.startTime | date:'dd-MM-yyyy HH:mm'}} </td>
+  <ng-container matColumnDef="time">
+    <th mat-header-cell *matHeaderCellDef> 
+      Tid  
+      <ng-container *ngIf="!onlyCompleted">
+        så langt
+      </ng-container>
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element.endTime | timeDiff:element.startTime }} </td>
   </ng-container>
 
-  <ng-container matColumnDef="end" *ngIf="onlyCompleted">
+  <!-- <ng-container matColumnDef="end" *ngIf="onlyCompleted">
     <th mat-header-cell *matHeaderCellDef> End </th>
     <td mat-cell *matCellDef="let element"> {{element.endTime | date:'dd-MM-yyyy HH:mm'}} </td>
-  </ng-container>
+  </ng-container> -->
 
 
 

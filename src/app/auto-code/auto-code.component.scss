@@ -35,3 +35,13 @@
     height: calc(100% - var(--autoButtonMargin)  * 2);
     margin: calc(var(--autoButtonMargin));
 }
+
+.run-button {
+    --autoButtonMargin: 20px;
+    font-size: 130px;
+    font-weight: bold;
+    
+    width: calc(100% - var(--autoButtonMargin)  * 2);
+    height: calc(100% - var(--autoButtonMargin)  * 2);
+    margin: calc(var(--autoButtonMargin));
+}

@@ -29,10 +29,10 @@ export class HighscoreComponent implements OnInit {
     ).snapshotChanges().pipe(map(stream => this.mapStream(stream)));
 
     if (this.onlyCompleted) {
-      this.displayedColumns = ['name', 'stage', 'start', 'end'];
+      this.displayedColumns = ['name', 'stage', 'time'];
       this.highscoreName = 'Fullførte';
     } else if (this.onlyOngoing) {
-      this.displayedColumns = ['name', 'stage', 'start'];
+      this.displayedColumns = ['name', 'stage', 'time'];
       this.highscoreName = 'Pågående';
     }
 

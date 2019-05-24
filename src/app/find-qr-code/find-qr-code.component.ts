@@ -3,6 +3,7 @@ import { Component, OnInit, AfterContentInit, ViewChild, OnDestroy } from '@angu
 import jsQR from 'jsqr';
 import { MasterService } from '../services/master.service';
 import { Stages } from '../models/stages';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'deg-find-qr-code',
@@ -21,7 +22,7 @@ export class FindQrCodeComponent implements OnInit, AfterContentInit, OnDestroy 
 
   showIntro = true;
 
-  constructor(private masterService: MasterService) { }
+  constructor(private masterService: MasterService, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     console.log('oppe');
@@ -77,7 +78,7 @@ export class FindQrCodeComponent implements OnInit, AfterContentInit, OnDestroy 
         inversionAttempts: 'dontInvert',
       });
 
-      console.log(code);
+      // console.log(code);
 
       if (code && code.data === this.solution) {
         solved = true;
@@ -102,6 +103,18 @@ export class FindQrCodeComponent implements OnInit, AfterContentInit, OnDestroy 
   closeIntro() {
     this.showIntro = false;
     this.getUserMedia();
+  }
+
+  qrClicked() {
+    const durationInSeconds = 3;
+    this.snackBar.open(
+      'Tip! Det kan hende du finner kode der du startet !',
+      '',
+      {
+        duration: durationInSeconds * 1000,
+      }
+    );
+
   }
 
 }

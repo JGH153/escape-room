@@ -7,4 +7,5 @@ export interface ScoreboardElement {
     name: string;
     score: number;
     stageCompleted: number;
+    durationTimeSec: number;
 }

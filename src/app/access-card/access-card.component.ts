@@ -5,6 +5,7 @@ import { Stages } from '../models/stages';
 import { AccessCardService } from './service/access-card.service';
 import { timer, Subscription } from 'rxjs';
 import { EmojiLikelihood } from './service/emoji-likelihood';
+import { MatSnackBar } from '@angular/material';
 
 // TODO auto stop image loopp after x sec
 
@@ -31,6 +32,8 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
   activeEmojions = '';
 
   progressDeg = 360 / 2;
+  noSmileTimes = 0;
+  imagesChecked = 0;
 
   myTimer = timer(0, 30);
   timerSub: Subscription;
@@ -40,6 +43,7 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
     private masterService: MasterService,
     private accessCardService: AccessCardService,
     private renderer: Renderer2,
+    private snackBar: MatSnackBar,
   ) { }
 
   ngOnInit() {
@@ -60,7 +64,6 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
   }
 
   getUserMedia() {
-    console.log(navigator.mediaDevices);
     if (!navigator.mediaDevices) {
       this.ifNoCamera();
     } else {
@@ -79,7 +82,9 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
         });
     }
 
-    this.timerSub = this.myTimer.subscribe({ next: this.logicTick.bind(this) });
+    if (!this.noCamera) {
+      this.timerSub = this.myTimer.subscribe({ next: this.logicTick.bind(this) });
+    }
   }
 
   logicTick(time) {
@@ -87,9 +92,18 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
     if (this.progressDeg > 360) {
       this.progressDeg = 0;
       this.grabImage();
+
+      // max images
+      this.imagesChecked++;
+      if (this.imagesChecked > 30) {
+        this.timerSub.unsubscribe();
+        alert('Timeout, last inn siden på nytt!');
+      }
     }
     const progressDegText = this.progressDeg + 'deg';
     this.progressElement.nativeElement.style.cssText = '--progress-deg:' + progressDegText + ';';
+
+
   }
 
   ifNoCamera() {
@@ -131,8 +145,6 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
 
     const outputWidth = targetWidth;
     const outputHight = videoH / diffFactor;
-    console.log(videoW, videoW);
-    console.log(outputWidth, outputHight);
 
     const myCanvas = document.createElement('canvas');
     // myCanvas.id = 'myCanvas';
@@ -147,7 +159,6 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
     this.accessCardService.detectEmojions(base64).subscribe({
       next: response => {
         this.loadingResponse = false;
-        console.log('response', response);
         this.tempResponse = response;
         if (this.accessCardService.emojiPossibleOrMore(response.joyLikelihood)) {
           this.puzzleComplete();
@@ -157,10 +168,27 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
         // TODO display emjions that match somewhere
         this.activeEmojions = this.accessCardService.getActiveEmojions(response);
         if (this.activeEmojions.length === 0) {
-          this.activeEmojions = 'Husk å smil!';
+          this.noSmileTimes++;
         }
+
+
+        if (this.noSmileTimes === 2 || this.noSmileTimes === 8) {
+          this.smileHint();
+        }
+
       }
     });
+  }
+
+  smileHint() {
+    const durationInSeconds = 5;
+    this.snackBar.open(
+      'Husk å smil på bildet ditt!',
+      '',
+      {
+        duration: durationInSeconds * 1000,
+      }
+    );
   }
 
 

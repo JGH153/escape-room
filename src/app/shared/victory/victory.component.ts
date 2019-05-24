@@ -16,13 +16,21 @@ export class VictoryComponent implements OnInit, AfterViewInit {
   @Input() effectLines = false;
   @Input() effectLogo = false;
   @Input() effectDna = false;
+  @Input() noSkipIntro = false;
+
+  canClose = true;
 
   showText = false;
 
   constructor() { }
 
   ngOnInit() {
-
+    if (this.noSkipIntro) {
+      this.canClose = false;
+      setTimeout(() => {
+        this.canClose = true;
+      }, 2000);
+    }
   }
 
   ngAfterViewInit() {
@@ -34,6 +42,9 @@ export class VictoryComponent implements OnInit, AfterViewInit {
   }
 
   onClickClose() {
+    if (!this.canClose) {
+      return;
+    }
     this.closedEE.emit(true);
   }
 

@@ -22,6 +22,7 @@ export class AutoCodeComponent implements OnInit {
 
   showIntro = true;
   showOutro = false;
+  codeDone = false;
 
   @ViewChild('codeElement') codeElement;
 
@@ -50,7 +51,7 @@ export class AutoCodeComponent implements OnInit {
   addText(toAdd) {
 
     if (this.currentText.length >= this.totalText.length) {
-      this.puzzleCompleted();
+      this.codeDone = true;
     }
 
     const chatsPrPress = toAdd;
@@ -63,6 +64,10 @@ export class AutoCodeComponent implements OnInit {
       this.codeElement.nativeElement.scrollTop = 1000000;
     });
 
+  }
+
+  runCode() {
+    this.puzzleCompleted();
   }
 
   gotoNextTask() {

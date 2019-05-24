@@ -2,9 +2,12 @@
 <div class="container">
   <div class="code-container" #codeElement [innerHtml]="currentText">
   </div>
-  <div class="button-row">
+  <div class="button-row" *ngIf="!codeDone">
       <button class="auto-button" (click)="clickedButtonZero()" mat-raised-button>0</button>
       <button class="auto-button" (click)="clickedButtonOne()" mat-raised-button>1</button>
+  </div>
+  <div class="button-row" *ngIf="codeDone">
+      <button class="run-button" (click)="runCode()" mat-raised-button>Run!</button>
   </div>
 </div>
 
@@ -20,4 +23,4 @@
     </deg-info-overlay>
 </div>
 
-<deg-victory (closedEE)="gotoNextTask()" [effectLogo]="true" [title]="'Seier!'" *ngIf="showOutro"></deg-victory>
+<deg-victory (closedEE)="gotoNextTask()" [effectLogo]="true" [title]="'Seier!'" *ngIf="showOutro" [noSkipIntro]="true"></deg-victory>
