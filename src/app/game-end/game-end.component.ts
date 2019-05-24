@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GameEndComponent implements OnInit {
 
-  showIntro = false;
+  showIntro = true;
   showOutro = false;
 
   canShare = false;

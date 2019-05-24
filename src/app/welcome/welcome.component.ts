@@ -43,6 +43,7 @@ export class WelcomeComponent implements OnInit {
   }
 
   start() {
+    // document.body.requestFullscreen();
     this.router.navigate(['login']);
   }
 
