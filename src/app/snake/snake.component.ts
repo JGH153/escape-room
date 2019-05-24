@@ -42,7 +42,6 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
   numBlocsWidth = 10;
   numBlocsHeight = 20;
 
-
   showIntro = true;
   hasChangedMoveDir = false;
   showOutro = false;
@@ -51,7 +50,7 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
   // on grid from numBlocs
   snakeHeadPos: GridPos = { x: this.numBlocsWidth / 2, y: this.numBlocsHeight / 2 };
   snakeLength = 1;
-  targetSnakeLength = 2;
+  targetSnakeLength = 4;
   snakeBody: Array<GridPos> = [
     // { ...this.snakeHeadPos, x: this.snakeHeadPos.x - 1 },
     // { ...this.snakeHeadPos, x: this.snakeHeadPos.x - 2 },
@@ -98,6 +97,10 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
         this.openHelpSnackBar();
       }
     }, 5000);
+
+    if (screen && screen.orientation) {
+      screen.orientation.lock('portrait');
+    }
   }
 
   gotoNextTask() {
@@ -145,6 +148,9 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
     window.removeEventListener('deviceorientation', this.handleOrientation.bind(this), true);
     if (this.timerSub) {
       this.timerSub.unsubscribe();
+    }
+    if (screen && screen.orientation) {
+      screen.orientation.unlock();
     }
   }
 

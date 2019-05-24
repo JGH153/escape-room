@@ -7,10 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GameEndComponent implements OnInit {
 
-  showIntro = true;
+  showIntro = false;
   showOutro = false;
 
-  constructor() { }
+  canShare = false;
+
+  constructor() {
+    if ((navigator as any).share) {
+      this.canShare = true;
+    } else {
+      console.log('no share for you');
+    }
+  }
 
   ngOnInit() {
   }
@@ -21,7 +29,19 @@ export class GameEndComponent implements OnInit {
   }
 
   closeOutro() {
+    this.showOutro = false;
+  }
 
+  share() {
+    if ((navigator as any).share) {
+      (navigator as any).share({
+          title: 'Digital Escape Room',
+          text: 'Compete and win prices!',
+          url: 'https://digitalescaperoom2019.firebaseapp.com/',
+      })
+        .then(() => console.log('Successful share'))
+        .catch((error) => console.log('Error sharing', error));
+    }
   }
 
 }

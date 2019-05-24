@@ -6,6 +6,8 @@ import { AccessCardService } from './service/access-card.service';
 import { timer, Subscription } from 'rxjs';
 import { EmojiLikelihood } from './service/emoji-likelihood';
 
+// TODO auto stop image loopp after x sec
+
 @Component({
   selector: 'deg-access-card',
   templateUrl: './access-card.component.html',

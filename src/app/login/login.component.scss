@@ -1,44 +1,44 @@
+.bg-img-container-login {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("./../../assets/login.jpg");
+  background-size: cover;
+  background-color: #fed547;
+  background-position: center 25%;
 
-.bg-img-container {
-    width: 100vw;
-    height: 100vh;
-    background-image: url('./../../assets/login.jpg');
-    background-size: cover;
-    background-color: #FED547;
-    background-position: center 25%;
-}
-
-.container {
+  .container {
     width: 100%;
     text-align: center;
-    
-}
+  }
 
-.full-width {
+  .full-width {
     width: 100%;
-}
+  }
 
-.top-container {
+  .top-container {
     margin: auto;
     padding: 20px;
     max-width: 800px;
     // -webkit-text-stroke: 1px white;
 
     .c-logo {
-        max-width: 100%;
-        min-width: 20%;;
+      max-width: 100%;
+      min-width: 20%;
     }
-}
+  }
 
-.form-container {
+  .form-container {
     width: 100%;
     background: white;
     padding: 10px 10px;
 
     .username-input {
-        max-width: 500px;
-        width: 100%;
+      max-width: 500px;
+      width: 100%;
     }
 
-    .mat-checkbox-layout { white-space: normal !important; }
+    .mat-checkbox-layout {
+      white-space: normal !important;
+    }
+  }
 }

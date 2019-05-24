@@ -1,11 +1,19 @@
+<!-- <deg-victory (closedEE)="closeOutro()" [effectDna]="true" [title]="''" *ngIf="showOutro"></deg-victory> -->
+<deg-dna-effect *ngIf="showOutro"></deg-dna-effect>
+
 <div class="container">
-    <br><br><br>
+    <h1 class="title">Seier!</h1>
     <p>
-        Du vant! Kontakt HR for premie!
+        Gratulere, du vant! Din score er automatisk sendt inn
     </p>
-    <p>
-        TODO share button https://developers.google.com/web/updates/2016/09/navigator-share
+    <p *ngIf="canShare">
+        <button mat-raised-button color="primary" class="start-button" (click)="share()">share!</button>
     </p>
+
+    <h2 class="title">Highscore</h2>
+    <div>
+        <deg-highscore [onlyCompleted]="true"></deg-highscore>
+    </div>
 
 
 
@@ -16,5 +24,3 @@
         Takk for at du spilte å sånn. Kikk denne for å se highscore
     </deg-info-overlay>
 </div>
-
-<deg-victory (closedEE)="closeOutro()" [effectDna]="true" [title]="'Slutt!'" *ngIf="showOutro"></deg-victory>
