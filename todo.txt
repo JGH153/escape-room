@@ -61,3 +61,18 @@ fullscreebn on start? on body?
 
 prevent joping over stage
 and add sec rules to backend
+
+stop autofill/autocomplete on name field on login
+
+scroll to top on page change (from login to accesscard)
+
+erik tolger prøv å roter som roter til landscape
+disable zoom på snake
+
+lukk tatatus med done knapp på tatatus
+
+iOS:
+camera only one frame and then stop (accesscard and qr code) add uatoplay?
+device motion fungerer ikke safari ios
+no pay to win på iOS
+bottom bar not icluded in vh on ioS...
