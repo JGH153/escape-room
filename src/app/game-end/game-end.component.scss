@@ -4,6 +4,7 @@
 
     width: 100vw;
     height: 100vh;
+    height: calc(var(--vh1, 1vh) * 100);
     // background-image: url('./../../assets/start.jpg');
     background-size: cover;
     background-color: #29CFF5;

@@ -37,3 +37,11 @@ https://github.com/aframevr/aframe/issues/3976
 
 
 consider using css fix for welcome vh for rest
+
+----
+
+change adress bar color
+
+make cards bigger
+
+https://css-tricks.com/snippets/css/star-wars-crawl-text/

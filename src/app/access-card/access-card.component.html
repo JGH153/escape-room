@@ -23,19 +23,27 @@
 
 
 
-<div class="intro-container" *ngIf="showIntro">
+<div class="intro-container" *ngIf="showIntroGeneral">
   <deg-info-overlay 
     [title]="'Velkommen til Computas'" 
     [subTitle]="'På tide å lage ID kortet'"
     [imageUrl]="'assets/profiles/christine.jpg'" 
-    [startButtonLabel]="'La oss starte!'"
+    [startButtonLabel]="'Jeg vil gjøre en forskjell!'"
+    (startEE)="closeIntroGeneral()"
+  >
+  Vi løser vi store samfunnsnyttige oppgaver med heftig teknologi. Løsningene forbedrer hverdagen for våre medmennesker, enten vi sikrer infrastrukturen i energisektoren eller sørger for mer tid til meningsfullt arbeid i det offentlige.
+  </deg-info-overlay>
+</div>
+<div class="intro-container" *ngIf="showIntro">
+  <deg-info-overlay 
+    [title]="'På tide å lage ID-kort'" 
+    [subTitle]="'På tide å lage ID kortet'"
+    [imageUrl]="'assets/profiles/christine.jpg'" 
+    [startButtonLabel]="'Jeg er klar!'"
     (startEE)="closeIntro()"
   >
-    The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-    A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-    bred for hunting.
-    Husk å smile!
+  Før du starter må du få adgangskort - ta bilde av deg selv
   </deg-info-overlay>
 </div>
 
-<deg-victory (closedEE)="gotoNextTask()" [effectLines]="true" [title]="'Seier!'" *ngIf="showOutro"></deg-victory>
+<deg-victory (closedEE)="gotoNextTask()" [effectLines]="true" [title]="'Herlig!'" *ngIf="showOutro"></deg-victory>

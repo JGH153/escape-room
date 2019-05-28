@@ -28,6 +28,7 @@ export class WelcomeComponent implements OnInit {
       'assets/login.jpg',
       'assets/qrCode.png',
       'assets/memoryBG.png',
+      'assets/loading.gif',
       'assets/profiles/christine.jpg',
       'assets/profiles/1.jpg',
       'assets/profiles/2.jpg',

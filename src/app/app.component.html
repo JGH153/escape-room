@@ -1,6 +1,7 @@
 <!-- TODO fix cover screen absolutt -->
 <div class="cover-screen" *ngIf="isLoading | async">
-    <mat-spinner class="loader"></mat-spinner>
+    <!-- <mat-spinner class="loader"></mat-spinner> -->
+    <img src="assets/loading.gif" class="loader">
 </div>
 
 <router-outlet></router-outlet>

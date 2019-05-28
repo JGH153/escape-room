@@ -7,7 +7,7 @@
 
 .video-container {
     width: 100vw;
-    height: 65vh;
+    height: calc(var(--vh1, 1vh) * 65);
 
     #localVideo {
         width: 100%;
@@ -18,7 +18,7 @@
 
 .qr-container {
     width: 100vw;
-    height: 35vh;
+    height: calc(var(--vh1, 1vh) * 35);
     text-align: center;
 }
 

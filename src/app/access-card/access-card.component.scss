@@ -1,6 +1,6 @@
 :host {
   --card-width: calc(100vw - 20px);
-  --card-height: calc(100vh - 20px);
+  --card-height: calc(calc(var(--vh1, 1vh) * 100) - 20px);
   --card-max-width: 600px;
   --card-color: #007a8e;
 }

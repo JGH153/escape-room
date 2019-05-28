@@ -25,11 +25,11 @@
       [title]="'Vi må finne tilbake til stacken!'" 
       [subTitle]="'Nå skal det matches!'"
       [imageUrl]="'assets/profiles/2.jpg'" 
-      [startButtonLabel]="'La oss lete!'"
+      [startButtonLabel]="' Jeg vil sertifiseres!'"
       (startEE)="closeIntro()"
   >
-      Noe noe matche kort, lykke til og sånt!
+    Vi verdsetter at våre ansatte holder seg oppdatert på ny teknologi. Du skal nå ta en sertifisering! Lykke til :D 
   </deg-info-overlay>
 </div>
 
-<deg-victory (closedEE)="gotoNextTask()" [effectLines]="true" [title]="'Seier!'" *ngIf="showOutro"></deg-victory>
+<deg-victory (closedEE)="gotoNextTask()" [effectLines]="true" [title]="'Gratulerer!'" *ngIf="showOutro"></deg-victory>
