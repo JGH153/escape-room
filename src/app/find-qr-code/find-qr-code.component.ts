@@ -12,7 +12,8 @@ import { MatSnackBar } from '@angular/material';
 })
 export class FindQrCodeComponent implements OnInit, AfterContentInit, OnDestroy {
 
-  video = document.createElement('video');
+  // video = document.createElement('video');
+  @ViewChild('videoElement') video;
   ownStream: MediaStream = null;
 
   width;
@@ -25,7 +26,6 @@ export class FindQrCodeComponent implements OnInit, AfterContentInit, OnDestroy 
   constructor(private masterService: MasterService, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    console.log('oppe');
   }
 
   ngAfterContentInit() {
@@ -41,8 +41,7 @@ export class FindQrCodeComponent implements OnInit, AfterContentInit, OnDestroy 
   getUserMedia() {
     navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: false }).then(stream => {
       this.ownStream = stream;
-      this.video.srcObject = stream;
-      this.video.play();
+      this.video.nativeElement.srcObject = stream;
       this.lookForCode();
     },
       error => {
@@ -60,7 +59,7 @@ export class FindQrCodeComponent implements OnInit, AfterContentInit, OnDestroy 
     const context = myCanvas.getContext('2d');
     myCanvas.width = videoW;
     myCanvas.height = videoH;
-    context.drawImage(this.video, 0, 0, videoW, videoH);
+    context.drawImage(this.video.nativeElement, 0, 0, videoW, videoH);
 
     return context.getImageData(0, 0, videoW, videoH);
   }
@@ -69,7 +68,7 @@ export class FindQrCodeComponent implements OnInit, AfterContentInit, OnDestroy 
 
     let solved = false;
 
-    if (this.video.readyState === this.video.HAVE_ENOUGH_DATA) {
+    if (this.video.nativeElement.readyState === this.video.nativeElement.HAVE_ENOUGH_DATA) {
 
       const videoW = this.ownStream.getTracks()[0].getSettings().width;
       const videoH = this.ownStream.getTracks()[0].getSettings().height;

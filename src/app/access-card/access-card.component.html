@@ -4,7 +4,7 @@
     <div class=person-img-container>
       <div class="person-img-circle" #progressElement>
         <!-- iOS safari needs playsinline... -->
-        <video id="localVideo" [srcObject]="ownStream" class="person-video" autoplay muted playsinline></video>
+        <video id="localVideo" #videoElement [srcObject]="ownStream" class="person-video" autoplay muted playsinline></video>
         <!-- <img class="own-img" src="assets/profiles/christine.jpg"> -->
         <img class="own-img" #thyImg >
         <div class="loading-spinner" *ngIf="loadingResponse">

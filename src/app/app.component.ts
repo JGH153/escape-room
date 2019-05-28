@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MasterService } from './services/master.service';
 import { fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'deg-root',
@@ -12,7 +13,7 @@ export class AppComponent implements OnInit {
 
   isLoading;
 
-  constructor(private masterService: MasterService) { }
+  constructor(private masterService: MasterService, private router: Router) { }
 
   ngOnInit() {
     this.isLoading = this.masterService.isLoading;
@@ -26,6 +27,13 @@ export class AppComponent implements OnInit {
         }
       });
     this.updateVh();
+
+    this.router.events.subscribe((evt) => {
+      if (!(evt instanceof NavigationEnd)) {
+        return;
+      }
+      window.scrollTo(0, 0);
+    });
   }
 
   updateVh() {

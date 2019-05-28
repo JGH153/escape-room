@@ -16,7 +16,8 @@ import { MatSnackBar } from '@angular/material';
 })
 export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy {
 
-  video = document.createElement('video');
+  // video = document.createElement('video');
+  @ViewChild('videoElement') video;
   ownStream: MediaStream = null;
   username;
 
@@ -67,14 +68,9 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
     if (!navigator.mediaDevices) {
       this.ifNoCamera();
     } else {
-      navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then(stream => {
+      navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then((stream: MediaStream) => {
         this.ownStream = stream;
-        this.video.srcObject = stream;
-        this.video.play();
-
-        // setTimeout(() => {
-        //   this.grabImage();
-        // }, 500);
+        this.video.nativeElement.srcObject = stream;
       },
         error => {
           console.warn('can\'t get media!');
@@ -124,7 +120,7 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
     const context = myCanvas.getContext('2d');
     myCanvas.width = videoW;
     myCanvas.height = videoH;
-    context.drawImage(this.video, 0, 0, videoW, videoH);
+    context.drawImage(this.video.nativeElement, 0, 0, videoW, videoH);
     // const image = new Image();
     // / image.id = 'pic';
     this.renderer.setStyle(this.thyImg.nativeElement, 'display', 'block');
@@ -151,33 +147,34 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
     const context = myCanvas.getContext('2d');
     myCanvas.width = outputWidth;
     myCanvas.height = outputHight;
-    context.drawImage(this.video, 0, 0, outputWidth, outputHight);
+    context.drawImage(this.video.nativeElement, 0, 0, outputWidth, outputHight);
 
     const base64 = myCanvas.toDataURL().replace('data:image/png;base64,', '');
 
     this.loadingResponse = true;
     this.accessCardService.detectEmojions(base64).subscribe({
-      next: response => {
-        this.loadingResponse = false;
-        this.tempResponse = response;
-        if (this.accessCardService.emojiPossibleOrMore(response.joyLikelihood)) {
-          this.puzzleComplete();
-        } else {
-          this.renderer.setStyle(this.thyImg.nativeElement, 'display', 'none');
-        }
-        // TODO display emjions that match somewhere
-        this.activeEmojions = this.accessCardService.getActiveEmojions(response);
-        if (this.activeEmojions.length === 0) {
-          this.noSmileTimes++;
-        }
-
-
-        if (this.noSmileTimes === 2 || this.noSmileTimes === 8) {
-          this.smileHint();
-        }
-
-      }
+      next: response => this.onDetectEmojiResponse(response)
     });
+  }
+
+  onDetectEmojiResponse(response) {
+    this.loadingResponse = false;
+    this.tempResponse = response;
+    if (this.accessCardService.emojiPossibleOrMore(response.joyLikelihood)) {
+      this.puzzleComplete();
+    } else {
+      this.renderer.setStyle(this.thyImg.nativeElement, 'display', 'none');
+    }
+    // TODO display emjions that match somewhere
+    this.activeEmojions = this.accessCardService.getActiveEmojions(response);
+    if (this.activeEmojions.length === 0) {
+      this.noSmileTimes++;
+    }
+
+
+    if (this.noSmileTimes === 3 || this.noSmileTimes === 10) {
+      this.smileHint();
+    }
   }
 
   smileHint() {

@@ -1,6 +1,6 @@
 <div class="container">
     <div class="video-container">
-        <video id="localVideo" [srcObject]="ownStream" class="person-video" autoplay muted playsinline></video>
+        <video id="localVideo" #videoElement [srcObject]="ownStream" class="person-video" autoplay muted playsinline></video>
     </div>
     <div class="qr-container">
         <h2>Finn denne koden å scann den</h2>

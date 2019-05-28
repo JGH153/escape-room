@@ -1,9 +1,14 @@
 <div class="page-container">
   <div class="cards-container">
     <ng-container *ngFor="let card of cards">
-      <div class="memory-card" (click)="clickedCard(card)">
+      <div class="memory-card" (click)="clickedCard(card)" [ngClass]="{'card-disabled': card.disabled}">
         <ng-container *ngIf="cardVisible(card.id); else notVisible">
-          <img src="assets/memory/{{card.url}}" draggable="false" class="memory-card-img">
+          <img 
+            src="assets/memory/{{card.url}}"
+            draggable="false"
+            class="memory-card-img"
+            
+          >
         </ng-container>
         <ng-template #notVisible>
           <div class="not-visible-body">

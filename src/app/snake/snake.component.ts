@@ -4,6 +4,7 @@ import { MasterService } from '../services/master.service';
 import { Router } from '@angular/router';
 import { Stages } from '../models/stages';
 import { MatSnackBar } from '@angular/material';
+import { FullscreenService } from '../services/fullscreen.service';
 
 enum MoveDirection {
   Up,
@@ -64,11 +65,14 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
   myTimer = timer(0, 250);
   timerSub: Subscription;
 
+  hasNotifiedUserOnOrtientation = false;
+
   constructor(
     private router: Router,
     private masterService: MasterService,
     private snackBar: MatSnackBar,
-    private changeDetector: ChangeDetectorRef
+    private changeDetector: ChangeDetectorRef,
+    private fullscreenService: FullscreenService
   ) { }
 
   ngOnInit() {
@@ -81,19 +85,31 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
     document.addEventListener('keydown', this.onKeyPress.bind(this));
     // TODO fix https://github.com/aframevr/aframe/issues/3976
     window.addEventListener('deviceorientation', this.handleOrientation.bind(this), true);
+
+    window.addEventListener('orientationchange', this.onOrientationchange.bind(this), true);
   }
 
   ngOnDestroy() {
     document.body.style.overflow = 'visible';
     document.removeEventListener('keydown', this.onKeyPress.bind(this));
+    document.removeEventListener('orientationchange', this.onOrientationchange.bind(this), true);
     window.removeEventListener('deviceorientation', this.handleOrientation.bind(this), true);
     if (this.timerSub) {
       this.timerSub.unsubscribe();
     }
+    this.fullscreenService.exitFullscreen(document);
     if (window.screen && window.screen.orientation) {
-      document.exitFullscreen();
       window.screen.orientation.unlock();
     }
+
+  }
+
+  // only works on mobile
+  onOrientationchange() {
+    if (!this.hasNotifiedUserOnOrtientation) {
+      this.openStopRotateSnackBar();
+    }
+    this.hasNotifiedUserOnOrtientation = true;
   }
 
   closeIntro() {
@@ -112,8 +128,8 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
       }
     }, 5000);
 
+    this.fullscreenService.requestFullscreen(document.body);
     if (window.screen && window.screen.orientation) {
-      document.body.requestFullscreen();
       window.screen.orientation.lock('portrait');
     }
   }
@@ -126,6 +142,17 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
     const durationInSeconds = 6;
     this.snackBar.open(
       'Prøv å roter telefonen!',
+      '',
+      {
+        duration: durationInSeconds * 1000,
+      }
+    );
+  }
+
+  openStopRotateSnackBar() {
+    const durationInSeconds = 6;
+    this.snackBar.open(
+      'Du bør låse roteringen på telefonen 🤔',
       '',
       {
         duration: durationInSeconds * 1000,
@@ -275,7 +302,9 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
     this.snakeHeadPos.x = this.numBlocsWidth / 2;
     this.snakeHeadPos.y = this.numBlocsHeight / 2;
     this.snakeBody = [];
-    window.navigator.vibrate(150);
+    if (window.navigator && window.navigator.vibrate) {
+      window.navigator.vibrate(150);
+    }
   }
 
   // drawing below. Move to own class?

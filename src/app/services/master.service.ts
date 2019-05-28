@@ -125,6 +125,19 @@ export class MasterService {
     });
   }
 
+  public setDeviceCameraId(id: string) {
+    if (!this.userId) {
+      this.gotoCorrectStage(Stages.Login);
+      return;
+    }
+    const docId = this.userId;
+    this.firestore.collection<ScoreboardElement>(
+      'scoreboard'
+    ).doc(docId).set({cameraDeviceId: id}, { merge: true }).then(() => {
+      console.log('saved');
+    });
+  }
+
   public setIsLoading(newValue) {
     this.isLoading.next(newValue);
   }

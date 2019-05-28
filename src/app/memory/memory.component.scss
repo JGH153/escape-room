@@ -41,6 +41,11 @@
             max-height: calc(calc(var(--cardWidth) * 1.618) - 10px);
         }
 
+        &.card-disabled {
+            opacity: 0;
+            cursor: unset;
+        }
+
         .not-visible-body {
             font-size: 80px;
             font-weight: bold;

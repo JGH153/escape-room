@@ -8,4 +8,5 @@ export interface ScoreboardElement {
     score: number;
     stageCompleted: number;
     durationTimeSec: number;
+    cameraDeviceId?: string;
 }

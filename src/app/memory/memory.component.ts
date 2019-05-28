@@ -6,7 +6,9 @@ interface Card {
   name: string;
   url: string;
   id?: number;
+  disabled?: boolean;
 }
+
 
 @Component({
   selector: 'deg-memory',
@@ -31,6 +33,7 @@ export class MemoryComponent implements OnInit {
 
   // with duplicates
   allCardsTotal: Card[] = [];
+
   cards: Card[] = [];
   selectedCards: Card[] = [];
 
@@ -49,7 +52,8 @@ export class MemoryComponent implements OnInit {
     this.allCardsTotal = this.allCardsTotal.map((current, index) => {
       return {
         ...current,
-        id: index
+        id: index,
+        disabled: false,
       };
     });
 
@@ -72,6 +76,9 @@ export class MemoryComponent implements OnInit {
   }
 
   clickedCard(card: Card) {
+    if (card.disabled) {
+      return;
+    }
     if (this.selectedCards.length >= 2) {
       this.selectedCards = [];
     }
@@ -82,7 +89,7 @@ export class MemoryComponent implements OnInit {
       this.selectedCards.push({ ...card });
       if (this.selectedCardsSame()) {
         setTimeout(() => {
-          this.removeCardByName(card.name);
+          this.disableCardByName(card.name);
         }, 200);
       }
     } else {
@@ -90,10 +97,16 @@ export class MemoryComponent implements OnInit {
     }
   }
 
-  private removeCardByName(name: Card['name']) {
-    this.cards = this.cards.filter(current => current.name !== name);
+  private disableCardByName(name: Card['name']) {
+    this.cards = this.cards.map(currentCard => {
+      if (currentCard.name === name) {
+        currentCard.disabled = true;
+      }
+      return currentCard;
+    });
 
-    if (this.cards.length === 0) {
+    // if all disabled
+    if (!this.cards.some(currentCard => !currentCard.disabled)) {
       this.showOutro = true;
     }
   }

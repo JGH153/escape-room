@@ -1,4 +1,6 @@
 <!-- TODO fix cover screen absolutt -->
-<!-- <mat-spinner *ngIf="isLoading | async"></mat-spinner> -->
+<div class="cover-screen" *ngIf="isLoading | async">
+    <mat-spinner class="loader"></mat-spinner>
+</div>
 
 <router-outlet></router-outlet>

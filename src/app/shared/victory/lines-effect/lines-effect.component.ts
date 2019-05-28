@@ -50,7 +50,9 @@ export class LinesEffectComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.main();
 
-    window.navigator.vibrate(200);
+    if (window.navigator && window.navigator.vibrate) {
+      window.navigator.vibrate(200);
+    }
 
   }
 

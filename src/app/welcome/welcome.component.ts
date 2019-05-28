@@ -12,8 +12,13 @@ export class WelcomeComponent implements OnInit {
 
   constructor(private router: Router) { }
 
+  canPayToWin = false;
+
   ngOnInit() {
     this.preLoadImages();
+    if ((window as any).PaymentRequest) {
+      this.canPayToWin = true;
+    }
   }
 
   preLoadImages() {

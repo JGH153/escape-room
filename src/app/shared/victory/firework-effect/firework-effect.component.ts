@@ -90,7 +90,10 @@ export class FireworkEffectComponent implements OnInit, AfterViewInit, OnDestroy
     //// NOTICE :you can only use two emitters do this effect.In this demo I use more emitters want to test the emtter's life
     this.proton.addEventListener(Proton.PARTICLE_DEAD, (particle) => {
       setTimeout(() => {
-        window.navigator.vibrate(200);
+        // no vibrate in safar
+        if (window.navigator && window.navigator.vibrate) {
+          window.navigator.vibrate(200);
+        }
       }, 50);
 
       if (Math.random() < .7) {
