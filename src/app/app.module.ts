@@ -44,6 +44,7 @@ import { LogoEffectComponent } from './shared/victory/logo-effect/logo-effect.co
 import { DnaEffectComponent } from './shared/victory/dna-effect/dna-effect.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TimeDiffPipe } from './shared/highscore/pipes/time-diff.pipe';
+import { GameIntroComponent } from './shared/game-intro/game-intro.component';
 
 const matImports = [
    MatCardModule,
@@ -83,6 +84,7 @@ const matImports = [
       LogoEffectComponent,
       DnaEffectComponent,
       TimeDiffPipe,
+      GameIntroComponent,
    ],
    entryComponents: [],
    imports: [

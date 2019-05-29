@@ -14,11 +14,18 @@ export class WelcomeComponent implements OnInit {
 
   canPayToWin = false;
 
+  showIntro = true;
+
   ngOnInit() {
     this.preLoadImages();
     if ((window as any).PaymentRequest) {
       this.canPayToWin = true;
     }
+
+    setTimeout(() => {
+      this.showIntro = false;
+      // console.log('now');
+    }, 35000);
   }
 
   preLoadImages() {
@@ -50,6 +57,10 @@ export class WelcomeComponent implements OnInit {
   start() {
     // document.body.requestFullscreen();
     this.router.navigate(['login']);
+  }
+
+  clickedIntro() {
+    this.showIntro = false;
   }
 
   payToWin() {
