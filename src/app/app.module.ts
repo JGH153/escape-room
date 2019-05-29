@@ -97,7 +97,7 @@ const matImports = [
       AngularFireFunctionsModule,
       AngularFireAuthModule,
       FormsModule,
-      HttpClientModule
+      HttpClientModule,
    ],
    providers: [],
    bootstrap: [

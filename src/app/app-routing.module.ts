@@ -16,13 +16,13 @@ import { MemoryComponent } from './memory/memory.component';
 // todo routes to const?
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'accesscard', component: AccessCardComponent },
-  { path: 'snake', component: SnakeComponent },
-  { path: 'autocode', component: AutoCodeComponent },
-  { path: 'memory', component: MemoryComponent },
-  { path: 'findqrcode', component: FindQrCodeComponent },
-  { path: 'end', component: GameEndComponent },
+  { path: 'login', component: LoginComponent, data: {animation: 'slideIn'} },
+  { path: 'accesscard', component: AccessCardComponent, data: {animation: 'slideIn'} },
+  { path: 'snake', component: SnakeComponent, data: {animation: 'slideIn'} },
+  { path: 'autocode', component: AutoCodeComponent, data: {animation: 'slideIn'} },
+  { path: 'memory', component: MemoryComponent, data: {animation: 'slideIn'} },
+  { path: 'findqrcode', component: FindQrCodeComponent, data: {animation: 'slideIn'} },
+  { path: 'end', component: GameEndComponent, data: {animation: 'slideIn'} },
   { path: 'highscore', component: HighscorePageComponent },
   // { path: 'memory/', component:  }, Memory game?
   // { path: '**', redirectTo: 'login/'}

@@ -2,12 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { MasterService } from './services/master.service';
 import { fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { fadeAnimation } from './animations';
+// import { routerTransition } from './animations';
+// import { faderPage } from './animations';
 
 @Component({
   selector: 'deg-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  animations: [
+    fadeAnimation
+  ]
 })
 export class AppComponent implements OnInit {
 
@@ -41,6 +47,10 @@ export class AppComponent implements OnInit {
     // Then we set the value in the --vh custom property to the root of the document
     console.log(window.innerHeight);
     document.documentElement.style.setProperty('--vh1', `${vh}px`);
+  }
+
+  prepareRoute(outlet: RouterOutlet) {
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;
   }
 
 }

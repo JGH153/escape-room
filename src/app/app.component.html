@@ -4,4 +4,6 @@
     <img src="assets/loading.gif" class="loader">
 </div>
 
-<router-outlet></router-outlet>
+<main [@fadeAnimation]="prepareRoute(outlet)">
+    <router-outlet #outlet="outlet"></router-outlet>
+</main>
