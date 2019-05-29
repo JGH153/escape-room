@@ -9,7 +9,7 @@ import * as Proton from 'proton-js/build/proton.js';
 })
 export class FireworkEffectComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  @ViewChild('myCanvas') myCanvas: ElementRef;
+  @ViewChild('myCanvas', { static: true }) myCanvas: ElementRef;
   canvasRC: CanvasRenderingContext2D;
 
   width;

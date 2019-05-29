@@ -3,7 +3,7 @@ import { timer, Subscription } from 'rxjs';
 import { MasterService } from '../services/master.service';
 import { Router } from '@angular/router';
 import { Stages } from '../models/stages';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { FullscreenService } from '../services/fullscreen.service';
 
 enum MoveDirection {
@@ -27,7 +27,7 @@ interface GridPos {
 })
 export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
 
-  @ViewChild('myCanvas') myCanvas;
+  @ViewChild('myCanvas', { static: true }) myCanvas;
   canvasRC: CanvasRenderingContext2D;
 
   image: HTMLImageElement;

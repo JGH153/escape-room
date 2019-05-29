@@ -24,7 +24,7 @@ export class AutoCodeComponent implements OnInit {
   showOutro = false;
   codeDone = false;
 
-  @ViewChild('codeElement') codeElement;
+  @ViewChild('codeElement', { static: true }) codeElement;
 
   constructor(private masterService: MasterService, private sanitized: DomSanitizer) { }
 

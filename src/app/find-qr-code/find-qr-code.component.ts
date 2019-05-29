@@ -3,7 +3,7 @@ import { Component, OnInit, AfterContentInit, ViewChild, OnDestroy } from '@angu
 import jsQR from 'jsqr';
 import { MasterService } from '../services/master.service';
 import { Stages } from '../models/stages';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'deg-find-qr-code',
@@ -13,7 +13,7 @@ import { MatSnackBar } from '@angular/material';
 export class FindQrCodeComponent implements OnInit, AfterContentInit, OnDestroy {
 
   // video = document.createElement('video');
-  @ViewChild('videoElement') video;
+  @ViewChild('videoElement', { static: true }) video;
   ownStream: MediaStream = null;
 
   width;

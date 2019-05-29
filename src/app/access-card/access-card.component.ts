@@ -5,7 +5,7 @@ import { Stages } from '../models/stages';
 import { AccessCardService } from './service/access-card.service';
 import { timer, Subscription } from 'rxjs';
 import { EmojiLikelihood } from './service/emoji-likelihood';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 // TODO auto stop image loopp after x sec
 
@@ -17,7 +17,7 @@ import { MatSnackBar } from '@angular/material';
 export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy {
 
   // video = document.createElement('video');
-  @ViewChild('videoElement') video;
+  @ViewChild('videoElement', { static: true }) video;
   ownStream: MediaStream = null;
   username;
 
@@ -26,8 +26,8 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
   noCamera = false;
   showOutro = false;
 
-  @ViewChild('thyImg') thyImg;
-  @ViewChild('progressElement') progressElement;
+  @ViewChild('thyImg', { static: true }) thyImg;
+  @ViewChild('progressElement', { static: true }) progressElement;
 
   loadingResponse = false;
   tempResponse = '';
