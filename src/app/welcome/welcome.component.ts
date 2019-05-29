@@ -25,7 +25,7 @@ export class WelcomeComponent implements OnInit {
     setTimeout(() => {
       this.showIntro = false;
       // console.log('now');
-    }, 35000);
+    }, 26000);
   }
 
   preLoadImages() {
