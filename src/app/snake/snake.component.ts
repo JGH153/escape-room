@@ -46,6 +46,7 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
   showIntro = true;
   hasChangedMoveDir = false;
   showOutro = false;
+  showWin = false;
   stopDrawing = false;
 
   // on grid from numBlocs
@@ -138,6 +139,11 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
     this.masterService.gotoStage(Stages.Autocode);
   }
 
+  setShowOutro() {
+    this.showWin = false;
+    this.showOutro = true;
+  }
+
   openHelpSnackBar() {
     const durationInSeconds = 6;
     this.snackBar.open(
@@ -210,7 +216,7 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
   handleIfWon() {
     if (this.snakeBody.length >= this.targetSnakeLength) {
       // WON!
-      this.showOutro = true;
+      this.showWin = true;
       this.stopDrawing = true;
     }
   }

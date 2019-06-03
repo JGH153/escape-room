@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import * as Proton from 'proton-js/build/proton.js';
-
 @Component({
   selector: 'deg-welcome',
   templateUrl: './welcome.component.html',
@@ -25,7 +23,7 @@ export class WelcomeComponent implements OnInit {
     setTimeout(() => {
       this.showIntro = false;
       // console.log('now');
-    }, 26500);
+    }, 32500);
   }
 
   preLoadImages() {
@@ -103,6 +101,10 @@ export class WelcomeComponent implements OnInit {
         {
           label: 'GDPR fee',
           amount: { currency: 'USD', value: '10.00' },
+        },
+        {
+          label: 'Phishing protection',
+          amount: { currency: 'NGN', value: '1336.00' },
         },
       ],
     };

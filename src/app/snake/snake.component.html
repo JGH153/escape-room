@@ -12,4 +12,16 @@
     </deg-info-overlay>
 </div>
 
-<deg-victory (closedEE)="gotoNextTask()" [effectFireworks]="true" [title]="'Seier!'" *ngIf="showOutro"></deg-victory>
+<div class="intro-container" *ngIf="showOutro">
+    <deg-info-overlay 
+        [title]="'Din første kunde!'" 
+        [subTitle]="'Nå skal det jobbes med strøm'"
+        [imageUrl]="'assets/profiles/3.jpg'" 
+        [startButtonLabel]="'Jeg vil styrke infrastrukturen vår!'"
+        (startEE)="gotoNextTask()"
+    >
+    Over 720.000 strømmålere er montert i norske hjem og bygg. Det gir Hafslund helt nye muligheter. Vi bidrar med spisskompetanse på multicloud. Du må nå finne den fremste teknologien hos ulike skyleverandører. 
+    </deg-info-overlay>
+</div>
+
+<deg-victory (closedEE)="setShowOutro()" [effectFireworks]="true" [title]="'Seier!'" *ngIf="showWin"></deg-victory>
