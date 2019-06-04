@@ -8,6 +8,7 @@ import { Stages } from '../models/stages';
 import {
   subMinutes
 } from 'date-fns';
+import { map } from 'rxjs/operators';
 
 // for the complete state
 @Injectable({
@@ -32,6 +33,25 @@ export class MasterService {
       this.setIsLoading(false);
     }
 
+  }
+
+  public getRandomWinner() {
+    // add some delay for effect?
+    this.setIsLoading(true);
+    return this.firestore.collection<ScoreboardElement>(
+      'scoreboard',
+      (reference => reference.where('completed', '==', true))
+    ).get().pipe(
+      map(result => {
+        this.setIsLoading(false);
+        const randPos = this.getRandNumber(result.size);
+        return result.docs[randPos].get('name');
+      })
+    );
+  }
+
+  getRandNumber(toRange) {
+    return Math.floor(Math.random() * toRange);
   }
 
   public loadUser() {
@@ -132,7 +152,7 @@ export class MasterService {
     const docId = this.userId;
     this.firestore.collection<ScoreboardElement>(
       'scoreboard'
-    ).doc(docId).set({cameraDeviceId: id}, { merge: true }).then(() => {
+    ).doc(docId).set({ cameraDeviceId: id }, { merge: true }).then(() => {
       console.log('saved');
     });
   }
@@ -143,6 +163,14 @@ export class MasterService {
 
   public getUnix30MinAgo() {
     return this.getUnixTime(subMinutes(new Date(), 30));
+  }
+
+  public getColors() {
+    return ['#FED546', '#FF5F63', '#49BCA1', '#29CFF5'];
+  }
+
+  public getRandomColor() {
+    return this.getColors()[Math.floor(Math.random() * this.getColors().length)];
   }
 
   private getRandDocId(): string {

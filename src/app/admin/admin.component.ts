@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MasterService } from '../services/master.service';
 
 @Component({
   selector: 'deg-admin',
@@ -10,7 +11,7 @@ export class AdminComponent implements OnInit {
   showWinner = false;
   winnerName = 'Greger';
 
-  constructor() { }
+  constructor(private masterService: MasterService) { }
 
   ngOnInit() {
   }
@@ -18,7 +19,12 @@ export class AdminComponent implements OnInit {
   // Draw winner randomly from completed<br>
   // assuming less than a few hundred winners. Just read all docs and select at random?
   getRandomWinner() {
-    this.showWinner = true;
+    this.masterService.getRandomWinner().subscribe({
+      next: winner => {
+        this.showWinner = true;
+        this.winnerName = winner;
+      }
+    });
   }
 
   closeWinnerPopup() {

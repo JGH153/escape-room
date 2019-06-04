@@ -53,7 +53,7 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
   numBlocsWidth = 10;
   numBlocsHeight = 20;
 
-  showIntro = false;
+  showIntro = true;
   hasChangedMoveDir = false;
   showOutro = false;
   showWin = false;
@@ -74,16 +74,16 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
   ];
   snakeFoodPos: GridPos = { x: 5, y: 1 };
 
-  myTimer = timer(0, 250);
-  timerSub: Subscription;
+  subscriptions = new Subscription();
 
   hasNotifiedUserOnOrtientation = false;
 
   images;
   foodImg;
   snakeImgs;
+  snakeBodyImg;
 
-  deg = 90;
+  foodDeg = 90;
 
   constructor(
     private router: Router,
@@ -108,7 +108,7 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
 
     window.addEventListener('orientationchange', this.onOrientationchange.bind(this), true);
 
-    this.initSnake(); // temp
+    // this.initSnake(); // temp
   }
 
   ngOnDestroy() {
@@ -116,9 +116,7 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
     document.removeEventListener('keydown', this.onKeyPress.bind(this));
     document.removeEventListener('orientationchange', this.onOrientationchange.bind(this), true);
     window.removeEventListener('deviceorientation', this.handleOrientation.bind(this), true);
-    if (this.timerSub) {
-      this.timerSub.unsubscribe();
-    }
+    this.subscriptions.unsubscribe();
     this.fullscreenService.exitFullscreen(document);
     if (window.screen && window.screen.orientation) {
       window.screen.orientation.unlock();
@@ -144,16 +142,18 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
     ];
 
     this.imagesHelperService.loadImages(imageSrc).subscribe(images => {
-      console.log(images, 'images!');
       this.images = images;
       this.snakeImgs = [images.get(imageSrc[0]), images.get(imageSrc[1]), images.get(imageSrc[2])];
+      this.snakeBodyImg = images.get(imageSrc[0]);
       this.foodImg = images.get(imageSrc[3]);
       this.imagesLoaded();
     });
   }
 
   imagesLoaded() {
-    this.timerSub = this.myTimer.subscribe({ next: this.logicTick.bind(this) });
+    const gameSpeedMs = 250;
+    this.subscriptions.add(timer(0, gameSpeedMs).subscribe({ next: this.logicTick.bind(this) }));
+    this.subscriptions.add(timer(0, gameSpeedMs / 2).subscribe({ next: this.animationsTick.bind(this) }));
     // TODO animations timer
 
     setTimeout(() => {
@@ -164,6 +164,8 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
 
     this.draw();
   }
+
+
 
   initSnake() {
 
@@ -255,7 +257,9 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
     this.updateSnakePos();
     this.handleEating();
     this.handleIfWon();
+  }
 
+  animationsTick() {
     this.snakeFrame++;
     if (this.snakeFrame > 2) {
       this.snakeFrame = 0;
@@ -391,37 +395,19 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
   }
 
   drawFood() {
-    this.deg++;
-    const xPosHead = this.blockWidth * this.snakeFoodPos.x;
-    const yPosHead = this.blockHeight * this.snakeFoodPos.y;
-    // this.drawRect(xPosHead, yPosHead, this.blockWidth, this.blockHeight, 'white');
-    this.canvasRC.drawImage(this.foodImg, xPosHead, yPosHead, this.blockWidth, this.blockHeight);
+    this.foodDeg++;
+    const xPosFood = this.blockWidth * this.snakeFoodPos.x;
+    const yPosFood = this.blockHeight * this.snakeFoodPos.y;
 
-    const angleInDeg = this.deg;
-    const x = xPosHead + (this.blockWidth / 2);
-    const y = yPosHead + (this.blockHeight / 2);
-    const width = this.blockWidth;
-    const height = this.blockHeight;
-    const angleInRadians = angleInDeg * (Math.PI / 180);
-
-    this.canvasRC.translate(x, y);
-    this.canvasRC.rotate(angleInRadians);
-    this.canvasRC.drawImage(this.foodImg, -width / 2, -height / 2, this.blockWidth, this.blockHeight);
-    this.canvasRC.rotate(-angleInRadians);
-    this.canvasRC.translate(-x, -y);
-
-
-    // this.imagesHelperService.drawImageWithRotation(
-    //   this.canvasRC,
-    //   this.foodImg,
-    //   this.deg,
-    //   xPosHead,
-    //   yPosHead,
-    //   0,
-    //   0,
-    //   this.blockWidth,
-    //   this.blockHeight
-    // );
+    this.imagesHelperService.drawImageWithRotation(
+      this.canvasRC,
+      this.foodImg,
+      this.foodDeg,
+      xPosFood,
+      yPosFood,
+      this.blockWidth,
+      this.blockHeight
+    );
   }
 
   drawReset() {
@@ -431,19 +417,64 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
   drawSnake() {
     const xPosHead = this.blockWidth * this.snakeHeadPos.x;
     const yPosHead = this.blockHeight * this.snakeHeadPos.y;
-    // this.drawRect(xPosHead, yPosHead, this.blockWidth, this.blockHeight, 'red');
-    this.canvasRC.drawImage(this.snakeImgs[this.snakeFrame], xPosHead, yPosHead, this.blockWidth, this.blockHeight);
+
+
+    this.imagesHelperService.drawImageWithRotation(
+      this.canvasRC,
+      this.snakeImgs[this.snakeFrame],
+      this.getSnakeHeadRotDeg(),
+      xPosHead,
+      yPosHead,
+      this.blockWidth,
+      this.blockHeight
+    );
+
+
 
     // body
-    this.snakeBody.forEach(current => {
+    this.snakeBody.forEach((current, index) => {
+
+
+
       const xPos = this.blockWidth * current.x;
       const yPos = this.blockHeight * current.y;
-      this.drawRect(xPos, yPos, this.blockWidth, this.blockHeight, 'blue');
+
+      let rotToBody = 0;
+      if (index === 0) {
+        rotToBody = this.getRotationToBodyBlock(xPos, yPos, xPosHead, yPosHead);
+      } else {
+        const xPosPrev = this.blockWidth * this.snakeBody[index - 1].x;
+        const yPosPrev = this.blockHeight * this.snakeBody[index - 1].y;
+        rotToBody = this.getRotationToBodyBlock(xPos, yPos, xPosPrev, yPosPrev);
+      }
+
+      // this.drawRect(xPos, yPos, this.blockWidth, this.blockHeight, 'blue');
+      this.imagesHelperService.drawImageWithRotation(
+        this.canvasRC,
+        this.snakeBodyImg,
+        rotToBody,
+        xPos,
+        yPos,
+        this.blockWidth,
+        this.blockHeight
+      );
+      // this.canvasRC.drawImage(this.snakeBodyImg, xPos, yPos, this.blockWidth, this.blockHeight);
     });
   }
 
-  drawAllSquares() {
+  getSnakeHeadRotDeg(): number {
+    if (this.moveDirection === MoveDirection.Up) {
+      return 270;
+    } else if (this.moveDirection === MoveDirection.Right) {
+      return 0;
+    } else if (this.moveDirection === MoveDirection.Down) {
+      return 90;
+    } else if (this.moveDirection === MoveDirection.Left) {
+      return 180;
+    }
+  }
 
+  drawAllSquares() {
     for (let x = 0; x < this.numBlocsWidth; x++) {
       for (let y = 0; y < this.numBlocsHeight; y++) {
         const xPos = this.blockWidth * x;
@@ -468,6 +499,25 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
 
   getRandNumber(toRange) {
     return Math.floor(Math.random() * toRange);
+  }
+
+  // 0 = right
+  private getRotationToBodyBlock(meX, meY, targetX, targetY) {
+    if (meX === targetX) {
+      if (meY < targetY) {
+        return 90;
+      } else {
+        return 270;
+      }
+    }
+    if (meY === targetY) {
+      if (meX < targetX) {
+        return 0;
+      } else {
+        return 180;
+      }
+    }
+    return 0;
   }
 
 }

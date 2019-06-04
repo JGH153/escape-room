@@ -40,13 +40,18 @@ export class ImagesHelperService {
 
   }
 
-  drawImageWithRotation(context, image, angleInDeg, positionX, positionY, axisX, axisY, drawWidth, drawHeight) {
-    const angleInRad = angleInDeg * (Math.PI / 180);
-    context.translate(positionX, positionY);
-    context.rotate(angleInRad);
-    context.drawImage(image, -axisX, -axisY, drawWidth, drawHeight);
-    context.rotate(-angleInRad);
-    context.translate(-positionX, -positionY);
+  drawImageWithRotation(context, image, angleInDeg, canvasPosX, canvasPosY, drawWidth, drawHeight ) {
+    const x = canvasPosX + (drawWidth / 2);
+    const y = canvasPosY + (drawHeight / 2);
+    const width = drawWidth;
+    const height = drawHeight;
+    const angleInRadians = angleInDeg * (Math.PI / 180);
+
+    context.translate(x, y);
+    context.rotate(angleInRadians);
+    context.drawImage(image, -width / 2, -height / 2, drawWidth, drawHeight);
+    context.rotate(-angleInRadians);
+    context.translate(-x, -y);
   }
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
 
 import * as Proton from 'proton-js/build/proton.js';
+import { MasterService } from 'src/app/services/master.service';
 
 @Component({
   selector: 'deg-lines-effect',
@@ -27,7 +28,7 @@ export class LinesEffectComponent implements OnInit, AfterViewInit, OnDestroy {
 
   play = true;
 
-  constructor() { }
+  constructor(private masterService: MasterService) { }
 
   ngOnInit() {
   }
@@ -85,7 +86,7 @@ export class LinesEffectComponent implements OnInit, AfterViewInit, OnDestroy {
     this.addAttractionBehaviours();
     this.crossZoneBehaviour = new Proton.CrossZone(
       new Proton.RectZone(0, 0, this.canvas.width, this.canvas.height), 'bound');
-    this.emitter.addBehaviour(new Proton.Color('random'));
+    this.emitter.addBehaviour(new Proton.Color(this.masterService.getColors()));
     this.emitter.addBehaviour(this.attractionBehaviour);
     this.emitter.addBehaviour(this.crossZoneBehaviour);
     this.emitter.addInitialize(new Proton.Life(5, 10));

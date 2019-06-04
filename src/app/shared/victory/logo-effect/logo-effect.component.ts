@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
 
 import * as Proton from 'proton-js/build/proton.js';
+import { MasterService } from 'src/app/services/master.service';
 
 @Component({
   selector: 'deg-logo-effect',
@@ -27,7 +28,7 @@ export class LogoEffectComponent implements OnInit, AfterViewInit, OnDestroy {
 
   play = true;
 
-  constructor() { }
+  constructor(private masterService: MasterService) { }
 
   ngOnInit() {
   }
@@ -90,7 +91,7 @@ export class LogoEffectComponent implements OnInit, AfterViewInit, OnDestroy {
     this.emitter.addBehaviour(this.customScaleBehaviour());
     this.emitter.addBehaviour(this.gravity);
     this.emitter.addBehaviour(this.randomBehaviour);
-    this.emitter.addBehaviour(new Proton.Color(['#00aeff', '#0fa954', '#54396e', '#e61d5f']));
+    this.emitter.addBehaviour(new Proton.Color(this.masterService.getColors()));
     this.emitter.addBehaviour(new Proton.CrossZone(new Proton.RectZone(0, 0, this.canvas.width, this.canvas.height), 'collision'));
     this.emitter.emit();
     // add emitter

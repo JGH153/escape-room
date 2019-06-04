@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
 
 import * as Proton from 'proton-js/build/proton.js';
+import { MasterService } from 'src/app/services/master.service';
 
 @Component({
   selector: 'deg-firework-effect',
@@ -24,7 +25,7 @@ export class FireworkEffectComponent implements OnInit, AfterViewInit, OnDestroy
 
   play = true;
 
-  constructor() { }
+  constructor(private masterService: MasterService) { }
 
   ngOnInit() {
   }
@@ -115,8 +116,8 @@ export class FireworkEffectComponent implements OnInit, AfterViewInit, OnDestroy
     subemitter.addBehaviour(new Proton.RandomDrift(10, 10, .05));
     subemitter.addBehaviour(new Proton.Alpha(1, 0));
     subemitter.addBehaviour(new Proton.Gravity(3));
-    const color = Math.random() > .3 ? Proton.MathUtils.randomColor() : 'random';
-    subemitter.addBehaviour(new Proton.Color(color));
+    // const color = Proton.MathUtils.randomColor();
+    subemitter.addBehaviour(new Proton.Color(this.masterService.getRandomColor()));
 
     subemitter.p.x = particle.p.x;
     subemitter.p.y = particle.p.y;
@@ -136,14 +137,16 @@ export class FireworkEffectComponent implements OnInit, AfterViewInit, OnDestroy
     subemitter.addBehaviour(new Proton.Alpha(1, 0));
     subemitter.addBehaviour(new Proton.Scale(1, .1));
     subemitter.addBehaviour(new Proton.Gravity(1));
-    const color = Proton.MathUtils.randomColor();
-    subemitter.addBehaviour(new Proton.Color(color));
+    // const color = Proton.MathUtils.randomColor();
+    // console.log(color);
+    subemitter.addBehaviour(new Proton.Color(this.masterService.getRandomColor()));
 
     subemitter.p.x = particle.p.x;
     subemitter.p.y = particle.p.y;
     subemitter.emit('once', true);
     this.proton.addEmitter(subemitter);
   }
+
 
 
 }
