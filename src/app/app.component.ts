@@ -45,7 +45,6 @@ export class AppComponent implements OnInit {
   updateVh() {
     const vh = window.innerHeight * 0.01;
     // Then we set the value in the --vh custom property to the root of the document
-    console.log(window.innerHeight);
     document.documentElement.style.setProperty('--vh1', `${vh}px`);
   }
 

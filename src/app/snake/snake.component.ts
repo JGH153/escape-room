@@ -1,11 +1,20 @@
-import { Component, OnInit, ViewChild, AfterContentInit, OnDestroy, HostListener, ChangeDetectorRef, ViewRef, ɵConsole } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  AfterContentInit,
+  OnDestroy,
+  HostListener,
+  ChangeDetectorRef,
+  ViewRef
+} from '@angular/core';
 import { timer, Subscription } from 'rxjs';
 import { MasterService } from '../services/master.service';
 import { Router } from '@angular/router';
 import { Stages } from '../models/stages';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FullscreenService } from '../services/fullscreen.service';
-import { ImagesLoaderService } from './services/images-loader.service';
+import { ImagesHelperService } from './services/images-helper.service';
 
 enum MoveDirection {
   Up,
@@ -70,7 +79,7 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
 
   hasNotifiedUserOnOrtientation = false;
 
-  images = [];
+  images;
   foodImg;
   snakeImgs;
 
@@ -82,7 +91,7 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
     private snackBar: MatSnackBar,
     private changeDetector: ChangeDetectorRef,
     private fullscreenService: FullscreenService,
-    private imagesLoaderService: ImagesLoaderService
+    private imagesHelperService: ImagesHelperService
   ) { }
 
   ngOnInit() {
@@ -134,17 +143,18 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
       'assets/snake/sky.png',
     ];
 
-    this.imagesLoaderService.loadImages(imageSrc).subscribe(images => {
+    this.imagesHelperService.loadImages(imageSrc).subscribe(images => {
       console.log(images, 'images!');
       this.images = images;
-      this.snakeImgs = [images[0], images[1], images[2]];
-      this.foodImg = images[3];
+      this.snakeImgs = [images.get(imageSrc[0]), images.get(imageSrc[1]), images.get(imageSrc[2])];
+      this.foodImg = images.get(imageSrc[3]);
       this.imagesLoaded();
     });
   }
 
   imagesLoaded() {
     this.timerSub = this.myTimer.subscribe({ next: this.logicTick.bind(this) });
+    // TODO animations timer
 
     setTimeout(() => {
       if (!this.hasChangedMoveDir && !(this.changeDetector as ViewRef).destroyed) {
@@ -396,12 +406,12 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
 
     this.canvasRC.translate(x, y);
     this.canvasRC.rotate(angleInRadians);
-    this.canvasRC.drawImage(this.foodImg,  -width / 2, -height / 2, this.blockWidth, this.blockHeight);
+    this.canvasRC.drawImage(this.foodImg, -width / 2, -height / 2, this.blockWidth, this.blockHeight);
     this.canvasRC.rotate(-angleInRadians);
     this.canvasRC.translate(-x, -y);
 
 
-    // this.imagesLoaderService.drawImageWithRotation(
+    // this.imagesHelperService.drawImageWithRotation(
     //   this.canvasRC,
     //   this.foodImg,
     //   this.deg,

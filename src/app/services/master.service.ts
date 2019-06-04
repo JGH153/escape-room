@@ -32,7 +32,6 @@ export class MasterService {
       this.setIsLoading(false);
     }
 
-    console.log(this.getUnixTime(new Date()));
   }
 
   public loadUser() {

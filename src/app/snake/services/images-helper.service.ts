@@ -1,29 +1,30 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { toArray } from 'rxjs/operators';
+import { toArray, reduce } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
 })
 // rename image service
-export class ImagesLoaderService {
+export class ImagesHelperService {
 
   constructor() { }
 
   // todo return map as cant garantte order on imgs
-  loadImages(paths: string[]): Observable<any> { // HTMLImageElement
+  loadImages(paths: string[]): Observable<Map<string, any>> { // HTMLImageElement
 
     // const images = [];
 
     return new Observable(subscriber => {
       let loadedImages = 0;
 
-      paths.forEach((current) => {
+      paths.forEach((currentPath) => {
         const image = new Image();
-        image.src = current;
+        image.src = currentPath;
         image.onload = () => {
           loadedImages++;
-          subscriber.next(image);
+          subscriber.next([currentPath, image]);
           if (loadedImages === paths.length) {
             subscriber.complete();
           }
@@ -31,7 +32,9 @@ export class ImagesLoaderService {
       });
 
     }).pipe(
-      toArray()
+      reduce((total, current, index) => {
+        return total.set(current[0], current[1]);
+      }, new Map())
     );
 
 
