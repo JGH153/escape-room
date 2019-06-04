@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { GameEndComponent } from './game-end/game-end.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { MemoryComponent } from './memory/memory.component';
+import { AdminComponent } from './admin/admin.component';
 
 // use inbetween components for when between tasks?
 // TODO router guard to prevent skipping tasks
@@ -24,8 +25,8 @@ const routes: Routes = [
   { path: 'findqrcode', component: FindQrCodeComponent, data: {animation: 'slideIn2'} },
   { path: 'end', component: GameEndComponent, data: {animation: 'slideIn'} },
   { path: 'highscore', component: HighscorePageComponent },
-  // { path: 'memory/', component:  }, Memory game?
-  // { path: '**', redirectTo: 'login/'}
+  { path: 'admin', component: AdminComponent },
+  // { path: '**', redirectTo: ''}
 ];
 
 @NgModule({

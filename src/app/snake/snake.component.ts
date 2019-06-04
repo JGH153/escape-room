@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild, AfterContentInit, OnDestroy, HostListener, ChangeDetectorRef, ViewRef } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterContentInit, OnDestroy, HostListener, ChangeDetectorRef, ViewRef, ɵConsole } from '@angular/core';
 import { timer, Subscription } from 'rxjs';
 import { MasterService } from '../services/master.service';
 import { Router } from '@angular/router';
 import { Stages } from '../models/stages';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FullscreenService } from '../services/fullscreen.service';
+import { ImagesLoaderService } from './services/images-loader.service';
 
 enum MoveDirection {
   Up,
@@ -43,7 +44,7 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
   numBlocsWidth = 10;
   numBlocsHeight = 20;
 
-  showIntro = true;
+  showIntro = false;
   hasChangedMoveDir = false;
   showOutro = false;
   showWin = false;
@@ -52,6 +53,7 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
   // on grid from numBlocs
   snakeHeadPos: GridPos = { x: this.numBlocsWidth / 2, y: this.numBlocsHeight / 2 };
   snakeLength = 1;
+  snakeFrame = 0;
   targetSnakeLength = 4;
   snakeBody: Array<GridPos> = [
     // { ...this.snakeHeadPos, x: this.snakeHeadPos.x - 1 },
@@ -68,15 +70,23 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
 
   hasNotifiedUserOnOrtientation = false;
 
+  images = [];
+  foodImg;
+  snakeImgs;
+
+  deg = 90;
+
   constructor(
     private router: Router,
     private masterService: MasterService,
     private snackBar: MatSnackBar,
     private changeDetector: ChangeDetectorRef,
-    private fullscreenService: FullscreenService
+    private fullscreenService: FullscreenService,
+    private imagesLoaderService: ImagesLoaderService
   ) { }
 
   ngOnInit() {
+
   }
 
   ngAfterContentInit() {
@@ -88,6 +98,8 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
     window.addEventListener('deviceorientation', this.handleOrientation.bind(this), true);
 
     window.addEventListener('orientationchange', this.onOrientationchange.bind(this), true);
+
+    this.initSnake(); // temp
   }
 
   ngOnDestroy() {
@@ -113,14 +125,25 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
     this.hasNotifiedUserOnOrtientation = true;
   }
 
-  closeIntro() {
-    this.showIntro = false;
+  loadImages() {
 
-    this.image = new Image();
-    this.image.src = 'assets/boss.png';
-    this.image.onload = () => {
-      this.draw();
-    };
+    const imageSrc = [
+      'assets/snake/logo1.png',
+      'assets/snake/logo2.png',
+      'assets/snake/logo3.png',
+      'assets/snake/sky.png',
+    ];
+
+    this.imagesLoaderService.loadImages(imageSrc).subscribe(images => {
+      console.log(images, 'images!');
+      this.images = images;
+      this.snakeImgs = [images[0], images[1], images[2]];
+      this.foodImg = images[3];
+      this.imagesLoaded();
+    });
+  }
+
+  imagesLoaded() {
     this.timerSub = this.myTimer.subscribe({ next: this.logicTick.bind(this) });
 
     setTimeout(() => {
@@ -129,10 +152,22 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
       }
     }, 5000);
 
-    this.fullscreenService.requestFullscreen(document.body);
-    if (window.screen && window.screen.orientation) {
-      window.screen.orientation.lock('portrait');
-    }
+    this.draw();
+  }
+
+  initSnake() {
+
+    this.loadImages();
+
+    // this.fullscreenService.requestFullscreen(document.body);
+    // if (window.screen && window.screen.orientation) {
+    //   window.screen.orientation.lock('portrait');
+    // }
+  }
+
+  closeIntro() {
+    this.showIntro = false;
+    this.initSnake();
   }
 
   gotoNextTask() {
@@ -211,6 +246,10 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
     this.handleEating();
     this.handleIfWon();
 
+    this.snakeFrame++;
+    if (this.snakeFrame > 2) {
+      this.snakeFrame = 0;
+    }
   }
 
   handleIfWon() {
@@ -332,7 +371,7 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
     this.drawFood();
     this.drawSnake();
 
-    // this.canvasRC.drawImage(this.image, 20, 20);
+
 
     if (this.stopDrawing) {
       return;
@@ -342,9 +381,37 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
   }
 
   drawFood() {
+    this.deg++;
     const xPosHead = this.blockWidth * this.snakeFoodPos.x;
     const yPosHead = this.blockHeight * this.snakeFoodPos.y;
-    this.drawRect(xPosHead, yPosHead, this.blockWidth, this.blockHeight, 'white');
+    // this.drawRect(xPosHead, yPosHead, this.blockWidth, this.blockHeight, 'white');
+    this.canvasRC.drawImage(this.foodImg, xPosHead, yPosHead, this.blockWidth, this.blockHeight);
+
+    const angleInDeg = this.deg;
+    const x = xPosHead;
+    const y = yPosHead;
+    const width = 100;
+    const height = 100;
+    const angleInRadians = angleInDeg * (Math.PI / 180);
+
+    this.canvasRC.translate(x, y);
+    this.canvasRC.rotate(angleInRadians);
+    this.canvasRC.drawImage(this.foodImg,  -xPosHead / 2, -yPosHead / 2, this.blockWidth, this.blockHeight);
+    this.canvasRC.rotate(-angleInRadians);
+    this.canvasRC.translate(-x, -y);
+
+
+    // this.imagesLoaderService.drawImageWithRotation(
+    //   this.canvasRC,
+    //   this.foodImg,
+    //   this.deg,
+    //   xPosHead,
+    //   yPosHead,
+    //   0,
+    //   0,
+    //   this.blockWidth,
+    //   this.blockHeight
+    // );
   }
 
   drawReset() {
@@ -354,7 +421,8 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
   drawSnake() {
     const xPosHead = this.blockWidth * this.snakeHeadPos.x;
     const yPosHead = this.blockHeight * this.snakeHeadPos.y;
-    this.drawRect(xPosHead, yPosHead, this.blockWidth, this.blockHeight, 'red');
+    // this.drawRect(xPosHead, yPosHead, this.blockWidth, this.blockHeight, 'red');
+    this.canvasRC.drawImage(this.snakeImgs[this.snakeFrame], xPosHead, yPosHead, this.blockWidth, this.blockHeight);
 
     // body
     this.snakeBody.forEach(current => {

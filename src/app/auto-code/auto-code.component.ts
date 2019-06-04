@@ -71,7 +71,7 @@ export class AutoCodeComponent implements OnInit {
   }
 
   gotoNextTask() {
-    this.masterService.gotoStage(Stages.Memory);
+    this.masterService.gotoStage(Stages.FindQrCode);
   }
 
   closeIntro() {

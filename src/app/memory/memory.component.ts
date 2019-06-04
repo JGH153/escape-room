@@ -63,7 +63,7 @@ export class MemoryComponent implements OnInit {
   }
 
   gotoNextTask() {
-    this.masterService.gotoStage(Stages.FindQrCode);
+    this.masterService.gotoStage(Stages.Autocode);
   }
 
   closeIntro() {
@@ -85,15 +85,13 @@ export class MemoryComponent implements OnInit {
 
     if (this.selectedCards.length === 0) {
       this.selectedCards.push({ ...card });
-    } else if (this.selectedCards.length === 1) {
+    } else if (this.selectedCards.length === 1 && this.selectedCards[0].id !== card.id) {
       this.selectedCards.push({ ...card });
       if (this.selectedCardsSame()) {
         setTimeout(() => {
           this.disableCardByName(card.name);
         }, 200);
       }
-    } else {
-      console.warn('Error of some kind!');
     }
   }
 

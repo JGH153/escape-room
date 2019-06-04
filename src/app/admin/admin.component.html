@@ -1,0 +1,28 @@
+<p>
+  admin works! (need protection!)
+</p>
+
+
+
+<br>
+Change tome text to look like site made fore for event?<br>
+Win draw time?
+
+<br><br>
+
+Velger en tilfeldig person blant de som fullførte/vant
+<button mat-raised-button color="primary" (click)="getRandomWinner()">Velg en vinner!</button>
+
+
+<div class="intro-container" *ngIf="showWinner">
+  <deg-info-overlay 
+      [title]="'Winner!'" 
+      [subTitle]="'Så kult!'"
+      [imageUrl]="'assets/profiles/trond.jpg'" 
+      [startButtonLabel]="'Lukk'"
+      (startEE)="closeWinnerPopup()"
+  >
+      Vinneren ble: 
+      <h1>{{winnerName}}</h1>
+  </deg-info-overlay>
+</div>

@@ -45,6 +45,7 @@ import { DnaEffectComponent } from './shared/victory/dna-effect/dna-effect.compo
 import { HttpClientModule } from '@angular/common/http';
 import { TimeDiffPipe } from './shared/highscore/pipes/time-diff.pipe';
 import { GameIntroComponent } from './shared/game-intro/game-intro.component';
+import { AdminComponent } from './admin/admin.component';
 
 const matImports = [
    MatCardModule,
@@ -85,6 +86,7 @@ const matImports = [
       DnaEffectComponent,
       TimeDiffPipe,
       GameIntroComponent,
+      AdminComponent
    ],
    entryComponents: [],
    imports: [
@@ -97,7 +99,7 @@ const matImports = [
       AngularFireFunctionsModule,
       AngularFireAuthModule,
       FormsModule,
-      HttpClientModule,
+      HttpClientModule
    ],
    providers: [],
    bootstrap: [
