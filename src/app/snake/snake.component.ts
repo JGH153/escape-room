@@ -388,15 +388,15 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
     this.canvasRC.drawImage(this.foodImg, xPosHead, yPosHead, this.blockWidth, this.blockHeight);
 
     const angleInDeg = this.deg;
-    const x = xPosHead;
-    const y = yPosHead;
-    const width = 100;
-    const height = 100;
+    const x = xPosHead + (this.blockWidth / 2);
+    const y = yPosHead + (this.blockHeight / 2);
+    const width = this.blockWidth;
+    const height = this.blockHeight;
     const angleInRadians = angleInDeg * (Math.PI / 180);
 
     this.canvasRC.translate(x, y);
     this.canvasRC.rotate(angleInRadians);
-    this.canvasRC.drawImage(this.foodImg,  -xPosHead / 2, -yPosHead / 2, this.blockWidth, this.blockHeight);
+    this.canvasRC.drawImage(this.foodImg,  -width / 2, -height / 2, this.blockWidth, this.blockHeight);
     this.canvasRC.rotate(-angleInRadians);
     this.canvasRC.translate(-x, -y);
 

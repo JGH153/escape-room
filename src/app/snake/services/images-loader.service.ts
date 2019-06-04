@@ -10,6 +10,7 @@ export class ImagesLoaderService {
 
   constructor() { }
 
+  // todo return map as cant garantte order on imgs
   loadImages(paths: string[]): Observable<any> { // HTMLImageElement
 
     // const images = [];
