@@ -15,6 +15,8 @@ import { Stages } from '../models/stages';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FullscreenService } from '../services/fullscreen.service';
 import { ImagesHelperService } from './services/images-helper.service';
+import { SwipeService } from './services/swipe.service';
+import { SwipeDirection } from '../models/swipe';
 
 enum MoveDirection {
   Up,
@@ -91,7 +93,8 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
     private snackBar: MatSnackBar,
     private changeDetector: ChangeDetectorRef,
     private fullscreenService: FullscreenService,
-    private imagesHelperService: ImagesHelperService
+    private imagesHelperService: ImagesHelperService,
+    private swipeService: SwipeService
   ) { }
 
   ngOnInit() {
@@ -109,6 +112,12 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
     window.addEventListener('orientationchange', this.onOrientationchange.bind(this), true);
 
     // this.initSnake(); // temp
+
+    this.subscriptions.add(this.swipeService.getSwipes().subscribe({
+      next: (swipeDirection: SwipeDirection) => {
+        this.onSwipe(swipeDirection);
+      }
+    }));
   }
 
   ngOnDestroy() {
@@ -251,6 +260,20 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
 
     this.hasChangedMoveDir = true;
 
+  }
+
+  onSwipe(direction: SwipeDirection) {
+    if (direction === SwipeDirection.Up) {
+      this.moveDirection = MoveDirection.Up;
+    } else if (direction === SwipeDirection.Right) {
+      this.moveDirection = MoveDirection.Right;
+    } else if (direction === SwipeDirection.Down) {
+      this.moveDirection = MoveDirection.Down;
+    } else if (direction === SwipeDirection.Left) {
+      this.moveDirection = MoveDirection.Left;
+    }
+
+    this.hasChangedMoveDir = true;
   }
 
   logicTick() {
