@@ -26,3 +26,14 @@ router-outlet ~ * {
   height: 100%;
   width: 100%;
 }
+
+.mat-raised-button {
+  border-radius: 100px !important;
+  padding: 10px 30px !important;
+  font-size: 16px !important;
+}
+
+.mat-raised-button.mat-primary {
+  background-color: rgba(0, 52, 89, 1);
+  color: rgba(41,207,245,1);
+}

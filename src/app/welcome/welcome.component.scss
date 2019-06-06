@@ -2,10 +2,10 @@
   width: 100vw;
   height: 100vh;
   height: calc(var(--vh1, 1vh) * 100);
-  background-image: url("./../../assets/start.jpg");
-  background-size: cover;
-  background-color: #29cff5;
-  background-position: center center;
+  // background-image: url("./../../assets/start.jpg");
+  // background-size: cover;
+  // background-position: center center;
+  background-color: rgba(41, 207, 245, 1);
 }
 
 .content-container {
@@ -14,39 +14,61 @@
   align-items: center;
   margin: auto;
   width: 75vw;
-  height: 80vh;
+  height: calc(var(--vh1, 1vh) * 100);
   flex-direction: column;
-}
 
-.logo {
-  min-width: 400px;
-  text-align: center;
-}
+  .logo {
+    width: 60vw;
+    height: 60vw;
+    text-align: center;
+    border-radius: 100%;
+    // overflow: hidden;
 
-.title {
-  text-align: center;
-  font-weight: bold;
-  font-size: 40px;
-}
+    background-image: url("./../../assets/design/home.png");
+    background-size: cover;
+    background-position: center center;
 
-.subtitle {
-  text-align: center;
-  font-weight: bold;
-  font-size: 25px;
-}
+    .logo-img {
+      width: 100%;
+      height: 100%;
+    }
+  }
 
-.info {
-}
+  .title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 48px;
 
-.start {
-}
-.start-button {
-  --buttonHeight: 100px;
-  min-width: calc(var(--buttonHeight) * 1.618);
-  height: var(--buttonHeight);
-  font-size: 30px;
-}
+    background-image: url("https://media1.giphy.com/media/3o84TYaWr47oRcCQfu/giphy.gif?");
+    background-image: url("https://media.giphy.com/media/26BROrSHlmyzzHf3i/giphy.gif");
+    background-size: cover;
+    color: transparent;
+    // -moz-background-clip: text;
+    background-clip: text;
+    // text-transform: uppercase;
+  }
 
-.info {
-  width: 85vw;
+  .subtitle {
+    text-align: center;
+    font-weight: bold;
+    font-size: 25px;
+  }
+
+  .info {
+    text-align: center;
+  }
+
+  .buttons {
+  }
+  .start-button {
+    // --buttonHeight: 100px;
+    // min-width: calc(var(--buttonHeight) * 1.618);
+    // height: var(--buttonHeight);
+    // font-size: 30px;
+    margin-left: 20px;
+  }
+
+  .info {
+    // width: 85vw;
+  }
 }
