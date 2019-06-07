@@ -24,6 +24,12 @@
         
         <mat-checkbox class="" name="">
           Jeg godtar at 97.5% av min CPU kan brukes til Bitcoin mining
+        
+        </mat-checkbox>
+        <div class="checkbox-seperator"></div>
+        
+        <mat-checkbox class="comic-checkbox" name="comic" [ngModel]="wantComic" (change)="comicCheckToggle()">
+          Jeg vil ha alt i Comic Sans
         </mat-checkbox>
 
         <br><br>

@@ -6,33 +6,31 @@
   // background-size: cover;
   // background-position: center center;
   background-color: rgba(41, 207, 245, 1);
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  // background-image: url("./../../assets/design/home.png");
+  // background-size: cover;
+  // background-position: center center;
 }
 
-.content-container {
+.top-content {
+  width: 80vw;
+  height: calc(var(--vh1, 1vh) * 40);
+  margin: auto;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  margin: auto;
-  padding-bottom: 20px;
-  width: 80vw;
-  height: calc(var(--vh1, 1vh) * 100);
   flex-direction: column;
-
-  .logo {
-    width: 60vw;
-    height: 60vw;
-    text-align: center;
-    border-radius: 100%;
-
-    background-image: url("./../../assets/design/home.png");
-    background-size: cover;
-    background-position: center center;
-  }
+  text-align: center;
 
   .title {
-    text-align: center;
     font-weight: bold;
     font-size: 48px;
+
+    margin: 0px;
 
     background-image: url("https://media1.giphy.com/media/3o84TYaWr47oRcCQfu/giphy.gif?");
     background-image: url("https://media.giphy.com/media/26BROrSHlmyzzHf3i/giphy.gif");
@@ -42,18 +40,27 @@
     background-clip: text;
     // text-transform: uppercase;
   }
+}
+.bottom-content {
+  width: 100vw;
+  height: calc(var(--vh1, 1vh) * 60);
 
-  .subtitle {
-    text-align: center;
-    font-weight: bold;
-    font-size: 25px;
-  }
+  background-image: url("./../../assets/design/home.png");
+  background-size: contain;
+  background-size: cover;
+  background-size: auto 100%;
+  background-repeat:no-repeat;
+  background-position: center bottom;
+  // background-position: center left;
 
-  .info {
-    text-align: center;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
 
   .buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
     
   }
   .start-button {
@@ -62,9 +69,5 @@
     // height: var(--buttonHeight);
     // font-size: 30px;
     margin-left: 20px;
-  }
-
-  .info {
-    // width: 85vw;
   }
 }

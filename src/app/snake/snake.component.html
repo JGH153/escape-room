@@ -25,4 +25,6 @@
     </deg-info-overlay>
 </div>
 
-<deg-victory (closedEE)="setShowOutro()" [effectFireworks]="true" [title]="'Seier!'" *ngIf="showWin"></deg-victory>
+<deg-victory (closedEE)="setShowOutro()" [effectFireworks]="true" [title]="'Seier!'" *ngIf="showWin"  [outroTitle]="'Gratulerer!'" [outroColor]="'green'">
+    Du har nå plukket den fremste teknologien hos ulike skyleverandører og Hafslund kan nå tilby stabilt nettverk. Til det beste for folk flest! 
+</deg-victory>

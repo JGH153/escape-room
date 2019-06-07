@@ -12,7 +12,6 @@
         </ng-container>
         <ng-template #notVisible>
           <div class="not-visible-body">
-            ?
           </div>
         </ng-template>
       </div>
@@ -22,14 +21,17 @@
 
 <div class="intro-container" *ngIf="showIntro">
   <deg-info-overlay 
-      [title]="'Vi må finne tilbake til stacken!'" 
+      [title]="'Styrk kompetansen'" 
       [subTitle]="'Nå skal det matches!'"
-      [imageUrl]="'assets/profiles/2.jpg'" 
+      [imageUrl]="'assets/design/people3.jpg'" 
       [startButtonLabel]="' Jeg vil sertifiseres!'"
       (startEE)="closeIntro()"
+      [buttonColor]="'red'"
   >
     Vi verdsetter at våre ansatte holder seg oppdatert på ny teknologi. Du skal nå ta en sertifisering! Lykke til :D 
   </deg-info-overlay>
 </div>
 
-<deg-victory (closedEE)="gotoNextTask()" [effectLines]="true" [title]="'Gratulerer!'" *ngIf="showOutro"></deg-victory>
+<deg-victory (closedEE)="gotoNextTask()" [effectLines]="true" [title]="'Gratulerer!'" *ngIf="showOutro" [outroTitle]="'Gratulerer!'" [outroColor]="'red'">
+    Vi ønsker alltid å ligge i front på ny teknologi og setter av mye ressurser til at våre ansatte kan oppdatere seg på siste nytt.
+</deg-victory>

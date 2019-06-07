@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   hasApprovedImg = false;
+  wantComic = false;
   username = '';
 
   constructor(private masterService: MasterService, private router: Router) { }
@@ -20,6 +21,15 @@ export class LoginComponent implements OnInit {
 
   startPuzzle() {
     this.masterService.createUser(this.username);
+  }
+
+  comicCheckToggle() {
+    this.wantComic = !this.wantComic;
+    if (this.wantComic) {
+      document.documentElement.style.setProperty('--font', `"Comic Sans MS", cursive, sans-serif`);
+    } else {
+      document.documentElement.style.setProperty('--font', `"Open Sans", sans-serif`);
+    }
   }
 
 }

@@ -5,6 +5,7 @@
 
 * {
   box-sizing: border-box;
+  // font-family: "Comic Sans MS", cursive, sans-serif !important;
 }
 
 .intro-container {
@@ -19,6 +20,11 @@
 
 :root {
   --vh1: 1vh;
+  --font: "Open Sans", sans-serif;
+  * {
+    font-family: var(--font);
+    // font-family: 'Open Sans', sans-serif;
+  }
 }
 
 router-outlet ~ * {
@@ -35,13 +41,13 @@ router-outlet ~ * {
 }
 
 .mat-raised-button.mat-primary {
-  background-color: white;
-  color: rgba(0, 52, 89, 1);
+  background-color: rgba(0, 52, 89, 1);
+  color: rgba(41, 207, 245, 1);
 }
 
 .mat-raised-button.mat-secondary {
-  background-color: rgba(0, 52, 89, 1);
-  color: rgba(41, 207, 245, 1);
+  background-color: white;
+  color: rgba(0, 52, 89, 1);
 }
 
 .mat-raised-button.mat-primary-blue {
@@ -64,6 +70,15 @@ router-outlet ~ * {
 .mat-raised-button.mat-primary[disabled] {
   background-color: rgb(95, 95, 95);
   color: black;
+}
+
+.mat-raised-button.mat-primary-code-blue {
+  border-radius: 0px !important;
+  background-color: rgba(41, 207, 245, 1);
+  color: black;
+
+  font-size: 130px !important;
+  font-weight: bold !important;
 }
 
 // dirty, but working

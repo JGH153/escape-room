@@ -34,6 +34,7 @@
 
     .form-container {
       width: 100%;
+      text-align: left;
 
       .username-input {
         max-width: 500px;
@@ -88,6 +89,12 @@
       .mat-pseudo-checkbox-checked,
       .mat-pseudo-checkbox-indeterminate {
         background-color: rgba(41, 207, 245, 1) !important;
+      }
+
+      .comic-checkbox {
+        * {
+          font-family: "Comic Sans MS", cursive, sans-serif !important;
+        }
       }
     }
   }

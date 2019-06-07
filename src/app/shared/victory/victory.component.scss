@@ -1,3 +1,85 @@
+.outro-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  height: calc(var(--vh1, 1vh) * 100);
+  overflow: hidden;
+  background: red;
+
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  // start hidden
+  display: none;
+
+  .outro-title-container {
+    width: 100vw;
+    // height: calc(var(--vh1, 1vh) * 10);
+    margin-top: 10vw;
+    .title {
+      margin: 0px;
+      color: rgba(17, 17, 17, 1);
+      font-family: "Open Sans";
+      font-size: 48px;
+      font-weight: bold;
+      letter-spacing: 0.2px;
+      line-height: 48px;
+    }
+  }
+
+  .outro-text {
+    width: 80vw;
+    // height: calc(var(--vh1, 1vh) * 30);
+    height: auto;
+  }
+
+  .image-box {
+    --image-url: url("./../../../assets/design/winGreen.png");
+
+    width: 100vw;
+    height: calc(var(--vh1, 1vh) * 60);
+
+    background-image: var(--image-url);
+    background-size: cover;
+    background-position: center top;
+    .image {
+      // width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+.effect-container {
+  animation-duration: 100s; // so each % is 1 sec
+  animation-name: fade-out;
+  animation-fill-mode: forwards;
+
+  @keyframes fade-out {
+    0% {
+      opacity: 1;
+    }
+
+    4% {
+      opacity: 1;
+    }
+
+    5% {
+      opacity: 0;
+      display: none;
+    }
+    100% {
+      opacity: 0;
+      display: none;
+    }
+  }
+}
+
 .message-container {
   position: absolute;
   top: 0;

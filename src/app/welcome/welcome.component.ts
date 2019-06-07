@@ -96,7 +96,7 @@ export class WelcomeComponent implements OnInit {
       displayItems: [
         {
           label: 'Russian mob fee',
-          amount: { currency: 'USD', value: '2.00' },
+          amount: { currency: 'RUB', value: '2.00' },
         },
         {
           label: 'GDPR fee',

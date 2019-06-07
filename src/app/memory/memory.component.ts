@@ -37,7 +37,7 @@ export class MemoryComponent implements OnInit {
   cards: Card[] = [];
   selectedCards: Card[] = [];
 
-  showIntro = true;
+  showIntro = false;
   showOutro = false;
 
   constructor(private masterService: MasterService) { }

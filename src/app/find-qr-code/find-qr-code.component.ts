@@ -29,7 +29,7 @@ export class FindQrCodeComponent implements OnInit, AfterContentInit, OnDestroy 
   }
 
   ngAfterContentInit() {
-
+    // this.getUserMedia(); // temp!
   }
 
   ngOnDestroy() {

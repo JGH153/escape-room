@@ -12,7 +12,7 @@
     height: 70%;;
     padding: 20px;
 
-    color: green;
+    color: rgba(41, 207, 245, 1);
     font-size: 14px;
     overflow-y: auto;
     text-align: left;
@@ -29,8 +29,6 @@
 
 .auto-button {
     --autoButtonMargin: 20px;
-    font-size: 130px;
-    font-weight: bold;
     
     width: calc(50% - var(--autoButtonMargin)  * 2);
     height: calc(100% - var(--autoButtonMargin)  * 2);

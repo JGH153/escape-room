@@ -3,11 +3,11 @@
   <div class="code-container" #codeElement [innerHtml]="currentText">
   </div>
   <div class="button-row" *ngIf="!codeDone">
-      <button class="auto-button" (click)="clickedButtonZero()" mat-raised-button>0</button>
-      <button class="auto-button" (click)="clickedButtonOne()" mat-raised-button>1</button>
+      <button class="auto-button" (click)="clickedButtonZero()" mat-raised-button color="primary-code-blue">0</button>
+      <button class="auto-button" (click)="clickedButtonOne()" mat-raised-button color="primary-code-blue">1</button>
   </div>
   <div class="button-row" *ngIf="codeDone">
-      <button class="run-button" (click)="runCode()" mat-raised-button>Run!</button>
+      <button class="run-button" (click)="runCode()" mat-raised-button color="primary-code-blue">Run!</button>
   </div>
 </div>
 
@@ -15,12 +15,14 @@
     <deg-info-overlay 
         [title]="'Du er nå ekspert!'" 
         [subTitle]="'Nå skal det kodes!'"
-        [imageUrl]="'assets/profiles/ai.jpg'" 
-        [startButtonLabel]="'Jeg vil bedre flyt i driften av Norge!'"
+        [imageUrl]="'assets/design/kode.jpg'" 
+        [startButtonLabel]="'Start koding!'"
         (startEE)="closeIntro()"
     >
     Din kompetanse er høyt verdsatt og du får nå en ekspertrolle i Computas. Du skal nå utvikle en automatisert løsning for en stor virksomhet i offentlig sektor!
     </deg-info-overlay>
 </div>
 
-<deg-victory (closedEE)="gotoNextTask()" [effectLogo]="true" [title]="'Seier!'" *ngIf="showOutro" [noSkipIntro]="true"></deg-victory>
+<deg-victory (closedEE)="gotoNextTask()" [effectLogo]="true" [title]="'Seier!'" *ngIf="showOutro" [noSkipIntro]="true" [outroTitle]="'Gratulerer!'" [outroColor]="'blue'">
+    Du har nå bidratt til at teknologien tar seg av det enkle og rutinemessige, så de ansatte i det offentlige kan bruke tiden sin på saker som krever hjerte og hjerne, innsikt og omsorg.
+</deg-victory>

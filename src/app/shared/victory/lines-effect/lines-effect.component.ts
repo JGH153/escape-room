@@ -73,7 +73,7 @@ export class LinesEffectComponent implements OnInit, AfterViewInit, OnDestroy {
     this.emitter = new Proton.Emitter();
     this.emitter.damping = 0.008;
 
-    this.emitter.rate = new Proton.Rate(500);
+    this.emitter.rate = new Proton.Rate(400);
     this.emitter.addInitialize(new Proton.Mass(1));
     this.emitter.addInitialize(new Proton.Radius(4));
     this.emitter.addInitialize(new Proton.Velocity(new Proton.Span(5), new Proton.Span(0, 360), 'polar'));

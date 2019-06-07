@@ -1,21 +1,27 @@
 <div class="container">
+
+    <div class="title-container">
+        <h2 class="title">Finn QR Koden</h2>
+    </div>
+
     <div class="video-container">
         <video id="localVideo" #videoElement [srcObject]="ownStream" class="person-video" autoplay muted playsinline></video>
     </div>
     <div class="qr-container">
-        <h2>Finn denne koden å scann den</h2>
+        
         <img class="qr-img" src="assets/qrCode.png" (click)="qrClicked()">
     </div>
 </div>
 
 <div class="intro-container" *ngIf="showIntro">
     <deg-info-overlay 
-        [title]="'På tide å løse dette!'" 
+        [title]="'Velkommen hjem!'" 
         [subTitle]="'Vise deg frem for sjæfen sjør'"
-        [imageUrl]="'assets/profiles/trond.jpg'" 
-        [startButtonLabel]="'La os finne den koden!'"
+        [imageUrl]="'assets/design/people4.jpg'" 
+        [startButtonLabel]="'Ta meg hjem!'"
         (startEE)="closeIntro()"
+        [buttonColor]="'yellow'"
     >
-        Noe noe QR kode og løse alt for å vinne. Trond følger med på deg Live!
+    Vi samles ofte til både fagdager, meetups og hackatons. Akersgata er et samlingspunkt for oss, og det er sjeldent det er tomt på huset. Finn QR koden for å avslutte.
     </deg-info-overlay>
 </div>

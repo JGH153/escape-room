@@ -31,7 +31,7 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
 
   loadingResponse = false;
   tempResponse = '';
-  activeEmojions = '';
+  activeEmojions = '😠';
 
   progressDeg = 360 / 2;
   noSmileTimes = 0;
