@@ -174,7 +174,7 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
     }
 
 
-    if (this.noSmileTimes === 3 || this.noSmileTimes === 10) {
+    if (this.activeEmojions.length && (this.noSmileTimes === 3 || this.noSmileTimes === 10)) {
       this.smileHint();
     }
   }
