@@ -1,42 +1,39 @@
 <div class="bg-img-container-login">
   <main class="container">
 
-    <div class="top-container">
-      <br><br>
-      <img class="c-logo" src="assets/computas-logo.svg">
-      <br><br>
-      <h1>Påmelding / Registering</h1>
-      <br>
-      Vil du løse samfunnsnyttige prosjekter med fremtidsrettet teknologi?
-      Da er Computas en lekeplass for deg.
-
-      <br>
-      <br>
+    <div class="logo-container">
+      <img src="assets/logo-standing.png" class="c-logo">
     </div>
+
+    <h1 class="title">
+      Game of Code
+    </h1>
 
     <div class="form-container">
       <form class="">
-        <h3>Ditt navn / kallenavn:</h3>
         <mat-form-field class="username-input">
           <input matInput placeholder="Ditt navn" autocomplete="off" [(ngModel)]="username" name="username" class="">
         </mat-form-field>
         <br>
 
-        <mat-checkbox class="" [(ngModel)]="hasApprovedImg" name="hasApprovedImg">
+        <mat-checkbox [(ngModel)]="hasApprovedImg" name="hasApprovedImg">
           Jeg godtar at det jeg fyller inn i spillet kan vises på highscorelisten
         </mat-checkbox>
-        <br>
+
+        <div class="checkbox-seperator"></div>
+        
         <mat-checkbox class="" name="">
           Jeg godtar at 97.5% av min CPU kan brukes til Bitcoin mining
         </mat-checkbox>
 
         <br><br>
 
-        <button mat-raised-button color="primary" [disabled]="!hasApprovedImg || username.length < 1"
-          (click)="startPuzzle()">Start morroa</button>
 
       </form>
     </div>
+
+    <button mat-raised-button color="primary-blue" [disabled]="!hasApprovedImg || username.length < 1"
+      (click)="startPuzzle()">Start</button>
 
   </main>
 </div>

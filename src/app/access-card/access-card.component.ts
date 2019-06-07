@@ -159,6 +159,7 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
   }
 
   onDetectEmojiResponse(response) {
+    this.renderer.setStyle(this.thyImg.nativeElement, 'display', 'none');
     this.loadingResponse = false;
     this.tempResponse = response;
     if (this.accessCardService.emojiPossibleOrMore(response.joyLikelihood)) {

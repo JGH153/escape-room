@@ -1,18 +1,8 @@
-<mat-card class="info-card">
-    <mat-card-header>
-      <div mat-card-avatar>
-        <mat-icon class="icon">announcement</mat-icon>
-      </div>
-      <mat-card-title>{{title}}</mat-card-title>
-      <mat-card-subtitle>{{subTitle}}</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image src="{{imageUrl}}" alt="Photo of a Computasser">
-    <mat-card-content>
-      <p>
-        <ng-content></ng-content>
-      </p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-raised-button color="primary" (click)="closeIntro()">{{startButtonLabel}}</button>
-    </mat-card-actions>
-  </mat-card>
+<div class="top-overlay">
+  <div class="container">
+    <h1 class="title">{{title}}</h1>
+    <div class="image-container" #imageElement></div>
+    <div class="info"><ng-content></ng-content></div>
+    <button mat-raised-button color="primary-{{buttonColor}}" (click)="closeIntro()">{{startButtonLabel}}</button>
+  </div>
+</div>

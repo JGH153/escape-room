@@ -31,9 +31,44 @@ router-outlet ~ * {
   border-radius: 100px !important;
   padding: 10px 30px !important;
   font-size: 16px !important;
+  min-width: 140px !important;
 }
 
 .mat-raised-button.mat-primary {
+  background-color: white;
+  color: rgba(0, 52, 89, 1);
+}
+
+.mat-raised-button.mat-secondary {
   background-color: rgba(0, 52, 89, 1);
-  color: rgba(41,207,245,1);
+  color: rgba(41, 207, 245, 1);
+}
+
+.mat-raised-button.mat-primary-blue {
+  background-color: rgba(41, 207, 245, 1);
+  color: rgba(0, 52, 89, 1);
+}
+.mat-raised-button.mat-primary-green {
+  background-color: rgba(73, 188, 161, 1);
+  color: rgba(17, 17, 17, 1);
+}
+.mat-raised-button.mat-primary-red {
+  background-color: rgba(255, 95, 99, 1);
+  color: rgba(17, 17, 17, 1);
+}
+.mat-raised-button.mat-primary-yellow {
+  background-color: rgba(254, 213, 70, 1);
+  color: rgba(17, 17, 17, 1);
+}
+
+.mat-raised-button.mat-primary[disabled] {
+  background-color: rgb(95, 95, 95);
+  color: black;
+}
+
+// dirty, but working
+.mat-yellow {
+  * {
+    stroke: #fed546 !important;
+  }
 }

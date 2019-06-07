@@ -2,7 +2,8 @@
   --card-width: calc(100vw - 20px);
   --card-height: calc(calc(var(--vh1, 1vh) * 100) - 20px);
   --card-max-width: 600px;
-  --card-color: #007a8e;
+  // --card-color: #007a8e;
+  background: #111111;
 }
 
 // .bg-img {
@@ -22,12 +23,18 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
 
   box-shadow: 2px 3px 14px 0px rgba(0, 0, 0, 0.75);
   border-radius: 10px;
   overflow: hidden;
 
   margin: 10px auto;
+
+  .logo {
+    max-width: 80vw;;
+    
+  }
 }
 
 .person-img-container {
@@ -45,7 +52,7 @@
   max-height: calc(var(--card-max-width) * 0.7);
   background-color: var(--card-color);
 
-  background: conic-gradient(green var(--progress-deg), red var(--progress-deg));
+  background: conic-gradient(#FED546 var(--progress-deg), #111111 var(--progress-deg));
 
   border-radius: 100%;
   padding: 10px;
@@ -62,6 +69,11 @@
     left: 0;
     object-fit: cover;
     margin: 10px;
+    background: #111111;
+    border:0;
+
+    display: none;
+
   }
 
   .loading-spinner {
@@ -92,10 +104,11 @@
   width: 100%;
   text-align: center;
   font-family: sans-serif;
+  color: white;
 }
 
 .bottom {
-  background-color: var(--card-color);
+  // background-color: var(--card-color);
   height: calc(var(--card-width) / 5);
   max-height: 120px;
   width: 100%;

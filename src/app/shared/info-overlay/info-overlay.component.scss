@@ -1,14 +1,41 @@
-
-.info-card {
-    max-width: 800px;
-    margin: auto;
+.top-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  height: calc(var(--vh1, 1vh) * 100);
+  background: black;
 }
 
-.mat-icon {
-    font-size: 40px;
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    color: #003459;
-    color: black;
+.container {
+  width: 80vw;
+  height: calc(var(--vh1, 1vh) * 100);
+  color: white;
+  margin: auto;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+
+  .title {
+  }
+
+  .image-container {
+    --image-url: url("./../../../assets/design/people1.jpg");
+
+    width: 60vw;
+    height: 60vw;
+    text-align: center;
+    border-radius: 100%;
+
+    background-image: var(--image-url);
+    background-size: cover;
+    background-position: center center;
+  }
+
+  .info {
+  }
 }

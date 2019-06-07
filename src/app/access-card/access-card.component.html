@@ -1,16 +1,13 @@
 <div class="bg-img">
   <main class="card-container">
-    <img src="assets/computas-logo.svg">
+    <img class="logo" src="assets/logo-white.svg">
     <div class=person-img-container>
       <div class="person-img-circle" #progressElement>
-        <!-- iOS safari needs playsinline... -->
         <video id="localVideo" #videoElement [srcObject]="ownStream" class="person-video" autoplay muted playsinline></video>
-        <!-- <img class="own-img" src="assets/profiles/christine.jpg"> -->
         <img class="own-img" #thyImg >
         <div class="loading-spinner" *ngIf="loadingResponse">
-            <mat-spinner></mat-spinner>
+            <mat-spinner color="yellow"></mat-spinner>
         </div>
-        <!-- <img src="assets/testUserImg.jpg" class="person-img"> -->
       </div>
     </div>
     <div class="person-name">{{username | async}}</div>
@@ -21,17 +18,16 @@
   </main>
 </div>
 
-
-
 <div class="intro-container" *ngIf="showIntroGeneral">
   <deg-info-overlay 
-    [title]="'Velkommen til Computas'" 
+    [title]="'Velkommen til Computas!'" 
     [subTitle]="'På tide å lage ID kortet'"
-    [imageUrl]="'assets/profiles/christine.jpg'" 
+    [imageUrl]="'assets/design/people1.jpg'" 
     [startButtonLabel]="'Jeg vil gjøre en forskjell!'"
     (startEE)="closeIntroGeneral()"
   >
-  Vi løser vi store samfunnsnyttige oppgaver med heftig teknologi. Løsningene forbedrer hverdagen for våre medmennesker, enten vi sikrer infrastrukturen i energisektoren eller sørger for mer tid til meningsfullt arbeid i det offentlige.
+  Vi løser store samfunnsnyttige oppgaver med heftig teknologi. Løsningene forbedrer hverdagen for våre medmennesker, enten vi sikrer infrastrukturen i energisektoren eller sørger for mer tid til meningsfullt arbeid i det offentlige. Teknologien for oss, er mest av alt et verktøy for å gjøre en forskjell. 
+
   </deg-info-overlay>
 </div>
 <div class="intro-container" *ngIf="showIntro">
