@@ -64,6 +64,12 @@ export class VictoryComponent implements OnInit, AfterViewInit {
 
   }
 
+  onClickCloseEffect() {
+    const bgColorCss = 'background: ' + this.getBgColor();
+    this.outroElement.nativeElement.style.cssText = 'display: flex;' + bgColorCss;
+    this.showEffect = false;
+  }
+
   getImageUrlForColor() {
     if (this.outroColor === 'green') {
       return 'winGreen.png';

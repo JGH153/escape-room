@@ -1,5 +1,5 @@
 
-<div class="outro-container" #outroElement>
+<div class="outro-container" (click)="onClickClose()" #outroElement>
     <div class="outro-title-container">
       <h1 class="title">{{outroTitle}}</h1>
     </div>
@@ -15,7 +15,7 @@
   <deg-lines-effect *ngIf="effectLines"></deg-lines-effect>
   <deg-logo-effect *ngIf="effectLogo"></deg-logo-effect>
   <deg-dna-effect *ngIf="effectDna"></deg-dna-effect>
-  <div class="message-container" (click)="onClickClose()" *ngIf="showText">
+  <div class="message-container" (click)="onClickCloseEffect()" *ngIf="showText">
     <div class="message">
       {{title}}
     </div>
