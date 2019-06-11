@@ -88,7 +88,7 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
   }
 
   logicTick(time) {
-    this.progressDeg += 2;
+    this.progressDeg += 3;
     if (this.progressDeg > 360) {
       this.progressDeg = 0;
 
