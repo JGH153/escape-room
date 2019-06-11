@@ -31,7 +31,7 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
 
   loadingResponse = false;
   tempResponse = '';
-  activeEmojions = '😠';
+  activeEmojions = '';
 
   progressDeg = 360 / 2;
   noSmileTimes = 0;
@@ -74,21 +74,27 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
         this.video.nativeElement.srcObject = stream;
       },
         error => {
+          this.ifNoCamera();
           console.warn('can\'t get media!');
           console.warn(error);
         });
     }
 
-    if (!this.noCamera) {
-      this.timerSub = this.myTimer.subscribe({ next: this.logicTick.bind(this) });
-    }
+    this.timerSub = this.myTimer.subscribe({ next: this.logicTick.bind(this) });
+  }
+
+  hasCamera() {
+    return !this.noCamera;
   }
 
   logicTick(time) {
     this.progressDeg += 2;
     if (this.progressDeg > 360) {
       this.progressDeg = 0;
-      this.grabImage();
+
+      if (this.hasCamera()) {
+        this.grabImage();
+      }
 
       // max images
       this.imagesChecked++;
@@ -126,6 +132,8 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
     // / image.id = 'pic';
     this.renderer.setStyle(this.thyImg.nativeElement, 'display', 'block');
     this.thyImg.nativeElement.src = myCanvas.toDataURL();
+
+    this.masterService.setOwnImage(myCanvas.toDataURL());
   }
 
   // https://developers.google.com/web/updates/2016/12/imagecapture

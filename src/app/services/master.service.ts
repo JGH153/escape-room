@@ -20,6 +20,8 @@ export class MasterService {
   public userId = ''; // userId is document id in scoreboard
   public username = new BehaviorSubject<string>('');
 
+  public ownImageDataUrl;
+
   private readonly userIdKey = 'userId';
 
   constructor(private router: Router, private firestore: AngularFirestore) {
@@ -29,10 +31,14 @@ export class MasterService {
       this.userId = localStorageUserId;
       this.loadUser();
     } else {
-      // this.router.navigate(['login']);
+      // this.router.navigate(['login']); TODO re-add
       this.setIsLoading(false);
     }
 
+  }
+
+  public setOwnImage(imageDataUrl: string) {
+    this.ownImageDataUrl = imageDataUrl;
   }
 
   public getRandomWinner() {

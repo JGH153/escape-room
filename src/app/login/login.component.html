@@ -28,7 +28,7 @@
         </mat-checkbox>
         <div class="checkbox-seperator"></div>
         
-        <mat-checkbox class="comic-checkbox" name="comic" [ngModel]="wantComic" (change)="comicCheckToggle()">
+        <mat-checkbox *ngIf="isWindows" class="comic-checkbox" name="comic" [ngModel]="wantComic" (change)="comicCheckToggle()">
           Jeg vil ha alt i Comic Sans
         </mat-checkbox>
 

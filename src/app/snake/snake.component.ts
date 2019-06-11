@@ -192,7 +192,7 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
   }
 
   gotoNextTask() {
-    this.masterService.gotoStage(Stages.Autocode);
+    this.masterService.gotoStage(Stages.Memory);
   }
 
   setShowOutro() {

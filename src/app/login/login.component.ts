@@ -14,6 +14,8 @@ export class LoginComponent implements OnInit {
   wantComic = false;
   username = '';
 
+  isWindows = (navigator.appVersion.indexOf('Win') !== -1);
+
   constructor(private masterService: MasterService, private router: Router) { }
 
   ngOnInit() {
