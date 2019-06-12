@@ -3,6 +3,9 @@
 @import "~normalize.css/normalize.css";
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+// $fa-font-path: "~font-awesome/fonts";
+// @import '~font-awesome/scss/font-awesome';
+
 * {
   box-sizing: border-box;
   // font-family: "Comic Sans MS", cursive, sans-serif !important;
@@ -14,7 +17,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.849);
+  background: rgba(0, 0, 0, 1);
   padding: 20px;
 }
 
@@ -23,6 +26,7 @@
   --font: "Open Sans", sans-serif;
   * {
     font-family: var(--font);
+    font-size: 15px;
     // font-family: 'Open Sans', sans-serif;
   }
 }
@@ -37,7 +41,8 @@ router-outlet ~ * {
   border-radius: 100px !important;
   padding: 10px 30px !important;
   font-size: 16px !important;
-  min-width: 240px !important;
+  min-width: 170px !important;
+  font-weight: 600;
 }
 
 .mat-raised-button.mat-primary {
@@ -86,4 +91,25 @@ router-outlet ~ * {
   * {
     stroke: #fed546 !important;
   }
+}
+
+
+/* unvisited link */
+a:link {
+  color: rgba(73,188,161,1);
+}
+
+/* visited link */
+a:visited {
+  color: rgba(73,188,161,1);
+}
+
+/* mouse over link */
+a:hover {
+  color: rgba(255, 95, 99, 1);
+}
+
+/* selected link */
+a:active {
+  color: rgba(73,188,161,1);
 }

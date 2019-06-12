@@ -19,6 +19,7 @@ export class MasterService {
   public isLoading = new BehaviorSubject<boolean>(true);
   public userId = ''; // userId is document id in scoreboard
   public username = new BehaviorSubject<string>('');
+  public startTime; // = subMinutes(new Date(), 2);
 
   public ownImageDataUrl;
 
@@ -66,7 +67,14 @@ export class MasterService {
     ).doc(this.userId).get().subscribe(doc => {
       // TODO what if not found
       // this.gotoCorrectStage(doc.data().stageCompleted + 1 as Stages);
-      this.username.next(doc.data().name);
+
+      console.log(doc.exists);
+      if (doc.exists) {
+        this.username.next(doc.data().name);
+      } else {
+        localStorage.removeItem(this.userIdKey);
+      }
+
       this.setIsLoading(false);
     });
   }
@@ -104,7 +112,7 @@ export class MasterService {
       completed: false,
       name: username,
       score: 0,
-      stageCompleted: Stages.Login
+      currentStage: Stages.AccessCard
     }).then(() => {
       this.setIsLoading(false);
       this.username.next(username);
@@ -127,12 +135,12 @@ export class MasterService {
     }
 
     let dataToSave: Partial<ScoreboardElement> = {
-      stageCompleted: newStage
+      currentStage: newStage,
     };
     if (newStage === Stages.End) {
       const durationTimeSec = 1337; // TODO
       dataToSave = {
-        stageCompleted: newStage,
+        currentStage: newStage,
         endTime: new Date().toISOString(),
         endTimeUnix: this.getUnixTime(new Date()),
         durationTimeSec,
@@ -145,10 +153,21 @@ export class MasterService {
     this.firestore.collection<ScoreboardElement>(
       'scoreboard'
     ).doc(docId).set(dataToSave, { merge: true }).then(() => {
-      this.setIsLoading(false);
-      this.gotoCorrectStage(newStage);
+      this.firestore.collection<ScoreboardElement>(
+        'scoreboard'
+      ).doc(this.userId).get().subscribe(doc => {
+        this.startTime = doc.data().startTime;
+        this.setIsLoading(false);
+        this.gotoCorrectStage(newStage);
+      });
     });
+
   }
+
+  public getStartTime() {
+    return this.startTime;
+  }
+
 
   public setDeviceCameraId(id: string) {
     if (!this.userId) {

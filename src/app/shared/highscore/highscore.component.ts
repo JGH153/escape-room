@@ -1,16 +1,17 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Observable, timer, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AngularFirestore, Query } from '@angular/fire/firestore';
 import { ScoreboardElement } from 'src/app/models/scoreboard';
 import { MasterService } from 'src/app/services/master.service';
+import { Stages } from 'src/app/models/stages';
 
 @Component({
   selector: 'deg-highscore',
   templateUrl: './highscore.component.html',
   styleUrls: ['./highscore.component.scss']
 })
-export class HighscoreComponent implements OnInit {
+export class HighscoreComponent implements OnInit, OnDestroy {
 
   @Input() onlyCompleted = false;
   @Input() onlyOngoing = false; // also only started less that 30 min ago. TODO text somewhere?
@@ -18,6 +19,9 @@ export class HighscoreComponent implements OnInit {
   highscores: Observable<ScoreboardElement[]>;
   displayedColumns: string[] = [];
   highscoreName = '';
+
+  nowTime = new Date();
+  timerSub: Subscription;
 
   constructor(private firestore: AngularFirestore, private masterService: MasterService) { }
 
@@ -37,6 +41,19 @@ export class HighscoreComponent implements OnInit {
     }
 
     console.log(this.displayedColumns);
+
+    this.timerSub = timer(0, 1000).subscribe({
+      next: (tick => {
+        this.nowTime = new Date();
+      })
+    });
+
+  }
+
+  ngOnDestroy() {
+    if (this.timerSub) {
+      this.timerSub.unsubscribe();
+    }
   }
 
   createQuery(reference: Query) {
@@ -44,6 +61,7 @@ export class HighscoreComponent implements OnInit {
     if (this.onlyCompleted) {
       reference = reference
         .where('completed', '==', true)
+        .where('currentStage', '==', Stages.End)
         .orderBy('startTime', 'desc')
         .limit(10);
     } else if (this.onlyOngoing) {

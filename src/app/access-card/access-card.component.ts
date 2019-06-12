@@ -21,8 +21,8 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
   ownStream: MediaStream = null;
   username;
 
-  showIntroGeneral = true;
-  showIntro = false;
+  // showIntroGeneral = true;
+  showIntro = true;
   noCamera = false;
   showOutro = false;
 
@@ -215,11 +215,9 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
     this.getUserMedia();
   }
 
-  closeIntroGeneral() {
-    this.showIntro = true;
-    this.showIntroGeneral = false;
-  }
-
-  // TODO use WebRTC to get image live and send to google and crop to face!
+  // closeIntroGeneral() {
+  //   this.showIntro = true;
+  //   this.showIntroGeneral = false;
+  // }
 
 }

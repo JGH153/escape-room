@@ -6,7 +6,7 @@ export interface ScoreboardElement {
     startTimeUnix: number;
     name: string;
     score: number;
-    stageCompleted: number;
+    currentStage: number;
     durationTimeSec: number;
     cameraDeviceId?: string;
 }

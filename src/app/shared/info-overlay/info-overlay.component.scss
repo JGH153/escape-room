@@ -5,7 +5,7 @@
   width: 100vw;
   height: 100vh;
   height: calc(var(--vh1, 1vh) * 100);
-  background: black;
+  // background: black;
 }
 
 .container {
@@ -21,6 +21,8 @@
   align-items: center;
 
   .title {
+    font-weight: bold;
+    font-size: 45px;
   }
 
   .image-container {

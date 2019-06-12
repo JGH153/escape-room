@@ -46,6 +46,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { TimeDiffPipe } from './shared/highscore/pipes/time-diff.pipe';
 import { GameIntroComponent } from './shared/game-intro/game-intro.component';
 import { AdminComponent } from './admin/admin.component';
+import { WinPopupComponent } from './game-end/win-popup/win-popup.component';
+import { ConfettiEffectComponent } from './shared/confetti-effect/confetti-effect.component';
+import { StageNamePipe } from './shared/highscore/pipes/stage-name.pipe';
+import { HighscoreLineComponent } from './shared/highscore/highscore-line/highscore-line.component';
 
 const matImports = [
    MatCardModule,
@@ -86,7 +90,11 @@ const matImports = [
       DnaEffectComponent,
       TimeDiffPipe,
       GameIntroComponent,
-      AdminComponent
+      AdminComponent,
+      WinPopupComponent,
+      ConfettiEffectComponent,
+      StageNamePipe,
+      HighscoreLineComponent
    ],
    entryComponents: [],
    imports: [

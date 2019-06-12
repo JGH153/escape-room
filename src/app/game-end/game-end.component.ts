@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MasterService } from '../services/master.service';
 
 @Component({
   selector: 'deg-game-end',
@@ -12,7 +13,9 @@ export class GameEndComponent implements OnInit {
 
   canShare = false;
 
-  constructor() {
+  startTime;
+
+  constructor(private masterService: MasterService) {
     if ((navigator as any).share) {
       this.canShare = true;
     } else {
@@ -21,6 +24,7 @@ export class GameEndComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.startTime = this.masterService.getStartTime();
   }
 
   closeIntro() {

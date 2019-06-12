@@ -18,19 +18,21 @@
   </main>
 </div>
 
-<div class="intro-container" *ngIf="showIntroGeneral">
+<div class="intro-container" *ngIf="showIntro">
   <deg-info-overlay 
     [title]="'Velkommen til Computas!'" 
     [subTitle]="'På tide å lage ID kortet'"
     [imageUrl]="'assets/design/people1.jpg'" 
     [startButtonLabel]="'Jeg vil gjøre en forskjell!'"
-    (startEE)="closeIntroGeneral()"
+    (startEE)="closeIntro()"
   >
   Vi løser store samfunnsnyttige oppgaver med heftig teknologi. Løsningene forbedrer hverdagen for våre medmennesker, enten vi sikrer infrastrukturen i energisektoren eller sørger for mer tid til meningsfullt arbeid i det offentlige. Teknologien for oss, er mest av alt et verktøy for å gjøre en forskjell. 
 
+  Før du starter må du få adgangskort - ta bilde av deg selv
+
   </deg-info-overlay>
 </div>
-<div class="intro-container" *ngIf="showIntro">
+<!-- <div class="intro-container" *ngIf="showIntro">
   <deg-info-overlay 
     [title]="'På tide å lage ID-kort'" 
     [subTitle]="'På tide å lage ID kortet'"
@@ -40,7 +42,7 @@
   >
   Før du starter må du få adgangskort - ta bilde av deg selv
   </deg-info-overlay>
-</div>
+</div> -->
 
 <deg-victory (closedEE)="gotoNextTask()" [effectLines]="true" [title]="'Herlig!'" *ngIf="showOutro" [outroTitle]="'Herlig!'" [outroColor]="'yellow'">
   Nå fikk vil laget deg et flott ID kort

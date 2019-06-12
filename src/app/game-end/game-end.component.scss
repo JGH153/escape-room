@@ -1,19 +1,59 @@
-
 .container {
-    background: #16a085;
+  background: #16a085;
 
-    width: 100vw;
-    height: 100vh;
-    height: calc(var(--vh1, 1vh) * 100);
-    // background-image: url('./../../assets/start.jpg');
-    background-size: cover;
-    background-color: #29CFF5;
-    background-position: center center;
+  width: 100vw;
+  height: 100vh;
+  height: calc(var(--vh1, 1vh) * 100);
+  // background-image: url('./../../assets/start.jpg');
+  background-size: cover;
+  background-color: #111111;
+  background-position: center center;
 
-    padding: 20px;
+  color: white;
 
-    .title {
-        text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+
+  .title {
+    text-align: center;
+    letter-spacing: 0.2px;
+    font-size: 45px;
+    font-weight: bold;
+  }
+
+  .logo {
+    max-width: 40vw;
+    .logo-img {
+        width: 100%;
+        height: 100%;;
     }
+  }
+
+  .text {
+      text-align: center;
+    max-width: 80vw;
+  }
+
+  .buttons {
+
+  }
+
 }
 
+
+.user {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  min-height: 65px;
+  .name {
+    font-weight: bold;
+  }
+  .time {
+    font-size: 30px;
+  }
+}

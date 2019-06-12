@@ -105,6 +105,9 @@ export class FindQrCodeComponent implements OnInit, AfterContentInit, OnDestroy 
   }
 
   qrClicked() {
+    // TEMP
+    // this.masterService.gotoStage(Stages.End);
+
     const durationInSeconds = 3;
     this.snackBar.open(
       'Tip! Det kan hende du finner kode der du startet !',

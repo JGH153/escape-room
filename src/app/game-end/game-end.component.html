@@ -2,27 +2,49 @@
 <!-- <deg-dna-effect *ngIf="showOutro"></deg-dna-effect> -->
 
 <div class="container">
-    <h1 class="title">Seier!</h1>
-    <p>
-        Gratulere, du vant! Din score er automatisk sendt inn. Vil du jobbe med kule ting? Meld interesse med
-        <a href="https://koble.events/6324">koble.events/6324</a>
-    </p>
-    <p *ngIf="canShare">
-        <button mat-raised-button color="primary" class="start-button" (click)="share()">share!</button>
-    </p>
+    <h1 class="title">Velkommen til Computas!</h1>
 
-    <h2 class="title">Highscore</h2>
-    <div>
-        <deg-highscore [onlyCompleted]="true"></deg-highscore>
+    <div class="logo">
+        <img src="assets/Computaspacman.gif" class="logo-img">
     </div>
 
+    <div class="text">
+        Du er nå en av Norges fremste ekspert på sky, AI og maskinlæring!
+        <br><br>
+        Gjennom spillet har du nå fått et innblikk i våre prosjekter. Vil du vite mer om hva vi jobber med eller hva vi
+        kan gjøre for deg? Kom innom og hils på oss på stand eller besøk vår nettside <a
+            href="https://computas.com/">computas.com</a>
+    </div>
 
+    <div class="buttons">
+        <a href="https://koble.events/6324">
+            <button mat-raised-button color="primary-blue" class="start-button">Søk hos oss</button>
+        </a>
+    </div>
 
 </div>
+
+<!-- <deg-win-popup></deg-win-popup> -->
+
+<!-- <a href="https://koble.events/6324">koble.events/6324</a> -->
+<!-- <p *ngIf="canShare">
+    <button mat-raised-button color="primary" class="start-button" (click)="share()">share!</button>
+</p> -->
+
 <div class="intro-container" *ngIf="showIntro">
-    <deg-info-overlay [title]="'Gratulere, du vant!'" [subTitle]="'Dette var kult'" [imageUrl]="'assets/profiles/1.jpg'"
-        [startButtonLabel]="'La meg se hvordan jeg ligger an'" (startEE)="closeIntro()">
-        Gratulerer, du er nå en av Norges fremste ekspert på sky, AI og maskinlæring. Gjennom spillet har du nå fått et innblikk i våre prosjekter. om du vil vite mer om hva vi jobber med (lenke til prosjekter, computas.com) eller hva vi kan gjøre for deg? Kom innom oss på stand eller meld din interesse her (lenke til koble).  (lenke til ledige stillinger, computas.com). 
+    <deg-confetti-effect></deg-confetti-effect>
+    <deg-info-overlay [title]="'Gratulere!'" [imageUrl]="'assets/testUserImg.jpg'" [startButtonLabel]="'Fortsett'"
+        (startEE)="closeIntro()">
+
+        <div class="user">
+            <div class="name">Greger</div>
+            <div class="time">{{startTime | timeDiff}}</div>
+        </div>
+
+        <ng-container *ngIf="canShare">
+            <br><br>
+            <button mat-raised-button color="secondary" class="start-button" (click)="share()">Share</button>
+        </ng-container>
 
     </deg-info-overlay>
 </div>
