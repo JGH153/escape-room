@@ -68,7 +68,6 @@ export class MasterService {
       // TODO what if not found
       // this.gotoCorrectStage(doc.data().stageCompleted + 1 as Stages);
 
-      console.log(doc.exists);
       if (doc.exists) {
         this.username.next(doc.data().name);
       } else {

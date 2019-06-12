@@ -35,7 +35,6 @@ import { GameEndComponent } from './game-end/game-end.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { InfoOverlayComponent } from './shared/info-overlay/info-overlay.component';
 import { MemoryComponent } from './memory/memory.component';
-import { HighscoreComponent } from './shared/highscore/highscore.component';
 import { HighscorePageComponent } from './highscore-page/highscore-page.component';
 import { VictoryComponent } from './shared/victory/victory.component';
 import { FireworkEffectComponent } from './shared/victory/firework-effect/firework-effect.component';
@@ -43,13 +42,17 @@ import { LinesEffectComponent } from './shared/victory/lines-effect/lines-effect
 import { LogoEffectComponent } from './shared/victory/logo-effect/logo-effect.component';
 import { DnaEffectComponent } from './shared/victory/dna-effect/dna-effect.component';
 import { HttpClientModule } from '@angular/common/http';
-import { TimeDiffPipe } from './shared/highscore/pipes/time-diff.pipe';
 import { GameIntroComponent } from './shared/game-intro/game-intro.component';
 import { AdminComponent } from './admin/admin.component';
 import { WinPopupComponent } from './game-end/win-popup/win-popup.component';
 import { ConfettiEffectComponent } from './shared/confetti-effect/confetti-effect.component';
-import { StageNamePipe } from './shared/highscore/pipes/stage-name.pipe';
-import { HighscoreLineComponent } from './shared/highscore/highscore-line/highscore-line.component';
+import { HighscoreTopComponent } from './shared/highscore-top/highscore-top.component';
+import { HighscoreOngoingComponent } from './shared/highscore-ongoing/highscore-ongoing.component';
+import { StageNamePipe } from './shared/highscore-ongoing/pipes/stage-name.pipe';
+import { HighscoreLineComponent } from './shared/highscore-ongoing/highscore-line/highscore-line.component';
+import { TimeDiffSecPipe } from './shared/highscore-ongoing/pipes/time-diff-sec.pipe';
+import { TimeDiffMinPipe } from './shared/highscore-ongoing/pipes/time-diff-min.pipe';
+import { HighscoreTimeComponent } from './shared/highscore-time/highscore-time.component';
 
 const matImports = [
    MatCardModule,
@@ -76,7 +79,7 @@ const matImports = [
       SnakeComponent,
       AutoCodeComponent,
       FindQrCodeComponent,
-      HighscoreComponent,
+      HighscoreOngoingComponent,
       HighscorePageComponent,
       LoginComponent,
       GameEndComponent,
@@ -88,13 +91,16 @@ const matImports = [
       LinesEffectComponent,
       LogoEffectComponent,
       DnaEffectComponent,
-      TimeDiffPipe,
+      TimeDiffSecPipe,
+      TimeDiffMinPipe,
       GameIntroComponent,
       AdminComponent,
       WinPopupComponent,
       ConfettiEffectComponent,
       StageNamePipe,
-      HighscoreLineComponent
+      HighscoreLineComponent,
+      HighscoreTopComponent,
+      HighscoreTimeComponent
    ],
    entryComponents: [],
    imports: [

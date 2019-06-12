@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'timeDiff'
+  name: 'timeDiffMin'
 })
-export class TimeDiffPipe implements PipeTransform {
+export class TimeDiffMinPipe implements PipeTransform {
 
   transform(startTime: any, endTime?: any): any {
     endTime = new Date(endTime);
@@ -14,8 +14,7 @@ export class TimeDiffPipe implements PipeTransform {
       diffInSec = (endTime.getTime() - startTime.getTime()) / 1000;
     }
     const diffMinutes = Math.floor(diffInSec / 60);
-    const remainingDiffSec = Math.floor(diffInSec - (diffMinutes * 60));
-    return diffMinutes + 'min' + ' ' + remainingDiffSec + 'sek';
+    return diffMinutes;
   }
 
 }

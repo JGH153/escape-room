@@ -1,10 +1,12 @@
 <div class="page-container">
   <div class="highscore-container">
-    <div class="highscore-column">
-      <deg-highscore [onlyCompleted]="true"></deg-highscore>
+    <div class="highscore-top">
+      <h1 class="title">Top 10</h1>
+      <deg-highscore-top></deg-highscore-top>
     </div>
-    <div class="highscore-column">
-      <deg-highscore [onlyOngoing]="true"></deg-highscore>
+    <div class="highscore-ongoing">
+      <h1 class="title">Highscore <span class="yellow">Live</span></h1>
+      <deg-highscore-ongoing></deg-highscore-ongoing>
     </div>
   </div>
 </div>

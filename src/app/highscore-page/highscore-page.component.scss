@@ -1,24 +1,57 @@
-
 .page-container {
-    width: 100vw;
-    height: 100vh;
+  width: 100vw;
+  height: 100vh;
 
-    // background-image: url('./../../assets/memoryBG.png');
-    background-size: cover;
-    background-color: #15CFA9;
-    background-position: center 25%;
+  // background-image: url('./../../assets/memoryBG.png');
+  background-size: cover;
+  background-color: black;
+  background-position: center 25%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .highscore-container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: row;
-}
+  width: 95vw;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
 
-.highscore-column {
-    width: calc(50vw);
+  color: white;
+
+  .highscore-top,
+  .highscore-ongoing {
     height: calc(100vh - 20px);
     padding: 10px;
     overflow-y: auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .highscore-top {
+    width: calc(40vw);
+  }
+
+  .highscore-ongoing {
+    width: calc(60vw);
+  }
+
+  deg-highscore-top, deg-highscore-ongoing {
+    width: 100%;
+  }
+
+  .title {
+    font-size: 43px;
+    letter-spacing: 0.5px;
+    text-align: center;
+    .yellow {
+      color: #fed546;
+      font-size: 43px;
+      letter-spacing: 0.5px;
+      text-align: center;
+    }
+  }
 }

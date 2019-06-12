@@ -1,0 +1,29 @@
+<h2 class="level-title">Level</h2>
+
+<div class="header-container">
+  <div class="header">
+    <div class="header-stage">1</div>
+    <div class="header-stage">2</div>
+    <div class="header-stage">3</div>
+    <div class="header-stage">4</div>
+    <div class="header-stage">5</div>
+    <div class="header-stage">6</div>
+    <div class="header-stage">7</div>
+  </div>
+</div>
+
+<!-- <deg-highscore-line [stage]="1"></deg-highscore-line>
+<deg-highscore-line [stage]="2"></deg-highscore-line>
+<deg-highscore-line [stage]="3"></deg-highscore-line>
+<deg-highscore-line [stage]="4"></deg-highscore-line>
+<deg-highscore-line [stage]="5"></deg-highscore-line>
+<deg-highscore-line [stage]="6"></deg-highscore-line>
+<deg-highscore-line [stage]="7"></deg-highscore-line> -->
+
+<ng-container *ngIf="highscores | async as highscores">
+  <ng-container *ngFor="let highscore of highscores">
+    <deg-highscore-line [name]="highscore.name" [stage]="highscore.currentStage ">
+      <deg-highscore-time [startTime]="highscore.startTime" [endTime]="highscore.endTime" [nowTime]="nowTime"></deg-highscore-time>
+    </deg-highscore-line>
+  </ng-container>
+</ng-container>

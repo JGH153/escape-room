@@ -12,8 +12,9 @@ export class InfoOverlayComponent implements OnInit, AfterViewInit {
   @Input() imageUrl = '';
   @Input() startButtonLabel = '';
   @Input() buttonColor = 'blue';
+  @Input() imageData = '';
 
-  @ViewChild('imageElement', {static: true}) imageElement;
+  @ViewChild('imageElement', { static: true }) imageElement;
 
   @Output() startEE = new EventEmitter<boolean>();
 
@@ -23,7 +24,11 @@ export class InfoOverlayComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.imageElement.nativeElement.style.cssText = '--image-url:  url("./../../../' + this.imageUrl + '");';
+    if (this.imageData) {
+      this.imageElement.nativeElement.style.cssText = '--image-url:  url("' + this.imageData + '");';
+    } else {
+      this.imageElement.nativeElement.style.cssText = '--image-url:  url("./../../../' + this.imageUrl + '");';
+    }
   }
 
   closeIntro() {

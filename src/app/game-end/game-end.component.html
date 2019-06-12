@@ -33,12 +33,14 @@
 
 <div class="intro-container" *ngIf="showIntro">
     <deg-confetti-effect></deg-confetti-effect>
-    <deg-info-overlay [title]="'Gratulere!'" [imageUrl]="'assets/testUserImg.jpg'" [startButtonLabel]="'Fortsett'"
+    <deg-info-overlay [title]="'Gratulere!'" [imageUrl]="'assets/testUserImg.jpg'" [imageData]="imageData" [startButtonLabel]="'Fortsett'"
         (startEE)="closeIntro()">
 
         <div class="user">
             <div class="name">Greger</div>
-            <div class="time">{{startTime | timeDiff}}</div>
+            <div class="time">
+                <deg-highscore-time [startTime]="startTime"></deg-highscore-time>
+            </div>
         </div>
 
         <ng-container *ngIf="canShare">

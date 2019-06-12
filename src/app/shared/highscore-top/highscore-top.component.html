@@ -1,0 +1,11 @@
+<div class="container" *ngIf="highscores | async as highscores">
+  <div class="score-line" *ngFor="let highscore of highscores">
+
+    <div class="number">1</div>
+    <div class="name">Grteger</div>
+    <div class="time">
+      <deg-highscore-time [startTime]="highscore.startTime" [endTime]="highscore.endTime"></deg-highscore-time>
+    </div>
+
+  </div>
+</div>

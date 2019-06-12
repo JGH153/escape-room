@@ -134,6 +134,7 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
     this.thyImg.nativeElement.src = myCanvas.toDataURL();
 
     this.masterService.setOwnImage(myCanvas.toDataURL());
+
   }
 
   // https://developers.google.com/web/updates/2016/12/imagecapture
@@ -145,7 +146,7 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
     const videoW = this.ownStream.getTracks()[0].getSettings().width;
     const videoH = this.ownStream.getTracks()[0].getSettings().height;
 
-    const targetWidth = 300;
+    const targetWidth = 400;
     const diffFactor = videoW / targetWidth;
 
     const outputWidth = targetWidth;

@@ -7,18 +7,13 @@ import { MasterService } from 'src/app/services/master.service';
 import { Stages } from 'src/app/models/stages';
 
 @Component({
-  selector: 'deg-highscore',
-  templateUrl: './highscore.component.html',
-  styleUrls: ['./highscore.component.scss']
+  selector: 'deg-highscore-ongoing',
+  templateUrl: './highscore-ongoing.component.html',
+  styleUrls: ['./highscore-ongoing.component.scss']
 })
-export class HighscoreComponent implements OnInit, OnDestroy {
-
-  @Input() onlyCompleted = false;
-  @Input() onlyOngoing = false; // also only started less that 30 min ago. TODO text somewhere?
+export class HighscoreOngoingComponent implements OnInit, OnDestroy {
 
   highscores: Observable<ScoreboardElement[]>;
-  displayedColumns: string[] = [];
-  highscoreName = '';
 
   nowTime = new Date();
   timerSub: Subscription;
@@ -31,16 +26,6 @@ export class HighscoreComponent implements OnInit, OnDestroy {
       'scoreboard',
       (reference => this.createQuery(reference))
     ).snapshotChanges().pipe(map(stream => this.mapStream(stream)));
-
-    if (this.onlyCompleted) {
-      this.displayedColumns = ['name', 'stage', 'time'];
-      this.highscoreName = 'Fullførte';
-    } else if (this.onlyOngoing) {
-      this.displayedColumns = ['name', 'stage', 'time'];
-      this.highscoreName = 'Pågående';
-    }
-
-    console.log(this.displayedColumns);
 
     this.timerSub = timer(0, 1000).subscribe({
       next: (tick => {
@@ -58,22 +43,18 @@ export class HighscoreComponent implements OnInit, OnDestroy {
 
   createQuery(reference: Query) {
 
-    if (this.onlyCompleted) {
-      reference = reference
-        .where('completed', '==', true)
-        .where('currentStage', '==', Stages.End)
-        .orderBy('startTime', 'desc')
-        .limit(10);
-    } else if (this.onlyOngoing) {
-      reference = reference
-        .where('completed', '==', false)
-        .where('startTimeUnix', '>', this.masterService.getUnix30MinAgo())
-        .orderBy('startTimeUnix', 'desc')
-        .limit(10);
-    } else {
-      reference = reference.orderBy('startTime', 'desc');
-    }
-    return reference;
+    // if (this.onlyCompleted) {
+    //   reference = reference
+    //     .where('completed', '==', true)
+    //     .where('currentStage', '==', Stages.End)
+    //     .orderBy('startTime', 'desc')
+    //     .limit(10);
+
+    return reference
+      .where('completed', '==', false)
+      // .where('startTimeUnix', '>', this.masterService.getUnix30MinAgo())
+      .orderBy('startTimeUnix', 'desc')
+      .limit(10);
 
   }
 

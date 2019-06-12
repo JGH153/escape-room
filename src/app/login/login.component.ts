@@ -34,4 +34,15 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  whoMadeIt() {
+    alert(`Laget av:
+Jan Greger Hemb
+Hilde Iren Breivik
+Charlotte Jenssen
+Caroline Helmersen
+John Sætrang
+Marcus Wærsted Skogsaas
+    `);
+  }
+
 }

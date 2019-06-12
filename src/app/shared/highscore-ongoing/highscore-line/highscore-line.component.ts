@@ -15,11 +15,7 @@ export class HighscoreLineComponent implements OnInit, AfterContentInit {
   constructor() { }
 
   ngOnInit() {
-    console.log('re-done');
-    // setInterval(() => {
-    //   this.stage++;
-    //   console.log(this.stage);
-    // }, 1000);
+
   }
 
   ngAfterContentInit() {
@@ -27,7 +23,6 @@ export class HighscoreLineComponent implements OnInit, AfterContentInit {
   }
 
   getPrecentageProgress() {
-    console.log(this.stage);
     if (this.stage === Stages.Login) {
       return '1%';
     }
