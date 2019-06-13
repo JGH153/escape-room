@@ -38,7 +38,7 @@ export class HighscoreTopComponent implements OnInit, OnDestroy {
     return reference
       // .where('completed', '==', true)
       // .where('currentStage', '==', Stages.End)
-      .orderBy('startTime', 'desc')
+      .orderBy('durationTimeSec', 'desc')
       .limit(10);
   }
 

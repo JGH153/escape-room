@@ -57,7 +57,6 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
 
   showIntro = true;
   hasChangedMoveDir = false;
-  showOutro = false;
   showWin = false;
   stopDrawing = false;
 
@@ -65,7 +64,7 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
   snakeHeadPos: GridPos = { x: this.numBlocsWidth / 2, y: this.numBlocsHeight / 2 };
   snakeLength = 1;
   snakeFrame = 0;
-  targetSnakeLength = 4;
+  targetSnakeLength = 3;
   snakeBody: Array<GridPos> = [
     // { ...this.snakeHeadPos, x: this.snakeHeadPos.x - 1 },
     // { ...this.snakeHeadPos, x: this.snakeHeadPos.x - 2 },
@@ -193,11 +192,6 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
 
   gotoNextTask() {
     this.masterService.gotoStage(Stages.Memory);
-  }
-
-  setShowOutro() {
-    this.showWin = false;
-    this.showOutro = true;
   }
 
   openHelpSnackBar() {

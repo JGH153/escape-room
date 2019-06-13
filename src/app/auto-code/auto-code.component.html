@@ -13,16 +13,15 @@
 
 <div class="intro-container" *ngIf="showIntro">
     <deg-info-overlay 
-        [title]="'Du er nå ekspert!'" 
-        [subTitle]="'Nå skal det kodes!'"
+        [title]="'Hei, eksperten!'" 
         [imageUrl]="'assets/design/kode.jpg'" 
-        [startButtonLabel]="'Start koding!'"
+        [startButtonLabel]="'Gi meg utfordringen!'"
         (startEE)="closeIntro()"
     >
-    Din kompetanse er høyt verdsatt og du får nå en ekspertrolle i Computas. Du skal nå utvikle en automatisert løsning for en stor virksomhet i offentlig sektor!
+    Du har høy, verdsatt kompetanse, og er nå ekspert! Vi vil at du hjelper oss å utvikle en automatisert løsning for en virksomhet i offentlig sektor. 
     </deg-info-overlay>
 </div>
 
-<deg-victory (closedEE)="gotoNextTask()" [effectLogo]="true" [title]="'Seier!'" *ngIf="showOutro" [noSkipIntro]="true" [outroTitle]="'Gratulerer!'" [outroColor]="'blue'">
-    Du har nå bidratt til at teknologien tar seg av det enkle og rutinemessige, så de ansatte i det offentlige kan bruke tiden sin på saker som krever hjerte og hjerne, innsikt og omsorg.
+<deg-victory (closedEE)="gotoNextTask()" [effectLogo]="true" [title]="'Hurra!'" *ngIf="showOutro" [noSkipIntro]="true" [outroTitle]="'Gratulerer!'" [outroColor]="'blue'">
+    Du har bidratt til at teknologien tar seg av rutineoppgaver, så ansatte i det offentlige kan bruke mer tid på saker som krever hjerte, hjerne, innsikt og omsorg. Da kan du sove godt om natten! 
 </deg-victory>

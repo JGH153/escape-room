@@ -16,12 +16,11 @@
 <div class="intro-container" *ngIf="showIntro">
     <deg-info-overlay 
         [title]="'Velkommen hjem!'" 
-        [subTitle]="'Vise deg frem for sjæfen sjør'"
         [imageUrl]="'assets/design/people4.jpg'" 
-        [startButtonLabel]="'Ta meg hjem!'"
+        [startButtonLabel]="'Ta meg hjem'"
         (startEE)="closeIntro()"
         [buttonColor]="'yellow'"
     >
-    Vi samles ofte til både fagdager, meetups og hackatons. Akersgata er et samlingspunkt for oss, og det er sjeldent det er tomt på huset. Finn QR koden for å avslutte.
+    Akersgata er et samlingspunkt hvor vi møtes til fagdager, meetups og hackatons! Finn QR koden for å avslutte. Et lite hint: Vi liker å samles! 
     </deg-info-overlay>
 </div>

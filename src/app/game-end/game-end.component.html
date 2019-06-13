@@ -9,16 +9,15 @@
     </div>
 
     <div class="text">
-        Du er nå en av Norges fremste ekspert på sky, AI og maskinlæring!
-        <br><br>
-        Gjennom spillet har du nå fått et innblikk i våre prosjekter. Vil du vite mer om hva vi jobber med eller hva vi
-        kan gjøre for deg? Kom innom og hils på oss på stand eller besøk vår nettside <a
-            href="https://computas.com/">computas.com</a>
+        Du har nå fått innblikk i noen av våre prosjekter. Du har kanskje ikke reddet verden enda - men du har
+        fått et lite innblikk i hvordan vi gjør en forskjell hver eneste dag! Vil du vite mer? Kom innom oss på stand,
+        eller les mer om oss på våre nettsider!
+        <a href="https://computas.com/">computas.com</a>
     </div>
 
     <div class="buttons">
         <a href="https://koble.events/6324">
-            <button mat-raised-button color="primary-blue" class="start-button">Søk hos oss</button>
+            <button mat-raised-button color="primary-blue" class="start-button">Meld interesse</button>
         </a>
     </div>
 
@@ -33,8 +32,8 @@
 
 <div class="intro-container" *ngIf="showIntro">
     <deg-confetti-effect></deg-confetti-effect>
-    <deg-info-overlay [title]="'Gratulere!'" [imageUrl]="'assets/testUserImg.jpg'" [imageData]="imageData" [startButtonLabel]="'Fortsett'"
-        (startEE)="closeIntro()">
+    <deg-info-overlay [title]="'Gratulerer!'" [imageUrl]="'assets/Computaspacman.gif'" [imageData]="imageData"
+        [startButtonLabel]="'Fortsett'" (startEE)="closeIntro()">
 
         <div class="user">
             <div class="name">Greger</div>

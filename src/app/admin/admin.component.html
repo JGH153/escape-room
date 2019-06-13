@@ -16,13 +16,12 @@ Velger en tilfeldig person blant de som fullførte/vant
 
 <div class="intro-container" *ngIf="showWinner">
   <deg-info-overlay 
-      [title]="'Winner!'" 
+      [title]="'Vinner!'" 
       [subTitle]="'Så kult!'"
       [imageUrl]="'assets/profiles/trond.jpg'" 
       [startButtonLabel]="'Lukk'"
       (startEE)="closeWinnerPopup()"
   >
-      Vinneren ble: 
       <h1 class="winner-name">{{winnerName}}</h1>
   </deg-info-overlay>
 </div>

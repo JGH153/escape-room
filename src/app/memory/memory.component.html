@@ -20,17 +20,16 @@
 
 <div class="intro-container" *ngIf="showIntro">
   <deg-info-overlay 
-      [title]="'Styrk kompetansen'" 
-      [subTitle]="'Nå skal det matches!'"
+      [title]="'Hold deg oppdatert'" 
       [imageUrl]="'assets/design/people3.jpg'" 
-      [startButtonLabel]="' Jeg vil sertifiseres!'"
+      [startButtonLabel]="'Kom med det!'"
       (startEE)="closeIntro()"
       [buttonColor]="'red'"
   >
-    Vi verdsetter at våre ansatte holder seg oppdatert på ny teknologi. Du skal nå ta en sertifisering! Lykke til :D 
+    Vi verdsetter at våre ansatte holder seg oppdatert på ny teknologi. Du skal nå ta en sertifisering! Lykke til 😃
   </deg-info-overlay>
 </div>
 
-<deg-victory (closedEE)="gotoNextTask()" [effectLines]="true" [title]="'Gratulerer!'" *ngIf="showOutro" [outroTitle]="'Gratulerer!'" [outroColor]="'red'">
-    Vi ønsker alltid å ligge i front på ny teknologi og setter av mye ressurser til at våre ansatte kan oppdatere seg på siste nytt.
+<deg-victory (closedEE)="gotoNextTask()" [effectLines]="true" [title]="'Hurra!'" *ngIf="showOutro" [outroTitle]="'Gratulerer!'" [outroColor]="'red'">
+  Vi vil alltid ligge i front på ny teknologi og setter av mye ressurser for at våre ansatte kan oppdatere seg på siste nytt.
 </deg-victory>

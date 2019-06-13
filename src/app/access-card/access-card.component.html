@@ -21,29 +21,15 @@
 <div class="intro-container" *ngIf="showIntro">
   <deg-info-overlay 
     [title]="'Velkommen til Computas!'" 
-    [subTitle]="'På tide å lage ID kortet'"
     [imageUrl]="'assets/design/people1.jpg'" 
-    [startButtonLabel]="'Jeg vil gjøre en forskjell!'"
+    [startButtonLabel]="'Lag ID-kort'"
     (startEE)="closeIntro()"
   >
-  Vi løser store samfunnsnyttige oppgaver med heftig teknologi. Løsningene forbedrer hverdagen for våre medmennesker, enten vi sikrer infrastrukturen i energisektoren eller sørger for mer tid til meningsfullt arbeid i det offentlige. Teknologien for oss, er mest av alt et verktøy for å gjøre en forskjell. 
-
-  Før du starter må du få adgangskort - ta bilde av deg selv
+  Hver dag jobber vi med å gjøre overgangen til en digital verden så smidig som mulig, enten vi effektiviserer energisektoren eller sørger for mer tid til meningsfylt arbeid i det offentlige. Bli med på reisen sammen med oss!
 
   </deg-info-overlay>
 </div>
-<!-- <div class="intro-container" *ngIf="showIntro">
-  <deg-info-overlay 
-    [title]="'På tide å lage ID-kort'" 
-    [subTitle]="'På tide å lage ID kortet'"
-    [imageUrl]="'assets/profiles/christine.jpg'" 
-    [startButtonLabel]="'Jeg er klar!'"
-    (startEE)="closeIntro()"
-  >
-  Før du starter må du få adgangskort - ta bilde av deg selv
-  </deg-info-overlay>
-</div> -->
 
-<deg-victory (closedEE)="gotoNextTask()" [effectLines]="true" [title]="'Herlig!'" *ngIf="showOutro" [outroTitle]="'Herlig!'" [outroColor]="'yellow'">
-  Nå fikk vil laget deg et flott ID kort
+<deg-victory (closedEE)="gotoNextTask()" [effectLines]="true" [title]="'Hurra!'" *ngIf="showOutro" [outroTitle]="'Gratulerer!'" [outroColor]="'yellow'">
+  Nå har du laget et kult ID-kort! Ingen fare, vi lagrer ikke bildet ditt på en server 😊
 </deg-victory>

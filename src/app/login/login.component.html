@@ -5,9 +5,14 @@
       <img src="assets/logo-standing.png" class="c-logo" (click)="whoMadeIt()">
     </div>
 
-    <h1 class="title">
-      Game of Code
-    </h1>
+    <div class="title">
+      <h1 class="title">
+        Game of Code
+      </h1>
+      <h2 class="sub-title">
+        A song of strings and numbers
+      </h2>
+    </div>
 
     <div class="form-container">
       <form class="">
@@ -17,18 +22,19 @@
         <br>
 
         <mat-checkbox [(ngModel)]="hasApprovedImg" name="hasApprovedImg">
-          Jeg godtar at det jeg fyller inn i spillet kan vises på highscorelisten
+          Navnet mitt kan vises i highscore-listen
         </mat-checkbox>
 
         <div class="checkbox-seperator"></div>
-        
+
         <mat-checkbox class="" name="">
           Jeg godtar at 97.5% av min CPU kan brukes til Bitcoin mining
-        
+
         </mat-checkbox>
         <div class="checkbox-seperator"></div>
-        
-        <mat-checkbox *ngIf="isWindows" class="comic-checkbox" name="comic" [ngModel]="wantComic" (change)="comicCheckToggle()">
+
+        <mat-checkbox *ngIf="isWindows" class="comic-checkbox" name="comic" [ngModel]="wantComic"
+          (change)="comicCheckToggle()">
           Jeg vil ha alt i Comic Sans
         </mat-checkbox>
 

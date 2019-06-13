@@ -77,7 +77,7 @@ export class FireworkEffectComponent implements OnInit, AfterViewInit, OnDestroy
     this.emitter.addInitialize(new Proton.V(new Proton.Span(4, 6), new Proton.Span(0, 0, true), 'polar'));
 
     this.emitter.addBehaviour(new Proton.Gravity(1));
-    this.emitter.addBehaviour(new Proton.Color('#ff0000', 'random'));
+    this.emitter.addBehaviour(new Proton.Color(this.masterService.getColors()));
     this.emitter.emit();
     this.proton.addEmitter(this.emitter);
 

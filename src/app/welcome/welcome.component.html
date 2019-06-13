@@ -2,19 +2,19 @@
 
   <div class="top-content">
     <h1 class="title">Hei!</h1>
-    <p>
+    <!-- <p>
       Vil du løse samfunnsnyttige prosjekter med fremtidsrettet teknologi? Da er Computas en lekeplass for deg. Et
       IT-selskap som skaper spennende teknologiske løsninger.
-    </p>
-    <p>
-      Vi har laget noen puzzles du kan løse for å bli bedre kjent med oss. Bli med da vel!
+    </p> -->
+    <p class="info-text">
+      Vi har laget noen nøtter du kan løse for å bli bedre kjent med oss. Bli med da vel!
     </p>
 
   </div>
   <div class="bottom-content">
     <div class="buttons">
       <button mat-raised-button color="secondary" class="" (click)="payToWin()" *ngIf="canPayToWin">Pay to Win</button>
-      <button mat-raised-button color="primary" class="start-button" (click)="start()">Ja, kjør!</button>
+      <button mat-raised-button color="primary" class="start-button" (click)="start()">Start!</button>
     </div>
   </div>
 
@@ -28,6 +28,6 @@
 
 <deg-game-intro *ngIf="showIntro" (click)="clickedIntro()"></deg-game-intro>
 
-<!-- <deg-victory (closedEE)="start()" [effectLines]="true" [title]="'Seier!'" [outroTitle]="'Gratulerer!'" [outroColor]="'blue'">
+<!-- <deg-victory (closedEE)="start()" [effectDna]="true" [title]="'Seier!'" [outroTitle]="'Gratulerer!'" [outroColor]="'blue'">
     Du har nå plukket den fremste teknologien hos ulike skyleverandører og Hafslund kan nå tilby stabilt nettverk. Til det beste for folk flest! 
 </deg-victory> -->

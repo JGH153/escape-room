@@ -8,6 +8,8 @@
   height: calc(var(--vh1, 1vh) * 100);
   background: black;
   animation: fade-in-background 100s linear;
+
+  font-size: 16px;
 }
 
 .super-container {
@@ -52,6 +54,18 @@
 
     animation: fade-in-text 100s linear; // 100s for % = sec
 
+    .title-text {
+      font-size: 120px;
+      color: black;
+      -webkit-text-stroke: 5px #feda4a;
+    }
+    .episode-text {
+      font-size: 72px;
+    }
+    .content-text {
+      font-size: 50px;
+    }
+
     .crawl {
       position: relative;
       top: 99999px;
@@ -72,7 +86,7 @@
 
   @keyframes crawl {
     0% {
-      top: calc(var(--vh1, 1vh) * 20);
+      top: calc(var(--vh1, 1vh) * 1);
       transform: rotateX(20deg) translateZ(0);
     }
     100% {
