@@ -18,30 +18,27 @@
 
   .title {
     text-align: center;
-    letter-spacing: 0.2px;
-    font-size: 45px;
+    font-size: 35px;
+    line-height: 40px;
     font-weight: bold;
   }
 
   .logo {
-    max-width: 40vw;
+    max-width: 65vw;
     .logo-img {
-        width: 100%;
-        height: 100%;;
+      width: 100%;
+      height: 100%;
     }
   }
 
   .text {
-      text-align: center;
+    text-align: center;
     max-width: 80vw;
   }
 
   .buttons {
-
   }
-
 }
-
 
 .user {
   display: flex;
@@ -56,4 +53,8 @@
   .time {
     font-size: 30px;
   }
+}
+
+.share-button {
+  margin-top: 100px;
 }

@@ -73,10 +73,10 @@ export class ConfettiEffectComponent implements OnInit, AfterViewInit, OnDestroy
     this.emitter.addInitialize(new Proton.Life(2, 4));
     this.emitter.addInitialize(new Proton.Velocity(new Proton.Span(2, 4), new Proton.Span(-30, 30), 'polar'));
     this.emitter.addBehaviour(new Proton.RandomDrift(30, 30, .05));
-    this.emitter.addBehaviour(new Proton.Color('ff0000', 'random', Infinity, Proton.easeOutQuart));
+    this.emitter.addBehaviour(new Proton.Color('#FED546'));
     this.emitter.addBehaviour(new Proton.Scale(1, 0.7));
     this.emitter.p.x = this.canvas.width / 2;
-    this.emitter.p.y = this.canvas.height / 2;
+    this.emitter.p.y = this.canvas.height / 4;
     this.emitter.emit();
 
     this.proton.addEmitter(this.emitter);

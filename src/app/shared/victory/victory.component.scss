@@ -24,6 +24,7 @@
     margin-top: 10vw;
     .title {
       margin: 0px;
+      margin-bottom: 30px;
       color: rgba(17, 17, 17, 1);
       font-family: "Open Sans";
       font-size: 48px;
@@ -38,6 +39,8 @@
     // height: calc(var(--vh1, 1vh) * 30);
     height: auto;
     font-size: 18px;
+    line-height: 24px;
+    margin: auto;
   }
 
   .image-box {
@@ -116,7 +119,7 @@
       */
 
     /* shadow */
-    text-shadow: 3px 5px 2px #474747;
+    // text-shadow: 3px 5px 2px #474747;
 
     @keyframes slidein {
       0% {

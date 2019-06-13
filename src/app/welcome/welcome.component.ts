@@ -23,7 +23,7 @@ export class WelcomeComponent implements OnInit {
     setTimeout(() => {
       this.showIntro = false;
       // console.log('now');
-    }, 32500);
+    }, 19500);
   }
 
   preLoadImages() {
@@ -40,7 +40,19 @@ export class WelcomeComponent implements OnInit {
       'assets/profiles/3.jpg',
       'assets/profiles/ai.jpg',
       'assets/profiles/trond.jpg',
-      'assets/profiles/trond2.jpg',
+      'assets/design/home.png',
+      'assets/design/kode.jpg',
+      'assets/design/memory.jpg',
+      'assets/design/people0.jpg',
+      'assets/design/people1.jpg',
+      'assets/design/people2.jpg',
+      'assets/design/people3.jpg',
+      'assets/design/people4.jpg',
+      'assets/design/winBlue.png',
+      'assets/design/winGreen.png',
+      'assets/design/winRed.png',
+      'assets/design/winYellow.png',
+      'assets/cp-logo-big.gif',
     );
 
     const images = new Array();

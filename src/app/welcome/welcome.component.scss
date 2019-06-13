@@ -26,8 +26,11 @@
   flex-direction: column;
   text-align: center;
 
+  color: #003459;
+
   .info-text {
     font-size: 24px;
+    line-height: 32px
   }
 
   .title {
@@ -64,7 +67,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
 
     button:first-of-type {
       margin-bottom: 20px;

@@ -47,11 +47,20 @@
     font-size: 43px;
     letter-spacing: 0.5px;
     text-align: center;
+    font-weight: normal;
     .yellow {
       color: #fed546;
       font-size: 43px;
       letter-spacing: 0.5px;
       text-align: center;
+      font-weight: bold;
+    }
+    .green {
+      color: #49DCA1;
+      font-size: 43px;
+      letter-spacing: 0.5px;
+      text-align: center;
+      font-weight: bold;
     }
   }
 }

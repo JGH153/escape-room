@@ -2,9 +2,9 @@
 <div class="outro-container" (click)="onClickClose()" #outroElement>
     <div class="outro-title-container">
       <h1 class="title">{{outroTitle}}</h1>
-    </div>
-    <div class="outro-text">
-        <ng-content></ng-content>
+      <div class="outro-text">
+          <ng-content></ng-content>
+      </div>
     </div>
     <div class="image-box" #imageElement>
     </div>
@@ -12,7 +12,7 @@
 
 <div class="effect-container" *ngIf="showEffect">
   <deg-firework-effect *ngIf="effectFireworks"></deg-firework-effect>
-  <deg-lines-effect *ngIf="effectLines"></deg-lines-effect>
+  <deg-lines-effect [outroColor]="outroColor" *ngIf="effectLines"></deg-lines-effect>
   <deg-logo-effect *ngIf="effectLogo"></deg-logo-effect>
   <deg-dna-effect *ngIf="effectDna"></deg-dna-effect>
   <div class="message-container" (click)="onClickCloseEffect()" *ngIf="showText">

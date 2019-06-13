@@ -13,6 +13,8 @@
 
 html {
   font-size: 15px; // fix for autocode
+  line-height: 22px;
+  letter-spacing: 0.2px;
 }
 
 .intro-container {
@@ -99,19 +101,23 @@ router-outlet ~ * {
 /* unvisited link */
 a:link {
   color: rgba(73, 188, 161, 1);
+  text-decoration: none;
 }
 
 /* visited link */
 a:visited {
   color: rgba(73, 188, 161, 1);
+  text-decoration: none;
 }
 
 /* mouse over link */
 a:hover {
   color: rgba(255, 95, 99, 1);
+  text-decoration: none;
 }
 
 /* selected link */
 a:active {
   color: rgba(73, 188, 161, 1);
+  text-decoration: none;
 }

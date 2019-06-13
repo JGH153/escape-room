@@ -91,7 +91,7 @@ export class LogoEffectComponent implements OnInit, AfterViewInit, OnDestroy {
     this.emitter.addBehaviour(this.customScaleBehaviour());
     this.emitter.addBehaviour(this.gravity);
     this.emitter.addBehaviour(this.randomBehaviour);
-    this.emitter.addBehaviour(new Proton.Color(this.masterService.getColors()));
+    this.emitter.addBehaviour(new Proton.Color('#29CFF5'));
     this.emitter.addBehaviour(new Proton.CrossZone(new Proton.RectZone(0, 0, this.canvas.width, this.canvas.height), 'collision'));
     this.emitter.emit();
     // add emitter

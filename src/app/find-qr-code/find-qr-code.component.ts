@@ -19,7 +19,7 @@ export class FindQrCodeComponent implements OnInit, AfterContentInit, OnDestroy 
   width;
   height;
 
-  solution = 'http://www.compcode.computas.com';
+  solution = 'https://compcode.computas.com/';
 
   showIntro = true;
 

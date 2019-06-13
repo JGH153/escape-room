@@ -3,6 +3,8 @@ import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, Output, EventE
 import * as Proton from 'proton-js/build/proton.js';
 import { MasterService } from 'src/app/services/master.service';
 
+type Colors = 'red' | 'blue' | 'green' | 'yellow';
+
 @Component({
   selector: 'deg-lines-effect',
   templateUrl: './lines-effect.component.html',
@@ -10,6 +12,7 @@ import { MasterService } from 'src/app/services/master.service';
 })
 export class LinesEffectComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  @Input() outroColor: Colors = 'yellow';
   @ViewChild('myCanvas', { static: true }) myCanvas: ElementRef;
   canvasRC: CanvasRenderingContext2D;
 
@@ -86,7 +89,11 @@ export class LinesEffectComponent implements OnInit, AfterViewInit, OnDestroy {
     this.addAttractionBehaviours();
     this.crossZoneBehaviour = new Proton.CrossZone(
       new Proton.RectZone(0, 0, this.canvas.width, this.canvas.height), 'bound');
-    this.emitter.addBehaviour(new Proton.Color(this.masterService.getColors()));
+    if (this.outroColor === 'yellow') {
+      this.emitter.addBehaviour(new Proton.Color('#FED546'));
+    } else if (this.outroColor === 'red') {
+      this.emitter.addBehaviour(new Proton.Color('#FF5F63'));
+    }
     this.emitter.addBehaviour(this.attractionBehaviour);
     this.emitter.addBehaviour(this.crossZoneBehaviour);
     this.emitter.addInitialize(new Proton.Life(5, 10));

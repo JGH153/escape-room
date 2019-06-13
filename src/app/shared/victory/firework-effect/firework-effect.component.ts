@@ -77,7 +77,7 @@ export class FireworkEffectComponent implements OnInit, AfterViewInit, OnDestroy
     this.emitter.addInitialize(new Proton.V(new Proton.Span(4, 6), new Proton.Span(0, 0, true), 'polar'));
 
     this.emitter.addBehaviour(new Proton.Gravity(1));
-    this.emitter.addBehaviour(new Proton.Color(this.masterService.getColors()));
+    this.emitter.addBehaviour(new Proton.Color('#49BCA1'));
     this.emitter.emit();
     this.proton.addEmitter(this.emitter);
 
@@ -120,7 +120,7 @@ export class FireworkEffectComponent implements OnInit, AfterViewInit, OnDestroy
     subemitter.addBehaviour(new Proton.Alpha(1, 0));
     subemitter.addBehaviour(new Proton.Gravity(3));
     // const color = Proton.MathUtils.randomColor();
-    subemitter.addBehaviour(new Proton.Color(this.masterService.getRandomColor()));
+    subemitter.addBehaviour(new Proton.Color('#49BCA1'));
 
     subemitter.p.x = particle.p.x;
     subemitter.p.y = particle.p.y;
@@ -142,7 +142,7 @@ export class FireworkEffectComponent implements OnInit, AfterViewInit, OnDestroy
     subemitter.addBehaviour(new Proton.Gravity(1));
     // const color = Proton.MathUtils.randomColor();
     // console.log(color);
-    subemitter.addBehaviour(new Proton.Color(this.masterService.getRandomColor()));
+    subemitter.addBehaviour(new Proton.Color('#49BCA1'));
 
     subemitter.p.x = particle.p.x;
     subemitter.p.y = particle.p.y;

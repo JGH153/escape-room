@@ -5,7 +5,7 @@
     <h1 class="title">Velkommen til Computas!</h1>
 
     <div class="logo">
-        <img src="assets/Computaspacman.gif" class="logo-img">
+        <img src="assets/cp-logo-big.gif" class="logo-img">
     </div>
 
     <div class="text">
@@ -17,7 +17,7 @@
 
     <div class="buttons">
         <a href="https://koble.events/6324">
-            <button mat-raised-button color="primary-blue" class="start-button">Meld interesse</button>
+            <button mat-raised-button color="primary-green" class="start-button">Meld interesse</button>
         </a>
     </div>
 
@@ -32,8 +32,8 @@
 
 <div class="intro-container" *ngIf="showIntro">
     <deg-confetti-effect></deg-confetti-effect>
-    <deg-info-overlay [title]="'Gratulerer!'" [imageUrl]="'assets/Computaspacman.gif'" [imageData]="imageData"
-        [startButtonLabel]="'Fortsett'" (startEE)="closeIntro()">
+    <deg-info-overlay [title]="'Seier!'" [imageUrl]="'assets/Computaspacman.gif'" [imageData]="imageData"
+        [startButtonLabel]="'Fortsett'" (startEE)="closeIntro()" [buttonColor]="'yellow'">
 
         <div class="user">
             <div class="name">Greger</div>
@@ -42,9 +42,8 @@
             </div>
         </div>
 
-        <ng-container *ngIf="canShare">
-            <br><br>
-            <button mat-raised-button color="secondary" class="start-button" (click)="share()">Share</button>
+        <ng-container *ngIf="!canShare">
+            <button mat-raised-button color="secondary" class="share-button" (click)="share()">Share</button>
         </ng-container>
 
     </deg-info-overlay>
