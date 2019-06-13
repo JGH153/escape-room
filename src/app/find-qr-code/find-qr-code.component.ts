@@ -81,7 +81,7 @@ export class FindQrCodeComponent implements OnInit, AfterContentInit, OnDestroy 
 
       if (code && code.data === this.solution) {
         solved = true;
-        this.masterService.gotoStage(Stages.End);
+        this.masterService.completeGame();
       }
     }
 

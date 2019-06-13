@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MasterService } from '../services/master.service';
 
 @Component({
   selector: 'deg-welcome',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class WelcomeComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private masterService: MasterService) { }
 
   canPayToWin = false;
 
@@ -24,6 +25,7 @@ export class WelcomeComponent implements OnInit {
       this.showIntro = false;
       // console.log('now');
     }, 19500);
+
   }
 
   preLoadImages() {

@@ -122,6 +122,49 @@ export class MasterService {
     this.userId = docId;
   }
 
+  // should be in backend
+  public getDuration(endTime: Date) {
+    return this.firestore.collection<ScoreboardElement>(
+      'scoreboard'
+    ).doc(this.userId).get().pipe(map(current => {
+      const diffInSec: number = (endTime.getTime() - new Date(current.data().startTime).getTime()) / 1000;
+      return diffInSec;
+    }));
+  }
+
+  public completeGame() {
+    const endTime = new Date();
+    this.getDuration(endTime).subscribe({
+      next: (duration) => {
+
+        const dataToSave = {
+          currentStage: Stages.End,
+          endTime: endTime.toISOString(),
+          endTimeUnix: this.getUnixTime(endTime),
+          durationTimeSec: duration,
+          completed: true,
+        };
+
+        this.setIsLoading(true);
+        const docId = this.userId;
+        this.firestore.collection<ScoreboardElement>(
+          'scoreboard'
+        ).doc(docId).set(dataToSave, { merge: true }).then(() => {
+          this.firestore.collection<ScoreboardElement>(
+            'scoreboard'
+          ).doc(this.userId).get().subscribe(doc => {
+            this.startTime = doc.data().startTime;
+            this.setIsLoading(false);
+            this.gotoCorrectStage(Stages.End);
+          });
+        });
+
+
+      }
+    });
+  }
+
+
   // TODO prevent spamming
   public gotoStage(newStage: Stages) {
     if (this.isLoading.value) {
@@ -133,19 +176,9 @@ export class MasterService {
       return;
     }
 
-    let dataToSave: Partial<ScoreboardElement> = {
+    const dataToSave: Partial<ScoreboardElement> = {
       currentStage: newStage,
     };
-    if (newStage === Stages.End) {
-      const durationTimeSec = 1337; // TODO
-      dataToSave = {
-        currentStage: newStage,
-        endTime: new Date().toISOString(),
-        endTimeUnix: this.getUnixTime(new Date()),
-        durationTimeSec,
-        completed: true,
-      };
-    }
 
     this.setIsLoading(true);
     const docId = this.userId;
