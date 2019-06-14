@@ -18,8 +18,8 @@ export class FullscreenService {
       element.requestFullscreen();
     } else if (element.mozRequestFullScreen) {
       element.mozRequestFullScreen();
-    } else if (element.webkitRequestFullScreen) {
-      element.webkitRequestFullScreen();
+    } else if (element.webkitRequestFullscreen) {
+      element.webkitRequestFullscreen();
     }
   }
 
@@ -28,8 +28,8 @@ export class FullscreenService {
       element.cancelFullScreen();
     } else if (element.mozCancelFullScreen) {
       element.mozCancelFullScreen();
-    } else if (element.webkitCancelFullScreen) {
-      element.webkitCancelFullScreen();
+    } else if (element.webkitCancelFullscreen) {
+      element.webkitCancelFullscreen();
     }
   }
 

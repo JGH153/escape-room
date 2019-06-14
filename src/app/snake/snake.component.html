@@ -1,4 +1,4 @@
-<canvas #myCanvas></canvas>
+<canvas #myCanvas (ontouchend)="stopTScroll($event)"></canvas>
 
 <div class="intro-container" *ngIf="showIntro">
     <deg-info-overlay 

@@ -72,6 +72,7 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
       navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then((stream: MediaStream) => {
         this.ownStream = stream;
         this.video.nativeElement.srcObject = stream;
+        this.timerSub = this.myTimer.subscribe({ next: this.logicTick.bind(this) });
       },
         error => {
           this.ifNoCamera();
@@ -80,7 +81,6 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
         });
     }
 
-    this.timerSub = this.myTimer.subscribe({ next: this.logicTick.bind(this) });
   }
 
   hasCamera() {

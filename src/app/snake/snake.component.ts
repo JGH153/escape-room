@@ -173,6 +173,9 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
     this.draw();
   }
 
+  stopTScroll(event) {
+    event.preventDefault();
+  }
 
 
   initSnake() {
@@ -197,7 +200,7 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
   openHelpSnackBar() {
     const durationInSeconds = 6;
     this.snackBar.open(
-      'Prøv å roter telefonen eller wipe!',
+      'Prøv å roter telefonen eller swipe!',
       '',
       {
         duration: durationInSeconds * 1000,
