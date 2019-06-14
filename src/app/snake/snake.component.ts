@@ -179,10 +179,10 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
 
     this.loadImages();
 
-    // this.fullscreenService.requestFullscreen(document.body);
-    // if (window.screen && window.screen.orientation) {
-    //   window.screen.orientation.lock('portrait');
-    // }
+    this.fullscreenService.requestFullscreen(document.body);
+    if (window.screen && window.screen.orientation) {
+      window.screen.orientation.lock('portrait');
+    }
   }
 
   closeIntro() {
@@ -197,7 +197,7 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
   openHelpSnackBar() {
     const durationInSeconds = 6;
     this.snackBar.open(
-      'Prøv å roter telefonen!',
+      'Prøv å roter telefonen eller wipe!',
       '',
       {
         duration: durationInSeconds * 1000,

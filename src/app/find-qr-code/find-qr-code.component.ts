@@ -77,7 +77,7 @@ export class FindQrCodeComponent implements OnInit, AfterContentInit, OnDestroy 
         inversionAttempts: 'dontInvert',
       });
 
-      // console.log(code);
+      console.log(code);
 
       if (code && code.data === this.solution) {
         solved = true;
@@ -110,7 +110,7 @@ export class FindQrCodeComponent implements OnInit, AfterContentInit, OnDestroy 
 
     const durationInSeconds = 3;
     this.snackBar.open(
-      'Tip! Det kan hende du finner kode der du startet !',
+      'tips! Du finner kanskje koden der du startet...',
       '',
       {
         duration: durationInSeconds * 1000,
