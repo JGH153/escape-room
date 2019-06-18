@@ -54,7 +54,7 @@ export class HighscoreOngoingComponent implements OnInit, OnDestroy {
       .where('completed', '==', false)
       // .where('startTimeUnix', '>', this.masterService.getUnix30MinAgo())
       .orderBy('startTimeUnix', 'desc')
-      .limit(20);
+      .limit(10);
 
   }
 
