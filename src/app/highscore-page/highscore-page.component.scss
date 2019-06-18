@@ -27,7 +27,7 @@
       color: #fed546;
     }
     .green {
-      color: #49dca1;
+      color: #49DCA1;
     }
   }
 }
@@ -59,9 +59,12 @@
     width: calc(60vw);
   }
 
-  deg-highscore-top,
-  deg-highscore-ongoing {
+  deg-highscore-top, deg-highscore-ongoing {
     width: 100%;
+  }
+
+  .top-score {
+    cursor: pointer;
   }
 
   .title {
@@ -77,7 +80,7 @@
       font-weight: bold;
     }
     .green {
-      color: #49dca1;
+      color: #49DCA1;
       font-size: 43px;
       letter-spacing: 0.5px;
       text-align: center;

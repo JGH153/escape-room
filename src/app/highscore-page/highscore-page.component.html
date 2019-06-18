@@ -1,11 +1,11 @@
 <div class="page-container">
   <div class="content-container">
-    <h2 class="info">Vi kårer <span class="green">1-3. plass</span> og trekker en <span class="yellow">tilfeldig
-      vinner</span> hver dag kl. 16! </h2>
-
+    <h2 class="info">Bli med på <span class="green">spill</span>.<span class="yellow">computas</span>.com! Vi kårer
+      <span class="green">1-3. plass</span> og trekker en <span class="yellow">tilfeldig
+        vinner</span> hver dag kl. 16!</h2>
     <div class="highscore-container">
       <div class="highscore-top">
-        <h1 class="title"><span class="green">High</span> Score</h1>
+        <h1 class="title top-score" (click)="openRandowmWinner()"><span class="green">High</span> Score</h1>
         <deg-highscore-top></deg-highscore-top>
       </div>
       <div class="highscore-ongoing">
@@ -15,3 +15,15 @@
     </div>
   </div>
 </div>
+
+<div class="intro-container" *ngIf="showWinner">
+    <deg-info-overlay 
+        [title]="'Vinner!'" 
+        [subTitle]="'Så kult!'"
+        [imageUrl]="'assets/Computaspacman.gif'" 
+        [startButtonLabel]="'Lukk'"
+        (startEE)="closeWinnerPopup()"
+    >
+        <h1 class="winner-name">{{winnerName}}</h1>
+    </deg-info-overlay>
+  </div>
