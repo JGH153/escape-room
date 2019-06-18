@@ -17,6 +17,8 @@ export class GameEndComponent implements OnInit {
 
   imageData;
 
+  username;
+
   constructor(private masterService: MasterService) {
     if ((navigator as any).share) {
       this.canShare = true;
@@ -28,6 +30,7 @@ export class GameEndComponent implements OnInit {
   ngOnInit() {
     this.startTime = this.masterService.getStartTime();
     this.imageData = this.masterService.ownImageDataUrl;
+    this.username = this.masterService.username;
   }
 
   closeIntro() {

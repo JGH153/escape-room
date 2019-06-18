@@ -36,7 +36,7 @@
         [startButtonLabel]="'Fortsett'" (startEE)="closeIntro()" [buttonColor]="'yellow'">
 
         <div class="user">
-            <div class="name">Greger</div>
+            <div class="name">{{username | async}}</div>
             <div class="time">
                 <deg-highscore-time [startTime]="startTime"></deg-highscore-time>
             </div>
