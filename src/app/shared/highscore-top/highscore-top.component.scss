@@ -13,24 +13,53 @@
     align-items: center;
 
     color: #111111;
+
+    &.is-row {
+      flex-direction: column;
+      justify-content: space-evenly;
+      height: 100px;
+      margin-top: 20px;
+      // background: red !important;
+    }
+
     .number {
         font-size: 20px;
         font-weight: bold;
         color: #111111;
         text-align: center;
         min-width: 30px;
+        position: relative;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-left: 8px
     }
     .name {
         font-size: 20px;
         padding-left: 5px;
-        flex-grow: 1;
         text-align: left;
         text-overflow: ellipsis;
+        &.grow {
+          flex-grow: 1;
+        }
+        &.bold {
+          font-weight: bold;
+        }
     }
     .time {
         font-size: 20px;
         text-align: center;
         min-width: 160px;
+    }
+
+    .mini-trophy  {
+      width: 30px;
+    }
+    .trophy {
+      height: 60px;
+      position: absolute;
+      top: -55px;
     }
   }
 }

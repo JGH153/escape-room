@@ -15,6 +15,8 @@ export class WelcomeComponent implements OnInit {
 
   showIntro = true;
 
+  isIosNotSafari = false;
+
   ngOnInit() {
     this.preLoadImages();
     if ((window as any).PaymentRequest) {
@@ -25,6 +27,10 @@ export class WelcomeComponent implements OnInit {
       this.showIntro = false;
       // console.log('now');
     }, 19500);
+
+    if (navigator.userAgent.match('CriOS')) {
+      this.isIosNotSafari = true;
+    }
 
   }
 

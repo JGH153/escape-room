@@ -10,6 +10,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
 }
 
 .content-container {
@@ -21,9 +22,28 @@
   align-items: center;
   flex-direction: column;
 
-  .info {
+  .page-title {
     color: white;
+    font-size: 50px;
+    font-family: 'Press Start 2P', cursive;
+    // letter-spacing: 1px;
+  }
+  
+  .game-url {
+    color: white;
+    font-size: 40px;
+    // font-family: 'Press Start 2P', cursive;
+  }
+
+  .info {
+    margin: 0px;
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    * {
+      font-family: 'Press Start 2P', cursive;
+    }
     .yellow {
+      
       color: #fed546;
     }
     .green {
@@ -34,7 +54,7 @@
 
 .highscore-container {
   width: 95vw;
-  height: 90vh;
+  height: 70vh;
   display: flex;
   flex-direction: row;
 
@@ -42,7 +62,7 @@
 
   .highscore-top,
   .highscore-ongoing {
-    height: calc(90vh - 20px);
+    height: calc(70vh - 20px);
     padding: 10px;
     overflow-y: auto;
 

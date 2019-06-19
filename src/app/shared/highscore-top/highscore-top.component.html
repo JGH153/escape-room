@@ -1,8 +1,19 @@
 <div class="container" *ngIf="highscores | async as highscores">
-  <div class="score-line" *ngFor="let highscore of highscores; let i = index">
+  <div class="score-line" *ngFor="let highscore of highscores; let i = index"  [ngClass]="{'is-row': i + 1 === 1}">
 
-    <div class="number">{{i + 1}}</div>
-    <div class="name">{{highscore.name}}</div>
+    <div *ngIf="i + 1 ===  1"></div>
+    <div class="number" *ngIf="i + 1 ===  1">
+      <img class="trophy" src="assets/trophy1.png">
+    </div>
+
+    <div class="number" *ngIf="i + 1 ===  2">
+      <img class="mini-trophy" src="assets/trophy_2.png">
+    </div>
+    <div class="number" *ngIf="i + 1 ===  3">
+      <img class="mini-trophy" src="assets/trophy_3.png">
+    </div>
+    <div class="number" *ngIf="i + 1 > 3">{{i + 1}}</div>
+    <div class="name" [ngClass]="{'grow': i + 1 > 1, 'bold': i + 1 ===  1}">{{highscore.name}}</div>
     <div class="time">
       <deg-highscore-time [startTime]="highscore.startTime" [endTime]="highscore.endTime"></deg-highscore-time>
     </div>

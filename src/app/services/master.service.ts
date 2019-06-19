@@ -218,8 +218,8 @@ export class MasterService {
     this.isLoading.next(newValue);
   }
 
-  public getUnix30MinAgo() {
-    return this.getUnixTime(subMinutes(new Date(), 30));
+  public getUnixMinAgo(min) {
+    return this.getUnixTime(subMinutes(new Date(), min));
   }
 
   public getColors() {
