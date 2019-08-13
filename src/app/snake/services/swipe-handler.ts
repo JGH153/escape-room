@@ -12,7 +12,7 @@ export class SwipeHandler {
 
   startPos: Vec2 | null;
 
-  minDistance = 100; // in px
+  minDistance = 40; // in px
 
   constructor() {
   }
