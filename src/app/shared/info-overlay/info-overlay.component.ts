@@ -1,4 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, AfterViewInit } from '@angular/core';
+import { timer } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'deg-info-overlay',
@@ -18,9 +20,23 @@ export class InfoOverlayComponent implements OnInit, AfterViewInit {
 
   @Output() startEE = new EventEmitter<boolean>();
 
+  minSecDisplayed = 3;
+  numTicks = 100;
+  tick = (this.minSecDisplayed * 1000) / this.numTicks;
+  progress = 0;
+  canClose = false;
+
   constructor() { }
 
   ngOnInit() {
+    timer(3000).pipe(take(1)).subscribe({
+      next: (tick) => {
+        this.canClose = true;
+      }
+    });
+    timer(0, this.tick).pipe(take(this.numTicks)).subscribe({next: (tick) => {
+      this.progress += 100 / this.numTicks;
+    }});
   }
 
   ngAfterViewInit() {
@@ -32,7 +48,11 @@ export class InfoOverlayComponent implements OnInit, AfterViewInit {
   }
 
   closeIntro() {
-    this.startEE.emit(true);
+    if (!this.canClose) {
+      // TODO
+    } else {
+      this.startEE.emit(true);
+    }
   }
 
 }

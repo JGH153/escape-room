@@ -6,6 +6,9 @@
   height: 100vh;
   height: calc(var(--vh1, 1vh) * 100);
   // background: black;
+
+  display: flex;
+  flex-direction: column;
 }
 
 .container {
@@ -46,5 +49,9 @@
   .info {
     font-size: 16px;
     line-height: 24px;
+  }
+
+  .hidden {
+    opacity: 0;
   }
 }
