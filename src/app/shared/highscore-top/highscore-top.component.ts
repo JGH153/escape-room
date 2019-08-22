@@ -37,6 +37,7 @@ export class HighscoreTopComponent implements OnInit, OnDestroy {
   createQuery(reference: Query) {
     return reference
       .where('completed', '==', true)
+      .where('hideInScoreboard', '==', false)
       .where('currentStage', '==', Stages.End)
       .orderBy('durationTimeSec', 'asc')
       .limit(10);

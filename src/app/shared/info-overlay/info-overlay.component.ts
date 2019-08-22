@@ -20,7 +20,7 @@ export class InfoOverlayComponent implements OnInit, AfterViewInit {
 
   @Output() startEE = new EventEmitter<boolean>();
 
-  minSecDisplayed = 3;
+  minSecDisplayed = 1;
   numTicks = 100;
   tick = (this.minSecDisplayed * 1000) / this.numTicks;
   progress = 0;

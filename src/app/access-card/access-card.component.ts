@@ -7,8 +7,6 @@ import { timer, Subscription } from 'rxjs';
 import { EmojiLikelihood } from './service/emoji-likelihood';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-// TODO auto stop image loopp after x sec
-
 @Component({
   selector: 'deg-access-card',
   templateUrl: './access-card.component.html',
@@ -16,12 +14,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy {
 
-  // video = document.createElement('video');
   @ViewChild('videoElement', { static: true }) video;
   ownStream: MediaStream = null;
   username;
 
-  // showIntroGeneral = true;
   showIntro = true;
   noCamera = false;
   showOutro = false;
@@ -138,7 +134,6 @@ export class AccessCardComponent implements OnInit, AfterContentInit, OnDestroy 
   }
 
   // https://developers.google.com/web/updates/2016/12/imagecapture
-
   grabImage() {
 
     this.setLocalImage();

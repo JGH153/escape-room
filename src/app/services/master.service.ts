@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject, BehaviorSubject } from 'rxjs';
+import { Subject, BehaviorSubject, combineLatest } from 'rxjs';
 import { ScoreboardElement } from '../models/scoreboard';
 import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -24,6 +24,7 @@ export class MasterService {
   public ownImageDataUrl;
 
   private readonly userIdKey = 'userId';
+  private readonly firstUserIdKey = 'FirstUserId';
 
   constructor(private router: Router, private firestore: AngularFirestore) {
 
@@ -103,15 +104,17 @@ export class MasterService {
     const docId = this.getRandDocId();
     this.firestore.collection<ScoreboardElement>(
       'scoreboard'
-    ).doc(docId).set({
+    ).doc<ScoreboardElement>(docId).set({
+      id: docId,
       endTime: '',
-      endTimeUnix: '',
+      endTimeUnix: 0,
       startTime: new Date().toISOString(),
       startTimeUnix: this.getUnixTime(new Date()),
       completed: false,
       name: username,
       score: 0,
-      currentStage: Stages.AccessCard
+      currentStage: Stages.AccessCard,
+      noCamera: !navigator.mediaDevices,
     }).then(() => {
       this.setIsLoading(false);
       this.username.next(username);
@@ -119,6 +122,9 @@ export class MasterService {
     });
 
     localStorage.setItem(this.userIdKey, docId);
+    if (!localStorage.getItem(this.firstUserIdKey)) {
+      localStorage.setItem(this.firstUserIdKey, docId);
+    }
     this.userId = docId;
   }
 
@@ -137,12 +143,19 @@ export class MasterService {
     this.getDuration(endTime).subscribe({
       next: (duration) => {
 
+        let hideInScoreboard = false;
+        // if user have submitted before
+        if (localStorage.getItem(this.firstUserIdKey) !== localStorage.getItem(this.userIdKey)) {
+          hideInScoreboard = true;
+        }
+
         const dataToSave = {
           currentStage: Stages.End,
           endTime: endTime.toISOString(),
           endTimeUnix: this.getUnixTime(endTime),
           durationTimeSec: duration,
           completed: true,
+          hideInScoreboard
         };
 
         this.setIsLoading(true);
@@ -156,14 +169,50 @@ export class MasterService {
             this.startTime = doc.data().startTime;
             this.setIsLoading(false);
             this.gotoCorrectStage(Stages.End);
+
+            if (hideInScoreboard) {
+              this.updateFirstUserSubmission();
+            }
           });
         });
-
 
       }
     });
   }
 
+  // updates first if current is faster
+  updateFirstUserSubmission() {
+    const firstUserId = localStorage.getItem(this.firstUserIdKey);
+    const currentUserId = localStorage.getItem(this.userIdKey);
+
+    combineLatest(
+      this.firestore.collection<ScoreboardElement>('scoreboard').doc(firstUserId).get()
+        .pipe(map(current => current.data() as ScoreboardElement)),
+      this.firestore.collection<ScoreboardElement>('scoreboard').doc(currentUserId).get()
+        .pipe(map(current => current.data() as ScoreboardElement)),
+    ).subscribe({
+      next: bothDocs => {
+        const firstSubDoc: ScoreboardElement = bothDocs[0];
+        const currentSubDoc: ScoreboardElement = bothDocs[1];
+
+        // update first if current is faster time
+        if (currentSubDoc.durationTimeSec < firstSubDoc.durationTimeSec || !firstSubDoc.durationTimeSec) {
+          firstSubDoc.durationTimeSec = currentSubDoc.durationTimeSec;
+          firstSubDoc.endTime = currentSubDoc.endTime;
+          firstSubDoc.endTimeUnix = currentSubDoc.endTimeUnix;
+          firstSubDoc.startTime = currentSubDoc.startTime;
+          firstSubDoc.startTimeUnix = currentSubDoc.startTimeUnix;
+          firstSubDoc.score = currentSubDoc.score;
+          firstSubDoc.currentStage = currentSubDoc.currentStage;
+          firstSubDoc.completed = currentSubDoc.completed;
+          firstSubDoc.hideInScoreboard = false;
+          this.firestore.collection<ScoreboardElement>('scoreboard').doc(firstUserId).set(firstSubDoc, { merge: true });
+        }
+        // no one can delete for now, need guest users for that
+        // this.firestore.collection<ScoreboardElement>('scoreboard').doc(currentUserId).delete();
+      }
+    });
+  }
 
   // TODO prevent spamming
   public gotoStage(newStage: Stages) {

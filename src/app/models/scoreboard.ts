@@ -1,4 +1,5 @@
 export interface ScoreboardElement {
+    id: string;
     endTime: string;
     endTimeUnix: number;
     completed: boolean;
@@ -7,6 +8,8 @@ export interface ScoreboardElement {
     name: string;
     score: number;
     currentStage: number;
-    durationTimeSec: number;
+    durationTimeSec?: number;
     cameraDeviceId?: string;
+    noCamera?: boolean;
+    hideInScoreboard?: boolean;
 }
