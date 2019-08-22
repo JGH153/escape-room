@@ -17,6 +17,7 @@ import { FullscreenService } from '../services/fullscreen.service';
 import { ImagesHelperService } from './services/images-helper.service';
 import { SwipeService } from './services/swipe.service';
 import { SwipeDirection } from '../models/swipe';
+import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 
 enum MoveDirection {
   Up,
@@ -97,7 +98,7 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-
+    disableBodyScroll(this.myCanvas.nativeElement);
   }
 
   ngAfterContentInit() {
@@ -130,6 +131,7 @@ export class SnakeComponent implements OnInit, AfterContentInit, OnDestroy {
       window.screen.orientation.unlock();
     }
 
+    enableBodyScroll(this.myCanvas.nativeElement);
   }
 
   // only works on mobile

@@ -10,7 +10,7 @@ export class FullscreenService {
   fullscreenEnabled() {
     return document.fullscreenEnabled
       || (document as any).mozFullScreenEnabled
-      || (document as any).documentElement.webkitRequestFullScreen;
+      || (document as any).documentElement.webkitRequestFullscreen;
   }
 
   requestFullscreen(element) {
