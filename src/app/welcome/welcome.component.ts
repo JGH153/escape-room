@@ -120,7 +120,7 @@ export class WelcomeComponent implements OnInit {
         },
         {
           label: 'GDPR fee',
-          amount: { currency: 'USD', value: '10.00' },
+          amount: { currency: 'EUR', value: '10.00' },
         },
         {
           label: 'Phishing protection',

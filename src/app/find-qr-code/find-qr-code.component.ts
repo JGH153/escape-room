@@ -20,8 +20,10 @@ export class FindQrCodeComponent implements OnInit, AfterContentInit, OnDestroy 
   height;
 
   solution = 'https://compcode.computas.com/';
+  solution2 = 'https://spill.computas.com/';
 
   showIntro = true;
+  noCamera = false;
 
   constructor(private masterService: MasterService, private snackBar: MatSnackBar) { }
 
@@ -39,15 +41,25 @@ export class FindQrCodeComponent implements OnInit, AfterContentInit, OnDestroy 
   }
 
   getUserMedia() {
-    navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: false }).then(stream => {
-      this.ownStream = stream;
-      this.video.nativeElement.srcObject = stream;
-      this.lookForCode();
-    },
-      error => {
-        console.warn('can\'t get media!');
-        console.warn(error);
-      });
+    if (!navigator.mediaDevices) {
+      this.ifNoCamera();
+    } else {
+      navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: false }).then(stream => {
+        this.ownStream = stream;
+        this.video.nativeElement.srcObject = stream;
+        this.lookForCode();
+      },
+        error => {
+          this.ifNoCamera();
+          console.warn('can\'t get media!');
+          console.warn(error);
+        });
+    }
+  }
+
+  ifNoCamera() {
+    this.noCamera = true;
+    alert('Du har ikke noe kamera :(');
   }
 
   grabImage() {
@@ -77,9 +89,9 @@ export class FindQrCodeComponent implements OnInit, AfterContentInit, OnDestroy 
         inversionAttempts: 'dontInvert',
       });
 
-      console.log(code);
+      // console.log(code);
 
-      if (code && code.data === this.solution) {
+      if (code && (code.data === this.solution || code.data === this.solution2)) {
         solved = true;
         this.masterService.completeGame();
       }
@@ -90,15 +102,6 @@ export class FindQrCodeComponent implements OnInit, AfterContentInit, OnDestroy 
     }
   }
 
-  drawReset() {
-    this.drawRect(0, 0, this.width, this.height, 'black');
-  }
-
-  drawRect(x, y, w, h, color: string) {
-    // this.canvasRC.fillStyle = color;
-    // this.canvasRC.fillRect(x, y, w, h);
-  }
-
   closeIntro() {
     this.showIntro = false;
     this.getUserMedia();
@@ -107,6 +110,10 @@ export class FindQrCodeComponent implements OnInit, AfterContentInit, OnDestroy 
   qrClicked() {
     // TEMP
     // this.masterService.gotoStage(Stages.End);
+
+    if (this.noCamera) {
+      return this.masterService.completeGame();
+    }
 
     const durationInSeconds = 3;
     this.snackBar.open(
