@@ -42,7 +42,7 @@
             </div>
         </div>
 
-        <ng-container *ngIf="!canShare">
+        <ng-container *ngIf="canShare">
             <button mat-raised-button color="secondary" class="share-button" (click)="share()">Share</button>
         </ng-container>
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterContentInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, AfterContentInit, ViewChild, OnDestroy, Renderer2 } from '@angular/core';
 
 import jsQR from 'jsqr';
 import { MasterService } from '../services/master.service';
@@ -14,6 +14,7 @@ export class FindQrCodeComponent implements OnInit, AfterContentInit, OnDestroy 
 
   // video = document.createElement('video');
   @ViewChild('videoElement', { static: true }) video;
+  @ViewChild('videoContainer', { static: true }) videoContainer;
   ownStream: MediaStream = null;
 
   width;
@@ -21,11 +22,16 @@ export class FindQrCodeComponent implements OnInit, AfterContentInit, OnDestroy 
 
   solution = 'https://compcode.computas.com/';
   solution2 = 'https://spill.computas.com/';
+  solved = false;
 
   showIntro = true;
   noCamera = false;
 
-  constructor(private masterService: MasterService, private snackBar: MatSnackBar) { }
+  constructor(
+    private masterService: MasterService,
+    private snackBar: MatSnackBar,
+    private renderer: Renderer2
+  ) { }
 
   ngOnInit() {
   }
@@ -59,7 +65,8 @@ export class FindQrCodeComponent implements OnInit, AfterContentInit, OnDestroy 
 
   ifNoCamera() {
     this.noCamera = true;
-    alert('Du har ikke noe kamera :(');
+    this.renderer.setStyle(this.videoContainer.nativeElement, 'display', 'none');
+    // alert('Du har ikke noe kamera :(');
   }
 
   grabImage() {
@@ -78,7 +85,7 @@ export class FindQrCodeComponent implements OnInit, AfterContentInit, OnDestroy 
 
   lookForCode() {
 
-    let solved = false;
+    this.solved = false;
 
     if (this.video.nativeElement.readyState === this.video.nativeElement.HAVE_ENOUGH_DATA) {
 
@@ -92,12 +99,12 @@ export class FindQrCodeComponent implements OnInit, AfterContentInit, OnDestroy 
       // console.log(code);
 
       if (code && (code.data === this.solution || code.data === this.solution2)) {
-        solved = true;
+        this.solved = true;
         this.masterService.completeGame(false);
       }
     }
 
-    if (!solved) {
+    if (!this.solved) {
       requestAnimationFrame(this.lookForCode.bind(this));
     }
   }
@@ -112,6 +119,7 @@ export class FindQrCodeComponent implements OnInit, AfterContentInit, OnDestroy 
     // this.masterService.gotoStage(Stages.End);
 
     if (this.noCamera) {
+      this.solved = true;
       return this.masterService.completeGame(true);
     }
 

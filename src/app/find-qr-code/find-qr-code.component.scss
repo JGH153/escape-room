@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   background-color: #111111;
+  height: calc(var(--vh1, 1vh) * 100);
 }
 
 .title-container {
@@ -19,18 +20,19 @@
   }
 }
 
-.video-container {
-  width: 100vw;
-  height: calc(var(--vh1, 1vh) * 60);
-
-//   border: 1px solid red;
-
 .no-camera {
   margin: auto;
   text-align: center;
   color: white;
   font-size: 15px;
 }
+
+.video-container {
+  width: 100vw;
+  height: calc(var(--vh1, 1vh) * 60);
+  // background: red;
+
+  //   border: 1px solid red;
 
   #localVideo {
     width: 100%;
@@ -43,12 +45,12 @@
 .qr-container {
   width: 100vw;
   height: calc(var(--vh1, 1vh) * 20);
-  
+
   display: flex;
   justify-content: space-around;
   align-items: center;
   flex-direction: column;
-  
+
   text-align: center;
 }
 
