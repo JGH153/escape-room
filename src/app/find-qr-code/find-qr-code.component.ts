@@ -93,7 +93,7 @@ export class FindQrCodeComponent implements OnInit, AfterContentInit, OnDestroy 
 
       if (code && (code.data === this.solution || code.data === this.solution2)) {
         solved = true;
-        this.masterService.completeGame();
+        this.masterService.completeGame(false);
       }
     }
 
@@ -112,7 +112,7 @@ export class FindQrCodeComponent implements OnInit, AfterContentInit, OnDestroy 
     // this.masterService.gotoStage(Stages.End);
 
     if (this.noCamera) {
-      return this.masterService.completeGame();
+      return this.masterService.completeGame(true);
     }
 
     const durationInSeconds = 3;

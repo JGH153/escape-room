@@ -6,7 +6,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Stages } from '../models/stages';
 
 import {
-  subMinutes
+  subMinutes, addMinutes
 } from 'date-fns';
 import { map } from 'rxjs/operators';
 
@@ -138,8 +138,11 @@ export class MasterService {
     }));
   }
 
-  public completeGame() {
-    const endTime = new Date();
+  public completeGame(noCamera: boolean) {
+    let endTime = new Date();
+    if (noCamera) {
+      endTime = addMinutes(endTime, 1);
+    }
     this.getDuration(endTime).subscribe({
       next: (duration) => {
 

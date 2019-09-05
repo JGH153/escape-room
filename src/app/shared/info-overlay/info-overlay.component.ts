@@ -20,7 +20,7 @@ export class InfoOverlayComponent implements OnInit, AfterViewInit {
 
   @Output() startEE = new EventEmitter<boolean>();
 
-  minSecDisplayed = 1;
+  minSecDisplayed = 2.5;
   numTicks = 10;
   tick = (this.minSecDisplayed * 1000) / this.numTicks;
   progress = 0;
@@ -34,9 +34,13 @@ export class InfoOverlayComponent implements OnInit, AfterViewInit {
         this.canClose = true;
       }
     });
-    timer(0, this.tick).pipe(take(this.numTicks)).subscribe({next: (tick) => {
-      this.progress += 100 / this.numTicks;
-    }});
+    // const tickDuration = 400;
+    // const ticsToRun = (this.minSecDisplayed * 1000) / tickDuration;
+    // timer(0, tickDuration).pipe(take(ticsToRun)).subscribe({
+    //   next: (tick) => {
+    //     this.progress += 20;
+    //   }
+    // });
   }
 
   ngAfterViewInit() {

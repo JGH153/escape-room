@@ -5,5 +5,5 @@
     <div class="info"><ng-content></ng-content></div>
     <button [ngClass]="{'hidden': !canClose}" mat-raised-button color="primary-{{buttonColor}}" (click)="closeIntro()">{{startButtonLabel}}</button>
   </div>
-  <mat-progress-bar mode="determinate" value="{{progress}}"></mat-progress-bar>
+  <!-- <mat-progress-bar mode="determinate" value="{{progress}}"></mat-progress-bar> -->
 </div>

@@ -27,11 +27,13 @@
 
         <div class="checkbox-seperator"></div>
 
-        <mat-checkbox class="" name="">
-          Jeg godtar at 97.5% av min CPU kan brukes til Bitcoin mining
+        <div class="hide-small">
+          <mat-checkbox class="" name="">
+            Jeg godtar at 97.5% av min CPU kan brukes til Bitcoin mining
 
-        </mat-checkbox>
-        <div class="checkbox-seperator"></div>
+          </mat-checkbox>
+          <div class="checkbox-seperator"></div>
+        </div>
 
         <mat-checkbox *ngIf="isWindows" class="comic-checkbox" name="comic" [ngModel]="wantComic"
           (change)="comicCheckToggle()">

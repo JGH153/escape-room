@@ -6,9 +6,9 @@
 
     <div class="video-container">
         <div class="no-camera" *ngIf="noCamera">
-            Enten har du nektet oss å bruke kamera ditt ellers så bruker du iPhone uten Safari 😢Apple har bestemt at kun safari får kule features på iOS. Trykk på QR koden under for å av slutte
+            Enten har du nektet oss å bruke kamera ditt ellers så bruker du iPhone uten Safari 😢Apple har bestemt at kun Safari får kule features på iOS. Trykk på QR koden under for å av slutte
         </div>
-        <video id="localVideo" #videoElement [srcObject]="ownStream" class="person-video" autoplay muted playsinline></video>
+        <video *ngIf="noCamera === false" id="localVideo" #videoElement [srcObject]="ownStream" class="person-video" autoplay muted playsinline></video>
     </div>
     <div class="qr-container">
         
